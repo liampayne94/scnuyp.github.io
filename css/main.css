@@ -957,7 +957,7 @@ pre .javascript .function {
   bottom: 19px;
 }
 .header {
-  background: #fff;
+  background: url("https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1490334274&di=8751db95a7716dd6745d1b4519aa4250&src=http://epaper.gywb.cn/gyrb/res/1/1/2016-08/21/A03/res03_attpic_brief.jpg");
 }
 .header-inner {
   position: relative;
@@ -1684,7 +1684,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #552620;
+  background: #df53c6;
 }
 .links-of-blogroll {
   font-size: 13px;
