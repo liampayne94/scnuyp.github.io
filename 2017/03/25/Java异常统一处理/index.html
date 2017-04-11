@@ -1,0 +1,801 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="我们知道，当我们访问某个网页出错的时候，会弹出这样的信息
+
+显然，这样对用户是极不友好的，我们应该自定义异常页面，对用户显示用户能够理解的错误信息
+自定义异常页面通常需要两步：配置过滤器和使用异常工具类。
+首先，我们先做好一些准备:
+config4error.properties代码：
+12345678910111213e001=传入参数为空e002=参数转换错误###数据库###e101=数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java统一异常过滤">
+<meta property="og:url" content="https://scnuyp.github.io/2017/03/25/Java异常统一处理/index.html">
+<meta property="og:site_name" content="彦鹏的个人博客">
+<meta property="og:description" content="我们知道，当我们访问某个网页出错的时候，会弹出这样的信息
+
+显然，这样对用户是极不友好的，我们应该自定义异常页面，对用户显示用户能够理解的错误信息
+自定义异常页面通常需要两步：配置过滤器和使用异常工具类。
+首先，我们先做好一些准备:
+config4error.properties代码：
+12345678910111213e001=传入参数为空e002=参数转换错误###数据库###e101=数据">
+<meta property="og:image" content="http://static.oschina.net/uploads/space/2016/0218/171643_2rLQ_2330817.png?_=6533574">
+<meta property="og:updated_time" content="2017-04-11T13:53:28.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java统一异常过滤">
+<meta name="twitter:description" content="我们知道，当我们访问某个网页出错的时候，会弹出这样的信息
+
+显然，这样对用户是极不友好的，我们应该自定义异常页面，对用户显示用户能够理解的错误信息
+自定义异常页面通常需要两步：配置过滤器和使用异常工具类。
+首先，我们先做好一些准备:
+config4error.properties代码：
+12345678910111213e001=传入参数为空e002=参数转换错误###数据库###e101=数据">
+<meta name="twitter:image" content="http://static.oschina.net/uploads/space/2016/0218/171643_2rLQ_2330817.png?_=6533574">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scnuyp.github.io/2017/03/25/Java异常统一处理/"/>
+
+
+
+
+
+  <title> Java统一异常过滤 | 彦鹏的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">彦鹏的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">scnuyp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/03/25/Java异常统一处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java统一异常过滤
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-25T23:43:20+08:00">
+                2017-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/25/Java异常统一处理/" class="leancloud_visitors" data-flag-title="Java统一异常过滤">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们知道，当我们访问某个网页出错的时候，会弹出这样的信息</p>
+<p><img src="http://static.oschina.net/uploads/space/2016/0218/171643_2rLQ_2330817.png?_=6533574" alt="img"></p>
+<p>显然，这样对用户是极不友好的，我们应该自定义异常页面，对用户显示用户能够理解的错误信息</p>
+<p>自定义异常页面通常需要两步：配置过滤器和使用异常工具类。</p>
+<p>首先，我们先做好一些准备:</p>
+<p>config4error.properties代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">e001=传入参数为空</div><div class="line">e002=参数转换错误</div><div class="line">###数据库###</div><div class="line">e101=数据库错误：初始化失败</div><div class="line">e102=数据库错误：连接创建失败</div><div class="line">e103=数据库错误：Statement创建失败</div><div class="line">e104=数据库错误：查询语法失败</div><div class="line">e105=数据库错误：更新语法失败</div><div class="line">e106=数据库错误：资源释放失败</div><div class="line">e107=数据库错误：结果集处理失败</div><div class="line">###其它无考虑/处理的异常/错误###</div><div class="line">e0001=系统异常</div><div class="line">e0002=系统错误</div></pre></td></tr></table></figure>
+<p>Config4Error.java代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.haigest.hx.util;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.leeyn.util.Configuration.Configuration;</div><div class="line"><span class="keyword">import</span> com.leeyn.util.path.GetRealPath;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Config4Error</span></span>&#123;    </div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String FILE_PATH = GetRealPath.getSrcOrClassesUrl(<span class="string">"Classes"</span>)+<span class="string">"/config4error.properties"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Configuration CONF = <span class="keyword">new</span> Configuration(FILE_PATH);   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>BaseException.java代码</p>
+<p>(该自定义类继承了RuntimeException类，并重写了的方法，提供一系列的构造方法，将properties中键与错误类型联系起来)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/***</span></div><div class="line"></div><div class="line">Copyright 2006 bsmith@qq.com</div><div class="line"></div><div class="line">Licensed under the Apache License, Version 2.0 (the "License");</div><div class="line">you may not use this file except in compliance with the License.</div><div class="line">You may obtain a copy of the License at</div><div class="line"></div><div class="line">   http://www.apache.org/licenses/LICENSE-2.0</div><div class="line"></div><div class="line">Unless required by applicable law or agreed to in writing, software</div><div class="line">distributed under the License is distributed on an "AS IS" BASIS,</div><div class="line">WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</div><div class="line">See the License for the specific language governing permissions and</div><div class="line">limitations under the License.</div><div class="line"></div><div class="line">*/</div><div class="line"></div><div class="line"><span class="keyword">package</span> com.haigest.hx.util;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * uniform exception class, uniform exception process with id+cause.</div><div class="line"> * the final message is formated from localize message resource.</div><div class="line"> * <span class="doctag">@author</span> bsmith.zhao</div><div class="line"> * <span class="doctag">@date</span> 2006-05-16 11:22:12</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">protected</span> String key;</div><div class="line">    <span class="keyword">protected</span> Object[] args;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * </div><div class="line">     * <span class="doctag">@param</span> key 异常提示信息</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseException</span><span class="params">(String key)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">super</span>(key);</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * </div><div class="line">     * <span class="doctag">@param</span> key 异常提示信息</div><div class="line">     * <span class="doctag">@param</span> cause 异常对象</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseException</span><span class="params">(String key, Throwable cause)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">super</span>(key, cause);</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * </div><div class="line">     * <span class="doctag">@param</span> key 异常提示信息</div><div class="line">     * <span class="doctag">@param</span> args 在抛异常时把某些数据也抛给异常处理者</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseException</span><span class="params">(String key,  Object ... args)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">super</span>(key);</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">        <span class="keyword">this</span>.args = args;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * </div><div class="line">     * <span class="doctag">@param</span> key 异常提示信息</div><div class="line">     * <span class="doctag">@param</span> cause 异常对象</div><div class="line">     * <span class="doctag">@param</span> args 在抛异常时把某些数据也抛给异常处理者</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseException</span><span class="params">(String key, Throwable cause, Object ... args)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">super</span>(key, cause);</div><div class="line">        <span class="keyword">this</span>.key = key;</div><div class="line">        <span class="keyword">this</span>.args = args;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getKey</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> key;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> Object[] getArgs()</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> args;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>过滤器：DoExceptionInViewFilter.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.haigest.hx.filter;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.util.UUID;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.servlet.FilterChain;</div><div class="line"><span class="keyword">import</span> javax.servlet.FilterConfig;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletResponse;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.log4j.Logger;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.haigest.hx.util.Config4Error;</div><div class="line"><span class="keyword">import</span> com.haigest.hx.util.BaseException;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Exception统一捕捉处理过滤器</div><div class="line"> * <span class="doctag">@author</span> leeyn</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoExceptionInViewFilter</span> <span class="keyword">implements</span> <span class="title">javax</span>.<span class="title">servlet</span>.<span class="title">Filter</span> </span>&#123;</div><div class="line">	</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Logger logger = Logger.getLogger(DoExceptionInViewFilter.class.getName());</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 *当请求到达时，会首先被此拦截器拦截，当数据经过获取并在V层显示完毕(响应完毕)后，</div><div class="line">	 *又回到此Filter内部，途中如果下层有异常抛出，在这里进行拦截捕捉，并统一处理</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span> </span></div><div class="line">			<span class="keyword">throws</span> IOException, ServletException &#123;</div><div class="line">		<span class="keyword">try</span>&#123;</div><div class="line">			chain.doFilter(request, response);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">catch</span>(BaseException e)&#123;	<span class="comment">//---自己定义、转换的异常---</span></div><div class="line">			doBaseException((HttpServletResponse)response, e);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">catch</span>(Exception e)&#123;		<span class="comment">//---其它无考虑/处理的异常---		</span></div><div class="line">			<span class="keyword">if</span>(e.getCause() <span class="keyword">instanceof</span> BaseException)&#123;  	</div><div class="line">              <span class="comment">//如果是经jsp，会把异常转为jsp定义的异常，这里就接不了自己定义的BaseException，所以在这里要区分开</span></div><div class="line">				doBaseException((HttpServletResponse)response, (BaseException)e.getCause());</div><div class="line">				<span class="keyword">return</span>;				</div><div class="line">			&#125;<span class="keyword">else</span>&#123;	</div><div class="line">				String uuid = UUID.randomUUID().toString();</div><div class="line">				logger.error(Config4Error.CONF.findProperty(<span class="string">"e0001"</span>) + uuid, e);</div><div class="line">				senderror((HttpServletResponse)response, <span class="string">"e0001"</span>, uuid);</div><div class="line">				<span class="keyword">return</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">catch</span>(Error e)&#123;			</div><div class="line">          <span class="comment">//---其它无考虑/处理的错误---	</span></div><div class="line">          <span class="comment">//error如果经过servlet一般都会被转化成异常，所以一般也就到不了这里</span></div><div class="line">			String uuid = UUID.randomUUID().toString();</div><div class="line">			logger.error(Config4Error.CONF.findProperty(<span class="string">"e0002"</span>) + uuid, e);</div><div class="line">			senderror((HttpServletResponse)response, <span class="string">"e0002"</span>, uuid);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;	</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doBaseException</span><span class="params">(HttpServletResponse response, BaseException e)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		String e_id = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">if</span>(e.getArgs()!=<span class="keyword">null</span> &amp;&amp; e.getArgs().length != <span class="number">0</span>)&#123;</div><div class="line">			e_id = (String)e.getArgs()[<span class="number">0</span>];</div><div class="line">		&#125;</div><div class="line">		senderror(response, e.getKey(), e_id);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">senderror</span><span class="params">(HttpServletResponse response, String error, String error_id)</span></span></div><div class="line">			<span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">		<span class="keyword">if</span>(error_id == <span class="keyword">null</span>)&#123;</div><div class="line">			response.sendRedirect(<span class="string">"/hx/hx/error.jsp?error="</span>+error);</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			response.sendRedirect(<span class="string">"/hx/hx/error.jsp?error="</span>+error+<span class="string">"&amp;error_id="</span>+error_id);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig arg0)</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line">	</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">	</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/24/JSON/" rel="next" title="浅析JSON">
+                <i class="fa fa-chevron-left"></i> 浅析JSON
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/29/Java中List的总结/" rel="prev" title="Java中ArrayList的总结">
+                Java中ArrayList的总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="彦鹏" />
+          <p class="site-author-name" itemprop="name">彦鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">每天进步一点点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">彦鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("haf2k8DGCn9V9IdwRUfFd1m2-gzGzoHsz", "eeRJlUBaMcwABRrULhYN4f3S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
