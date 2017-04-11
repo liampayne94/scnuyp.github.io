@@ -89,16 +89,28 @@
 
 
 
-<meta name="description" content="引入一般大家都知道ArrayList和LinkedList的大致区别：​     ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。​     2.对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。​     3.对于新增和删除操作add和remove，LinedList比较占优势，因为Array">
+<meta name="description" content="引入Java中的数组在内存中是连续储存的，因此它的索引速度非常快，同时，它的插入和删除都非常的方便。
+如int[ ] arr= new int;
+但是，我们可以看到，该数组只能存放类型相同的元素，这样是很不方便的。于是我们便有了list
+ArrayList的简介ArrayList 是一个数组队列，相当于 动态数组。与Java中的数组相比，它的容量能动态增长。
+ArrayList 继承了抽象类Abs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中ArrayList的总结">
 <meta property="og:url" content="https://scnuyp.github.io/2017/03/29/Java中List的总结/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="引入一般大家都知道ArrayList和LinkedList的大致区别：​     ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。​     2.对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。​     3.对于新增和删除操作add和remove，LinedList比较占优势，因为Array">
-<meta property="og:updated_time" content="2017-04-11T13:57:03.468Z">
+<meta property="og:description" content="引入Java中的数组在内存中是连续储存的，因此它的索引速度非常快，同时，它的插入和删除都非常的方便。
+如int[ ] arr= new int;
+但是，我们可以看到，该数组只能存放类型相同的元素，这样是很不方便的。于是我们便有了list
+ArrayList的简介ArrayList 是一个数组队列，相当于 动态数组。与Java中的数组相比，它的容量能动态增长。
+ArrayList 继承了抽象类Abs">
+<meta property="og:updated_time" content="2017-04-11T14:22:31.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中ArrayList的总结">
-<meta name="twitter:description" content="引入一般大家都知道ArrayList和LinkedList的大致区别：​     ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。​     2.对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。​     3.对于新增和删除操作add和remove，LinedList比较占优势，因为Array">
+<meta name="twitter:description" content="引入Java中的数组在内存中是连续储存的，因此它的索引速度非常快，同时，它的插入和删除都非常的方便。
+如int[ ] arr= new int;
+但是，我们可以看到，该数组只能存放类型相同的元素，这样是很不方便的。于是我们便有了list
+ArrayList的简介ArrayList 是一个数组队列，相当于 动态数组。与Java中的数组相比，它的容量能动态增长。
+ArrayList 继承了抽象类Abs">
 
 
 
@@ -334,8 +346,7 @@
       
 
       
-        <h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>一般大家都知道ArrayList和LinkedList的大致区别：<br>​     ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。<br>​     2.对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。<br>​     3.对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。 </p>
-<h3 id="Java中的数组"><a href="#Java中的数组" class="headerlink" title="Java中的数组"></a>Java中的数组</h3><p>数组在内存中是连续储存的，因此它的索引速度非常快，同时，它的插入和删除都非常的方便。</p>
+        <h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>Java中的数组在内存中是连续储存的，因此它的索引速度非常快，同时，它的插入和删除都非常的方便。</p>
 <p>如int[ ] arr= new int<a href=""></a>;</p>
 <p>但是，我们可以看到，该数组只能存放类型相同的元素，这样是很不方便的。于是我们便有了list</p>
 <h3 id="ArrayList的简介"><a href="#ArrayList的简介" class="headerlink" title="ArrayList的简介"></a>ArrayList的简介</h3><p>ArrayList 是一个<strong>数组队列</strong>，相当于 <strong>动态数组</strong>。与Java中的数组相比，它的容量能动态增长。</p>
@@ -351,6 +362,7 @@
 <h4 id="3、for循环遍历"><a href="#3、for循环遍历" class="headerlink" title="3、for循环遍历"></a>3、for循环遍历</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Integer value = <span class="keyword">null</span>;</div><div class="line"><span class="keyword">for</span> (Integer integ:list) &#123;</div><div class="line">    value = integ;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>遍历ArrayList时，使用随机访问(即，通过索引序号访问)效率最高，而使用迭代器的效率最低！</strong></p>
 <p>（代码迟点补上）</p>
+<h3 id="ArrayList和LinkedList的区别"><a href="#ArrayList和LinkedList的区别" class="headerlink" title="ArrayList和LinkedList的区别"></a>ArrayList和LinkedList的区别</h3><p>​    1. ArrayList是实现了基于动态数组的数据结构，LinkedList基于链表的数据结构。<br>​    2.对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。<br>​    3.对于新增和删除操作add和remove，LinedList比较占优势，因为ArrayList要移动数据。</p>
 
       
     </div>
@@ -393,8 +405,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/25/Java异常统一处理/" rel="next" title="Java统一异常过滤">
-                <i class="fa fa-chevron-left"></i> Java统一异常过滤
+              <a href="/2017/03/26/Java中HashMap的总结/" rel="next" title="Java中HashMap的总结">
+                <i class="fa fa-chevron-left"></i> Java中HashMap的总结
               </a>
             
           </div>
@@ -477,7 +489,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -490,7 +502,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -525,7 +537,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中的数组"><span class="nav-number">2.</span> <span class="nav-text">Java中的数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList的简介"><span class="nav-number">3.</span> <span class="nav-text">ArrayList的简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList-构造方法"><span class="nav-number">4.</span> <span class="nav-text">ArrayList 构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList的源码"><span class="nav-number">5.</span> <span class="nav-text">ArrayList的源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList的三种遍历方式"><span class="nav-number">6.</span> <span class="nav-text">ArrayList的三种遍历方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、迭代器遍历"><span class="nav-number">7.</span> <span class="nav-text">1、迭代器遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2、随机访问（通过索引值访问）"><span class="nav-number">7.1.</span> <span class="nav-text">2、随机访问（通过索引值访问）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、for循环遍历"><span class="nav-number">7.2.</span> <span class="nav-text">3、for循环遍历</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList的简介"><span class="nav-number">2.</span> <span class="nav-text">ArrayList的简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList-构造方法"><span class="nav-number">3.</span> <span class="nav-text">ArrayList 构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList的源码"><span class="nav-number">4.</span> <span class="nav-text">ArrayList的源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList的三种遍历方式"><span class="nav-number">5.</span> <span class="nav-text">ArrayList的三种遍历方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、迭代器遍历"><span class="nav-number">6.</span> <span class="nav-text">1、迭代器遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2、随机访问（通过索引值访问）"><span class="nav-number">6.1.</span> <span class="nav-text">2、随机访问（通过索引值访问）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、for循环遍历"><span class="nav-number">6.2.</span> <span class="nav-text">3、for循环遍历</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayList和LinkedList的区别"><span class="nav-number">7.</span> <span class="nav-text">ArrayList和LinkedList的区别</span></a></li></ol></div>
             
 
           </div>
