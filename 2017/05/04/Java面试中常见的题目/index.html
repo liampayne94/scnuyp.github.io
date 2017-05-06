@@ -1,0 +1,915 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="面试," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="面向对象和面向过程的区别面向过程优点：性能比面向对象高，因为类的实例化开销比较大，面向过程编程常见于硬件开发，如单片机开发
+缺点：维护性，复用性，扩展性差
+面向对象优点：易维护、易复用、易扩展
+缺点：性能较低，开销大
+访问控制符public,protected,private,以及默认的区别public——所有类都能访问
+protected——同一包内的类和包外的子类可以访问
+private——仅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面试中常见的题目">
+<meta property="og:url" content="https://scnuyp.github.io/2017/05/04/Java面试中常见的题目/index.html">
+<meta property="og:site_name" content="彦鹏的个人博客">
+<meta property="og:description" content="面向对象和面向过程的区别面向过程优点：性能比面向对象高，因为类的实例化开销比较大，面向过程编程常见于硬件开发，如单片机开发
+缺点：维护性，复用性，扩展性差
+面向对象优点：易维护、易复用、易扩展
+缺点：性能较低，开销大
+访问控制符public,protected,private,以及默认的区别public——所有类都能访问
+protected——同一包内的类和包外的子类可以访问
+private——仅">
+<meta property="og:image" content="http://dl.iteye.com/upload/attachment/556524/f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif">
+<meta property="og:image" content="https://i.imgur.com/rvfJnCj.png">
+<meta property="og:updated_time" content="2017-05-05T15:02:27.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java面试中常见的题目">
+<meta name="twitter:description" content="面向对象和面向过程的区别面向过程优点：性能比面向对象高，因为类的实例化开销比较大，面向过程编程常见于硬件开发，如单片机开发
+缺点：维护性，复用性，扩展性差
+面向对象优点：易维护、易复用、易扩展
+缺点：性能较低，开销大
+访问控制符public,protected,private,以及默认的区别public——所有类都能访问
+protected——同一包内的类和包外的子类可以访问
+private——仅">
+<meta name="twitter:image" content="http://dl.iteye.com/upload/attachment/556524/f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scnuyp.github.io/2017/05/04/Java面试中常见的题目/"/>
+
+
+
+
+
+  <title> Java面试中常见的题目 | 彦鹏的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">彦鹏的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">scnuyp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/05/04/Java面试中常见的题目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java面试中常见的题目
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-04T15:16:21+08:00">
+                2017-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/05/04/Java面试中常见的题目/" class="leancloud_visitors" data-flag-title="Java面试中常见的题目">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="面向对象和面向过程的区别"><a href="#面向对象和面向过程的区别" class="headerlink" title="面向对象和面向过程的区别"></a>面向对象和面向过程的区别</h3><h4 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h4><p>优点：性能比面向对象高，因为类的实例化开销比较大，面向过程编程常见于硬件开发，如单片机开发</p>
+<p>缺点：维护性，复用性，扩展性差</p>
+<h4 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h4><p>优点：易维护、易复用、易扩展</p>
+<p>缺点：性能较低，开销大</p>
+<h4 id="访问控制符public-protected-private-以及默认的区别"><a href="#访问控制符public-protected-private-以及默认的区别" class="headerlink" title="访问控制符public,protected,private,以及默认的区别"></a>访问控制符public,protected,private,以及默认的区别</h4><p>public——所有类都能访问</p>
+<p>protected——同一包内的类和包外的子类可以访问</p>
+<p>private——仅本类可以访问</p>
+<h3 id="String和StringBuffer、StringBuilder的区别"><a href="#String和StringBuffer、StringBuilder的区别" class="headerlink" title="String和StringBuffer、StringBuilder的区别"></a>String和StringBuffer、StringBuilder的区别</h3><p>String是不可变类，线程安全，AbstractStringBuilder是StringBuffer和StringBuilder。其中StringBuffer对方法以及调用的方法加了同步锁，是线程安全的，相反，StringBuilder没有加锁，线程不安全。</p>
+<p>String由于其不可变性，每次对其改变的时候都相当于新建一个String对象，然后将指针指向这个对象</p>
+<p>StringBuffer对对象本身进行操作，而不是生成新的对象</p>
+<p> StringBuilder相对StringBuffer提高10%到15%的性能，但要冒着线程不安全的风险。</p>
+<h3 id="OverLoading和OverRiding的区别"><a href="#OverLoading和OverRiding的区别" class="headerlink" title="OverLoading和OverRiding的区别"></a>OverLoading和OverRiding的区别</h3><p>OverLoading是方法重载，其中方法名必须相同，而参数的类型，个数，顺序可以不同，方法的返回值和权限修饰符也可以不同，一般发生于编译时</p>
+<p>OverRiding是方法重写，是指子类继承父类的时候，方法名，参数列表必须相同，而返回值要小于等于父类，抛出的异常也要小于等于父类</p>
+<h3 id="接口和抽象类的区别"><a href="#接口和抽象类的区别" class="headerlink" title="接口和抽象类的区别"></a>接口和抽象类的区别</h3><h4 id="语法层次"><a href="#语法层次" class="headerlink" title="语法层次"></a>语法层次</h4><p>两者的语法定义是不一样的</p>
+<h4 id="设计层次"><a href="#设计层次" class="headerlink" title="设计层次"></a>设计层次</h4><p>抽象类是对类的抽象，而接口是对行为的抽象，抽象类是对类整体进行抽象，包括属性行为，但是接口是对类的局部（行为）进行抽象，抽象类是自底向下抽象而来的，接口是自顶向下抽象而来的</p>
+<h4 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h4><p>抽象类的实现是通过继承的方式，而接口的实现则不然，他不要求实现者和接口之间的定义一致，仅仅是约定了接口的契约，相当于一种“like-a”的关系。</p>
+<h3 id="Tomcat、Apache、JBOSS之间的区别"><a href="#Tomcat、Apache、JBOSS之间的区别" class="headerlink" title="Tomcat、Apache、JBOSS之间的区别"></a>Tomcat、Apache、JBOSS之间的区别</h3><p>Apache 是HTTP服务器，类似于IIS，可以用于建立虚拟站点，编译静态页面</p>
+<p>Tomcat是Servlet容器，是轻量级的容器，不支持EJB</p>
+<p>JBOSS是运行EJB的J2EE服务器</p>
+<h3 id="Hash算法原理"><a href="#Hash算法原理" class="headerlink" title="Hash算法原理"></a>Hash算法原理</h3><p>散列表，它是基于快速存取的方式设计的，通过“空间换取时间”的方式实现。可以把它类比做一个线性表，然而它并不是紧密排列的</p>
+<p>散列表，是通过关键纸码（key value）进行快速存取的数据结构，它通过把关键值码映射到表中的一个位置进行访问，这个映射函数就是哈希函数。</p>
+<p>假设我们有70个元素，用100个元素空间进行存储，那么0.7就成为负载因子。相当于空间使用度（我在《<a href="https://scnuyp.github.io/2017/03/26/Java%E4%B8%ADHashMap%E7%9A%84%E6%80%BB%E7%BB%93/">Java中HashMap的总结</a>》）提到过。我们基于一种让结果尽可能随机分布的函数H来避免冲突。 这里的冲突是指两个元素通过H得到的地址相同，我们应该避免这种冲突，。H函数计算得到的结果是一个储存单位地址，每个桶储存单位成为一个“桶”。假设有m个桶，那么H函数的值域为[0,m-1]。</p>
+<h4 id="常用的Hash算法"><a href="#常用的Hash算法" class="headerlink" title="常用的Hash算法"></a>常用的Hash算法</h4><p>MD4、MD5、SHA1</p>
+<h3 id="数据库事务隔离级别（转自http-blog-csdn-net-fg2006-article-details-6937413）"><a href="#数据库事务隔离级别（转自http-blog-csdn-net-fg2006-article-details-6937413）" class="headerlink" title="数据库事务隔离级别（转自http://blog.csdn.net/fg2006/article/details/6937413）"></a>数据库事务隔离级别（转自<a href="http://blog.csdn.net/fg2006/article/details/6937413）" target="_blank" rel="external">http://blog.csdn.net/fg2006/article/details/6937413）</a></h3><table>
+<thead>
+<tr>
+<th></th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read uncommitted</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Read committed</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Repeatable read</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Serializable</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<p>Read uncommitted（读未提交）</p>
+<p>Read committed（读提交）——大多数数据库的默认级别就是Read committed，比如Sql Server , <a href="http://lib.csdn.net/base/oracle" target="_blank" rel="external">Oracle</a></p>
+<p>singo拿着工资卡去消费，系统读取到卡里确实有2000元，而此时她的老婆也正好在网上转账，把singo工资卡的2000元转到另一账户，并在singo之前提交了事务，当singo扣款时，系统检查到singo的工资卡已经没有钱，扣款失败，singo十分纳闷，明明卡里有钱，为何……</p>
+<p>出现上述情况，即我们所说的不可重复读，两个并发的事务，“事务A：singo消费”、“事务B：singo的老婆网上转账”，事务A事先读取了数据，事务B紧接了更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了改变。</p>
+<p>当隔离级别设置为Read committed时，避免了脏读，但是可能会造成不可重复读。</p>
+<p>公司发工资了，领导把5000元打到singo的账号上，但是该事务并未提交，而singo正好去查看账户，发现工资已经到账，是5000元整，非常高兴。可是不幸的是，领导发现发给singo的工资金额不对，是2000元，于是迅速回滚了事务，修改金额后，将事务提交，最后singo实际的工资只有2000元，singo空欢喜一场。</p>
+<p><img src="http://dl.iteye.com/upload/attachment/556524/f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif" alt="img"></p>
+<p>出现上述情况，即我们所说的脏读，两个并发的事务，“事务A：领导给singo发工资”、“事务B：singo查询工资账户”，事务B读取了事务A尚未提交的数据。</p>
+<p>Repeatable read（重复读）——Mysql的默认隔离级别</p>
+<p>当隔离级别设置为Repeatable read时，可以避免不可重复读。当singo拿着工资卡去消费时，一旦系统开始读取工资卡信息（即事务开始），singo的老婆就不可能对该记录进行修改，也就是singo的老婆不能在此时转账。</p>
+<p>虽然Repeatable read避免了不可重复读，但还有可能出现幻读。</p>
+<p>singo的老婆工作在银行部门，她时常通过银行内部系统查看singo的信用卡消费记录。有一天，她正在查询到singo当月信用卡的总消费金额（select sum(amount) from transaction where month = 本月）为80元，而singo此时正好在外面胡吃海塞后在收银台买单，消费1000元，即新增了一条1000元的消费记录（insert transaction … ），并提交了事务，随后singo的老婆将singo当月信用卡消费的明细打印到A4纸上，却发现消费总额为1080元，singo的老婆很诧异，以为出现了幻觉，幻读就这样产生了。</p>
+<p>Serializable（序列表）——花费高，性能低</p>
+<h3 id="乐观锁和悲观锁"><a href="#乐观锁和悲观锁" class="headerlink" title="乐观锁和悲观锁"></a>乐观锁和悲观锁</h3><p>在关系数据库管理系统里，悲观并发控制（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）是一种并发控制的方法。他可以阻止一个事务以影响其他用户的方式修改数据，悲观并发控制主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。</p>
+<h4 id="在数据库中，悲观锁的流程如下："><a href="#在数据库中，悲观锁的流程如下：" class="headerlink" title="在数据库中，悲观锁的流程如下："></a>在数据库中，悲观锁的流程如下：</h4><p>在对任意记录进行修改前，先尝试为该记录加上排他锁（exclusive locking）。</p>
+<p>如果加锁失败，说明该记录正在被修改，那么当前查询可能要等待或者抛出异常。 具体响应方式由开发者根据实际需要决定。</p>
+<p>如果成功加锁，那么就可以对记录做修改，事务完成后就会解锁了。</p>
+<p>其间如果有其他对该记录做修改或加排他锁的操作，都会等待我们解锁或直接抛出异常。</p>
+<p>在关系数据库管理系统里，乐观并发控制（又名“乐观锁”，Optimistic Concurrency Control，缩写“OCC”）是一种并发控制的方法。它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。如果其他事务有更新的话，正在提交的事务会进行回滚。</p>
+<h4 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h4><p>通过版本号+1的方法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1.查询出商品信息</div><div class="line"><span class="keyword">select</span> (<span class="keyword">status</span>,<span class="keyword">status</span>,<span class="keyword">version</span>) <span class="keyword">from</span> t_goods <span class="keyword">where</span> <span class="keyword">id</span>=#&#123;<span class="keyword">id</span>&#125;</div><div class="line"><span class="number">2.</span>根据商品信息生成订单</div><div class="line"><span class="number">3.</span>修改商品<span class="keyword">status</span>为<span class="number">2</span></div><div class="line"><span class="keyword">update</span> t_goods </div><div class="line"><span class="keyword">set</span> <span class="keyword">status</span>=<span class="number">2</span>,<span class="keyword">version</span>=<span class="keyword">version</span>+<span class="number">1</span></div><div class="line"><span class="keyword">where</span> <span class="keyword">id</span>=#&#123;<span class="keyword">id</span>&#125; <span class="keyword">and</span> <span class="keyword">version</span>=#&#123;<span class="keyword">version</span>&#125;;</div></pre></td></tr></table></figure>
+<h3 id="Linux进程调度"><a href="#Linux进程调度" class="headerlink" title="Linux进程调度"></a>Linux进程调度</h3><p>进程调度主要有主动调度和被动调度两种方式    </p>
+<p>进程提供了两种优先级，一种是普通的进程优先级，第二个是实时优先级。前者适用SCHED_NORMAL调度策略，后者可选SCHED_FIFO或SCHED_RR调度策略。<strong>任何时候，实时进程的优先级都高于普通进程</strong>，实时进程只会被更高级的实时进程抢占，同级实时进程之间是按照FIFO（一次机会做完）或者RR（多次轮转）规则调度的。</p>
+<h3 id="HTTP中GET和POST之间的区别"><a href="#HTTP中GET和POST之间的区别" class="headerlink" title="HTTP中GET和POST之间的区别"></a>HTTP中GET和POST之间的区别</h3><p>从原理上来说，在HTTP中，GET，POST，PUT，DELETE相当于查，改，增，删这四个方法。GET一般用于查找和获取信息，POST一般用于更新资源信息。</p>
+<p>而在目前的开发中，大部分人都没有太注重HTTP规范，导致了以下几个问题：</p>
+<p><strong>1</strong>.很多人贪方便，更新资源时用了GET，因为用POST必须要到FORM（表单），这样会麻烦一点。</p>
+<p><strong>2</strong>.对资源的增，删，改，查操作，其实都可以通过GET/POST完成，不需要用到PUT和DELETE。</p>
+<p><strong>3</strong>.另外一个是，早期的Web MVC框架设计者们并没有有意识地将URL当作抽象的资源来看待和设计，所以导致一个比较严重的问题是传统的Web MVC框架基本上都只支持GET和POST两种HTTP方法，而不支持PUT和DELETE方法。</p>
+<p>从表象上来看，他们之间的区别在于：</p>
+<p><strong>1.</strong>GET请求的数据会依附在URL上，（就是把数据放在HTTP协议头上），以？分割 URL和传输的数据，以&amp;来连接参数，POST请求的数据则是放在HTTP包的包体里面。</p>
+<p><strong>2.</strong>POST的安全性要比GET的安全性高，因为GET请求的参数是通过明文的方式暴露在URL上的</p>
+<p>在Java开发过程中，如果form表单中的method是get的话，则通过requset。queryString获得参数</p>
+<p>如果是post的话，则是request.form获取表单中的数据</p>
+<h3 id="HTTP报文详解"><a href="#HTTP报文详解" class="headerlink" title="HTTP报文详解"></a>HTTP报文详解</h3><p>HTTP中的报文主要有两类：HTTP请求报文和HTTP响应报文</p>
+<p>一个<strong>HTTP请求报文</strong>由请求行（request line）,请求头(request line),空行，和请求数据组成</p>
+<p><img src="https://i.imgur.com/rvfJnCj.png" alt="rvfJnCj.png"></p>
+<p><strong>HTTP响应报文</strong>由三部分组成：状态行、消息报头、响应正文</p>
+<p>状态行格式如下：</p>
+<p>HTTP-Version Status-Code Reason-Phrase CRLF</p>
+<p>举个例子：HTTP/1.1 200 OK（CRLF）。</p>
+<h3 id="七大查找算法"><a href="#七大查找算法" class="headerlink" title="七大查找算法"></a>七大查找算法</h3><p>顺序查找</p>
+<p>二分查找</p>
+<p>插值查找（二分查找的自适应）</p>
+<p>斐波那契查找（0.618的二分查找）</p>
+<p>树表查找（二叉树查找方法——最简单）</p>
+<p>分块查找（把元素划分为n块，块内的元素不一定有序，而块之间必须有序）</p>
+<p>哈希查找（哈希函数）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/04/‘ConcurrentHashmap的使用’/" rel="next" title="ConcurrentHashmap的使用">
+                <i class="fa fa-chevron-left"></i> ConcurrentHashmap的使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="彦鹏" />
+          <p class="site-author-name" itemprop="name">彦鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">每天进步一点点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象和面向过程的区别"><span class="nav-number">1.</span> <span class="nav-text">面向对象和面向过程的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向过程"><span class="nav-number">1.1.</span> <span class="nav-text">面向过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问控制符public-protected-private-以及默认的区别"><span class="nav-number">1.3.</span> <span class="nav-text">访问控制符public,protected,private,以及默认的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String和StringBuffer、StringBuilder的区别"><span class="nav-number">2.</span> <span class="nav-text">String和StringBuffer、StringBuilder的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OverLoading和OverRiding的区别"><span class="nav-number">3.</span> <span class="nav-text">OverLoading和OverRiding的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口和抽象类的区别"><span class="nav-number">4.</span> <span class="nav-text">接口和抽象类的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法层次"><span class="nav-number">4.1.</span> <span class="nav-text">语法层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计层次"><span class="nav-number">4.2.</span> <span class="nav-text">设计层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域"><span class="nav-number">4.3.</span> <span class="nav-text">跨域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat、Apache、JBOSS之间的区别"><span class="nav-number">5.</span> <span class="nav-text">Tomcat、Apache、JBOSS之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash算法原理"><span class="nav-number">6.</span> <span class="nav-text">Hash算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的Hash算法"><span class="nav-number">6.1.</span> <span class="nav-text">常用的Hash算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库事务隔离级别（转自http-blog-csdn-net-fg2006-article-details-6937413）"><span class="nav-number">7.</span> <span class="nav-text">数据库事务隔离级别（转自http://blog.csdn.net/fg2006/article/details/6937413）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乐观锁和悲观锁"><span class="nav-number">8.</span> <span class="nav-text">乐观锁和悲观锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在数据库中，悲观锁的流程如下："><span class="nav-number">8.1.</span> <span class="nav-text">在数据库中，悲观锁的流程如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法"><span class="nav-number">8.2.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux进程调度"><span class="nav-number">9.</span> <span class="nav-text">Linux进程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP中GET和POST之间的区别"><span class="nav-number">10.</span> <span class="nav-text">HTTP中GET和POST之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP报文详解"><span class="nav-number">11.</span> <span class="nav-text">HTTP报文详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七大查找算法"><span class="nav-number">12.</span> <span class="nav-text">七大查找算法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">彦鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("haf2k8DGCn9V9IdwRUfFd1m2-gzGzoHsz", "eeRJlUBaMcwABRrULhYN4f3S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
