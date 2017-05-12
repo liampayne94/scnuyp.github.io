@@ -109,7 +109,8 @@ protected——同一包内的类和包外的子类可以访问
 private——仅">
 <meta property="og:image" content="http://dl.iteye.com/upload/attachment/556524/f244ae46-c8f4-3bc1-906e-d1d9c1af3516.gif">
 <meta property="og:image" content="https://i.imgur.com/rvfJnCj.png">
-<meta property="og:updated_time" content="2017-05-05T15:02:27.159Z">
+<meta property="og:image" content="https://scnuyp.github.io/C:\Users\5000\Desktop\微信图片_20170506112517.png">
+<meta property="og:updated_time" content="2017-05-06T03:33:16.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java面试中常见的题目">
 <meta name="twitter:description" content="面向对象和面向过程的区别面向过程优点：性能比面向对象高，因为类的实例化开销比较大，面向过程编程常见于硬件开发，如单片机开发
@@ -367,7 +368,7 @@ private——仅">
 <p>StringBuffer对对象本身进行操作，而不是生成新的对象</p>
 <p> StringBuilder相对StringBuffer提高10%到15%的性能，但要冒着线程不安全的风险。</p>
 <h3 id="OverLoading和OverRiding的区别"><a href="#OverLoading和OverRiding的区别" class="headerlink" title="OverLoading和OverRiding的区别"></a>OverLoading和OverRiding的区别</h3><p>OverLoading是方法重载，其中方法名必须相同，而参数的类型，个数，顺序可以不同，方法的返回值和权限修饰符也可以不同，一般发生于编译时</p>
-<p>OverRiding是方法重写，是指子类继承父类的时候，方法名，参数列表必须相同，而返回值要小于等于父类，抛出的异常也要小于等于父类</p>
+<p>0OverRiding是方法重写，是指子类继承父类的时候，方法名，参数列表必须相同，而返回值要小于等于父类，抛出的异常也要小于等于父类</p>
 <h3 id="接口和抽象类的区别"><a href="#接口和抽象类的区别" class="headerlink" title="接口和抽象类的区别"></a>接口和抽象类的区别</h3><h4 id="语法层次"><a href="#语法层次" class="headerlink" title="语法层次"></a>语法层次</h4><p>两者的语法定义是不一样的</p>
 <h4 id="设计层次"><a href="#设计层次" class="headerlink" title="设计层次"></a>设计层次</h4><p>抽象类是对类的抽象，而接口是对行为的抽象，抽象类是对类整体进行抽象，包括属性行为，但是接口是对类的局部（行为）进行抽象，抽象类是自底向下抽象而来的，接口是自顶向下抽象而来的</p>
 <h4 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h4><p>抽象类的实现是通过继承的方式，而接口的实现则不然，他不要求实现者和接口之间的定义一致，仅仅是约定了接口的契约，相当于一种“like-a”的关系。</p>
@@ -461,6 +462,13 @@ private——仅">
 <p>树表查找（二叉树查找方法——最简单）</p>
 <p>分块查找（把元素划分为n块，块内的元素不一定有序，而块之间必须有序）</p>
 <p>哈希查找（哈希函数）</p>
+<h3 id="Hibernate一级和二级缓存"><a href="#Hibernate一级和二级缓存" class="headerlink" title="Hibernate一级和二级缓存"></a>Hibernate一级和二级缓存</h3><p>一级缓存：session里面的缓存</p>
+<p>二级缓存：sessionFactory里面的缓存，可以被多个session共用</p>
+<h3 id="Hibernate中的优化策略"><a href="#Hibernate中的优化策略" class="headerlink" title="Hibernate中的优化策略"></a>Hibernate中的优化策略</h3><p>1，在用到where的hql语句中尽量少的使用索引</p>
+<p>2，在数据库中使用聚合和order by</p>
+<p>3，延迟属性调优</p>
+<h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><p>IoC（控制反转：Inverse of Control）是Spring容器的内核 </p>
+<p><img src="C:\Users\5000\Desktop\微信图片_20170506112517.png" alt="微信图片_20170506112517"></p>
 
       
     </div>
@@ -512,6 +520,10 @@ private——仅">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/10/Jquery异步处理/" rel="prev" title="Jquery异步处理">
+                Jquery异步处理 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -583,7 +595,7 @@ private——仅">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -631,7 +643,7 @@ private——仅">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象和面向过程的区别"><span class="nav-number">1.</span> <span class="nav-text">面向对象和面向过程的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向过程"><span class="nav-number">1.1.</span> <span class="nav-text">面向过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问控制符public-protected-private-以及默认的区别"><span class="nav-number">1.3.</span> <span class="nav-text">访问控制符public,protected,private,以及默认的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String和StringBuffer、StringBuilder的区别"><span class="nav-number">2.</span> <span class="nav-text">String和StringBuffer、StringBuilder的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OverLoading和OverRiding的区别"><span class="nav-number">3.</span> <span class="nav-text">OverLoading和OverRiding的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口和抽象类的区别"><span class="nav-number">4.</span> <span class="nav-text">接口和抽象类的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法层次"><span class="nav-number">4.1.</span> <span class="nav-text">语法层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计层次"><span class="nav-number">4.2.</span> <span class="nav-text">设计层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域"><span class="nav-number">4.3.</span> <span class="nav-text">跨域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat、Apache、JBOSS之间的区别"><span class="nav-number">5.</span> <span class="nav-text">Tomcat、Apache、JBOSS之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash算法原理"><span class="nav-number">6.</span> <span class="nav-text">Hash算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的Hash算法"><span class="nav-number">6.1.</span> <span class="nav-text">常用的Hash算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库事务隔离级别（转自http-blog-csdn-net-fg2006-article-details-6937413）"><span class="nav-number">7.</span> <span class="nav-text">数据库事务隔离级别（转自http://blog.csdn.net/fg2006/article/details/6937413）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乐观锁和悲观锁"><span class="nav-number">8.</span> <span class="nav-text">乐观锁和悲观锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在数据库中，悲观锁的流程如下："><span class="nav-number">8.1.</span> <span class="nav-text">在数据库中，悲观锁的流程如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法"><span class="nav-number">8.2.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux进程调度"><span class="nav-number">9.</span> <span class="nav-text">Linux进程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP中GET和POST之间的区别"><span class="nav-number">10.</span> <span class="nav-text">HTTP中GET和POST之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP报文详解"><span class="nav-number">11.</span> <span class="nav-text">HTTP报文详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七大查找算法"><span class="nav-number">12.</span> <span class="nav-text">七大查找算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象和面向过程的区别"><span class="nav-number">1.</span> <span class="nav-text">面向对象和面向过程的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#面向过程"><span class="nav-number">1.1.</span> <span class="nav-text">面向过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象"><span class="nav-number">1.2.</span> <span class="nav-text">面向对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问控制符public-protected-private-以及默认的区别"><span class="nav-number">1.3.</span> <span class="nav-text">访问控制符public,protected,private,以及默认的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String和StringBuffer、StringBuilder的区别"><span class="nav-number">2.</span> <span class="nav-text">String和StringBuffer、StringBuilder的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OverLoading和OverRiding的区别"><span class="nav-number">3.</span> <span class="nav-text">OverLoading和OverRiding的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口和抽象类的区别"><span class="nav-number">4.</span> <span class="nav-text">接口和抽象类的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法层次"><span class="nav-number">4.1.</span> <span class="nav-text">语法层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计层次"><span class="nav-number">4.2.</span> <span class="nav-text">设计层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域"><span class="nav-number">4.3.</span> <span class="nav-text">跨域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat、Apache、JBOSS之间的区别"><span class="nav-number">5.</span> <span class="nav-text">Tomcat、Apache、JBOSS之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hash算法原理"><span class="nav-number">6.</span> <span class="nav-text">Hash算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用的Hash算法"><span class="nav-number">6.1.</span> <span class="nav-text">常用的Hash算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库事务隔离级别（转自http-blog-csdn-net-fg2006-article-details-6937413）"><span class="nav-number">7.</span> <span class="nav-text">数据库事务隔离级别（转自http://blog.csdn.net/fg2006/article/details/6937413）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乐观锁和悲观锁"><span class="nav-number">8.</span> <span class="nav-text">乐观锁和悲观锁</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在数据库中，悲观锁的流程如下："><span class="nav-number">8.1.</span> <span class="nav-text">在数据库中，悲观锁的流程如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现方法"><span class="nav-number">8.2.</span> <span class="nav-text">实现方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux进程调度"><span class="nav-number">9.</span> <span class="nav-text">Linux进程调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP中GET和POST之间的区别"><span class="nav-number">10.</span> <span class="nav-text">HTTP中GET和POST之间的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP报文详解"><span class="nav-number">11.</span> <span class="nav-text">HTTP报文详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七大查找算法"><span class="nav-number">12.</span> <span class="nav-text">七大查找算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hibernate一级和二级缓存"><span class="nav-number">13.</span> <span class="nav-text">Hibernate一级和二级缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hibernate中的优化策略"><span class="nav-number">14.</span> <span class="nav-text">Hibernate中的优化策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC"><span class="nav-number">15.</span> <span class="nav-text">IOC</span></a></li></ol></div>
             
 
           </div>
