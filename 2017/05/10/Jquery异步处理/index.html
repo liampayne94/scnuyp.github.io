@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="彦鹏的个人博客" />
+  <meta name="keywords" content="jQuery," />
 
 
 
@@ -89,16 +89,25 @@
 
 
 
-<meta name="description" content="每天进步一点点">
+<meta name="description" content="利用get方式进行异步操作 jQuery.get( url, [data], [callback] )
+url (String) :  发送请求的URL地址.
+data (Map) : (可选) 要发送给服务器的数据，以 Key/value 的键值对形式表示，会做为QueryString附加到请求URL中。
+callback (Function) : (可选) 载入成功时回调函数(只有当Respo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jquery异步处理">
 <meta property="og:url" content="https://scnuyp.github.io/2017/05/10/Jquery异步处理/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="每天进步一点点">
-<meta property="og:updated_time" content="2017-05-10T15:07:25.123Z">
+<meta property="og:description" content="利用get方式进行异步操作 jQuery.get( url, [data], [callback] )
+url (String) :  发送请求的URL地址.
+data (Map) : (可选) 要发送给服务器的数据，以 Key/value 的键值对形式表示，会做为QueryString附加到请求URL中。
+callback (Function) : (可选) 载入成功时回调函数(只有当Respo">
+<meta property="og:updated_time" content="2017-05-12T15:34:28.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jquery异步处理">
-<meta name="twitter:description" content="每天进步一点点">
+<meta name="twitter:description" content="利用get方式进行异步操作 jQuery.get( url, [data], [callback] )
+url (String) :  发送请求的URL地址.
+data (Map) : (可选) 要发送给服务器的数据，以 Key/value 的键值对形式表示，会做为QueryString附加到请求URL中。
+callback (Function) : (可选) 载入成功时回调函数(只有当Respo">
 
 
 
@@ -334,7 +343,19 @@
       
 
       
-        
+        <h3 id="利用get方式进行异步操作"><a href="#利用get方式进行异步操作" class="headerlink" title="利用get方式进行异步操作"></a>利用get方式进行异步操作</h3><p><strong> jQuery.get</strong>( url, [data], [callback] )</p>
+<p><strong>url </strong>(String) :  发送请求的URL地址.</p>
+<p><strong>data </strong>(Map) : (可选) 要发送给服务器的数据，以 Key/value 的键值对形式表示，会做为QueryString附加到请求URL中。</p>
+<p><strong>callback </strong>(Function) : (可选) 载入成功时回调函数(只有当Response的返回状态是success才是调用该方法)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$.get(<span class="string">"./Ajax.aspx"</span>, &#123;<span class="attr">Action</span>:<span class="string">"get"</span>,<span class="attr">Name</span>:<span class="string">"lulu"</span>&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">data, textStatus</span>)</span>&#123;</div></pre></td></tr></table></figure>
+<h3 id="使用POST方式来进行异步请求"><a href="#使用POST方式来进行异步请求" class="headerlink" title="使用POST方式来进行异步请求"></a>使用POST方式来进行异步请求</h3><p><strong> jQuery.post</strong>( url, [data], [callback], [type] ) </p>
+<p>参数：</p>
+<p><strong>url </strong>(String) : 发送请求的URL地址.</p>
+<p><strong>data </strong>(Map) : (可选) 要发送给服务器的数据，以 Key/value 的键值对形式表示。</p>
+<p><strong>callback </strong>(Function) : (可选) 载入成功时回调函数(只有当Response的返回状态是success才是调用该方法)。</p>
+<p><strong>type</strong> (String) : (可选)官方的说明是：Type of data to be sent。其实应该为客户端请求的类型(JSON,XML,等等)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$.post(<span class="string">"Ajax.aspx"</span>, &#123; <span class="attr">Action</span>: <span class="string">"post"</span>, <span class="attr">Name</span>: <span class="string">"lulu"</span> &#125;,</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params">data, textStatus</span>)</span>&#123;</div><div class="line"></div><div class="line"><span class="comment">// data 可以是 xmlDoc, jsonObj, html, text, 等等.</span></div><div class="line"><span class="comment">//this; // 这个Ajax请求的选项配置信息，请参考jQuery.get()说到的this</span></div><div class="line">alert(data.result);</div><div class="line"></div><div class="line">&#125;, <span class="string">"json"</span>);</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -361,6 +382,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          
+        </div>
+      
 
       
         
@@ -380,8 +407,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/12/记一次面试/" rel="prev" title="记一次面试">
-                记一次面试 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/12/session和cookie的区别/" rel="prev" title="session和cookie的区别">
+                session和cookie的区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -429,8 +456,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -445,7 +481,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -458,7 +494,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -483,6 +519,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用get方式进行异步操作"><span class="nav-number">1.</span> <span class="nav-text">利用get方式进行异步操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用POST方式来进行异步请求"><span class="nav-number">2.</span> <span class="nav-text">使用POST方式来进行异步请求</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
