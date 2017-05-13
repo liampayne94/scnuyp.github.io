@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java集合框架," />
+  <meta name="keywords" content="数据库," />
 
 
 
@@ -89,19 +89,25 @@
 
 
 
-<meta name="description" content="定义对于HashSet而言，它是基于HashMap来实现的，底层采用HashMap来保存元素。可以说看了我上一篇关于HashMap的总结之后，对于HashSet的理解就不难了
-构造函数123public class HashSet&amp;lt;E&amp;gt;    extends AbstractSet&amp;lt;E&amp;gt;    implements Set&amp;lt;E&amp;gt;, Cloneable, java">
+<meta name="description" content="sql语句的优化1.对查询进行优化，要尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。
+2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如
+lite1select id from t where num is null
+3.应尽量避免在 where 子句中使用 != 或 &amp;lt;&amp;gt; 操作符，否则">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java中HashSet的总结">
-<meta property="og:url" content="https://scnuyp.github.io/2017/03/27/Java中hashset的总结/index.html">
+<meta property="og:title" content="sql语句的优化">
+<meta property="og:url" content="https://scnuyp.github.io/2017/05/01/‘sql语句的优化’/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="定义对于HashSet而言，它是基于HashMap来实现的，底层采用HashMap来保存元素。可以说看了我上一篇关于HashMap的总结之后，对于HashSet的理解就不难了
-构造函数123public class HashSet&amp;lt;E&amp;gt;    extends AbstractSet&amp;lt;E&amp;gt;    implements Set&amp;lt;E&amp;gt;, Cloneable, java">
-<meta property="og:updated_time" content="2017-04-12T03:15:56.283Z">
+<meta property="og:description" content="sql语句的优化1.对查询进行优化，要尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。
+2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如
+lite1select id from t where num is null
+3.应尽量避免在 where 子句中使用 != 或 &amp;lt;&amp;gt; 操作符，否则">
+<meta property="og:updated_time" content="2017-05-13T00:29:58.968Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java中HashSet的总结">
-<meta name="twitter:description" content="定义对于HashSet而言，它是基于HashMap来实现的，底层采用HashMap来保存元素。可以说看了我上一篇关于HashMap的总结之后，对于HashSet的理解就不难了
-构造函数123public class HashSet&amp;lt;E&amp;gt;    extends AbstractSet&amp;lt;E&amp;gt;    implements Set&amp;lt;E&amp;gt;, Cloneable, java">
+<meta name="twitter:title" content="sql语句的优化">
+<meta name="twitter:description" content="sql语句的优化1.对查询进行优化，要尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。
+2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如
+lite1select id from t where num is null
+3.应尽量避免在 where 子句中使用 != 或 &amp;lt;&amp;gt; 操作符，否则">
 
 
 
@@ -129,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="https://scnuyp.github.io/2017/03/27/Java中hashset的总结/"/>
+  <link rel="canonical" href="https://scnuyp.github.io/2017/05/01/‘sql语句的优化’/"/>
 
 
 
 
 
-  <title> Java中HashSet的总结 | 彦鹏的个人博客 </title>
+  <title> sql语句的优化 | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/03/27/Java中hashset的总结/">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/05/01/‘sql语句的优化’/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彦鹏">
@@ -275,7 +281,7 @@
             
             
               
-                Java中HashSet的总结
+                sql语句的优化
               
             
           </h1>
@@ -290,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T10:50:52+08:00">
-                2017-03-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-01T08:19:29+08:00">
+                2017-05-01
               </time>
             
 
@@ -308,7 +314,7 @@
 
           
           
-             <span id="/2017/03/27/Java中hashset的总结/" class="leancloud_visitors" data-flag-title="Java中HashSet的总结">
+             <span id="/2017/05/01/‘sql语句的优化’/" class="leancloud_visitors" data-flag-title="sql语句的优化">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -337,42 +343,41 @@
       
 
       
-        <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>对于HashSet而言，它是基于HashMap来实现的，底层采用HashMap来保存元素。可以说看了我上一篇关于HashMap的总结之后，对于HashSet的理解就不难了</p>
-<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashSet</span>&lt;<span class="title">E</span>&gt;</span></div><div class="line">    <span class="keyword">extends</span> <span class="title">AbstractSet</span>&lt;<span class="title">E</span>&gt;</div><div class="line">    <span class="keyword">implements</span> <span class="title">Set</span>&lt;<span class="title">E</span>&gt;, <span class="title">Cloneable</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span></div></pre></td></tr></table></figure>
-<p>HashSet继承AbstractSet类，实现Set、Cloneable、Serializable接口。（与HashMap类似）其中AbstractSet提供 Set 接口的骨干实现，从而最大限度地减少了实现此接口所需的工作。Set接口是一种不包括重复元素的Collection，它维持它自己的内部排序，所以随机访问没有任何意义。</p>
-<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">   * 默认构造函数</div><div class="line">   * 初始化一个空的HashMap，并使用默认初始容量为16和加载因子0.75。</div><div class="line">   */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</div><div class="line">       map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">/**</span></div><div class="line">    * 构造一个包含指定 collection 中的元素的新 set。</div><div class="line">    */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;</div><div class="line">       map = <span class="keyword">new</span> HashMap&lt;&gt;(Math.max((<span class="keyword">int</span>) (c.size()/.<span class="number">75f</span>) + <span class="number">1</span>, <span class="number">16</span>));</div><div class="line">       addAll(c);</div><div class="line">   &#125;</div><div class="line">   </div><div class="line">   <span class="comment">/**</span></div><div class="line">    * 构造一个新的空 set，其底层 HashMap 实例具有指定的初始容量和指定的加载因子</div><div class="line">    */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</div><div class="line">       map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">   &#125;</div><div class="line">      </div><div class="line">   <span class="comment">/**</span></div><div class="line">    * 构造一个新的空 set，其底层 HashMap 实例具有指定的初始容量和默认的加载因子（0.75）。</div><div class="line">    */</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">(<span class="keyword">int</span> initialCapacity)</span> </span>&#123;</div><div class="line">      map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity);</div><div class="line">   &#125;</div><div class="line">      </div><div class="line">   <span class="comment">/**</span></div><div class="line">    * 在API中我没有看到这个构造函数，今天看源码才发现（原来访问权限为包权限，不对外公开的）</div><div class="line">    * 以指定的initialCapacity和loadFactor构造一个新的空链接哈希集合。</div><div class="line">    * dummy 为标识 该构造函数主要作用是对LinkedHashSet起到一个支持作用</div><div class="line">    */</div><div class="line">   HashSet(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor, <span class="keyword">boolean</span> dummy) &#123;</div><div class="line">      map = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>可以看出，HashSet构造函数底层的还是实现一个HashMap</p>
-<h3 id="HashSet与HashMap的区别"><a href="#HashSet与HashMap的区别" class="headerlink" title="HashSet与HashMap的区别"></a>HashSet与HashMap的区别</h3><table>
-<thead>
-<tr>
-<th>HashSet</th>
-<th>HashMap</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>HashMap实现了Map接口</td>
-<td>HashSet实现了Set接口</td>
-</tr>
-<tr>
-<td>HashMap储存键值对</td>
-<td>HashSet仅仅存储了对象</td>
-</tr>
-<tr>
-<td>使用put()方法将元素放入map中</td>
-<td>使用add()方法将元素放入set中</td>
-</tr>
-<tr>
-<td>HashMap中使用键对象来计算hashcode值</td>
-<td>HashSet使用成员对象来计算hashcode值，对于两个对象来说hashcode可能相同，所以equals()方法用来判断对象的相等性，如果两个对象不同的话，那么返回false</td>
-</tr>
-<tr>
-<td>HashMap比较快，因为是使用唯一的键来获取对象</td>
-<td>HashSet较HashMap来说比较慢</td>
-</tr>
-</tbody>
-</table>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p> 由于HashSet底层使用了HashMap实现，使其的实现过程变得非常简单，相比之下，HashSet的实现速度比HashMap要慢</p>
+        <h3 id="sql语句的优化"><a href="#sql语句的优化" class="headerlink" title="sql语句的优化"></a>sql语句的优化</h3><p>1.对查询进行优化，要尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。</p>
+<p>2.应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如</p>
+<figure class="highlight sql"><figcaption><span>lite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span> <span class="keyword">is</span> <span class="literal">null</span></div></pre></td></tr></table></figure>
+<p>3.应尽量避免在 where 子句中使用 != 或 &lt;&gt; 操作符，否则将引擎放弃使用索引而进行全表扫描。</p>
+<p>4.应尽量避免在 where 子句中使用 or 来连接条件，<strong>如果一个字段有索引，一个字段没有索引，将导致引擎放弃使用索引而进行全表扫描</strong></p>
+<figure class="highlight sql"><figcaption><span>lite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span>=<span class="number">10</span> <span class="keyword">or</span> <span class="keyword">Name</span> = <span class="string">'admin'</span></div></pre></td></tr></table></figure>
+<p>可以采用以下的方式</p>
+<figure class="highlight sql"><figcaption><span>lite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span> = <span class="number">10</span></div><div class="line"><span class="keyword">union</span> all //合并结果集</div><div class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">Name</span> = <span class="string">'admin'</span></div></pre></td></tr></table></figure>
+<p>5.in 和 not in 也要慎用，否则会导致全表扫描，如：</p>
+<figure class="highlight sql"><figcaption><span>lite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span> <span class="keyword">in</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>6.如果在 where 子句中使用参数，也会导致全表扫描。因为SQL只有在运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时；它必须在编译时进行选择。然 而，如果在编译时建立访问计划，变量的值还是未知的，因而无法作为索引选择的输入项。如下面语句将进行全表扫描：</p>
+<figure class="highlight sql"><figcaption><span>lite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span> = @<span class="keyword">num</span></div></pre></td></tr></table></figure>
+<p>7.Update 语句，如果只更改1、2个字段，不要Update全部字段，否则频繁调用会引起明显的性能消耗，同时带来大量日志。</p>
+<p>8.对于多张大数据量（这里几百条就算大了）的表JOIN，要先分页再JOIN，否则逻辑读会很高，性能很差。</p>
+<p>9.select count(*) from table；这样不带任何条件的count会引起全表扫描，并且没有任何业务意义，是一定要杜绝的。</p>
+<p>10.索引并不是越多越好，索引固然可以提高相应的 select 的效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时有可能会重建索引，所以怎样建索引需要慎重考虑，视具体情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建的索引是否有 必要。</p>
+<p>11.任何地方都不要使用 select <em> from t ，用具体的字段列表代替“</em>”，不要返回用不到的任何字段。</p>
+<h3 id="表变量和临时表的比较"><a href="#表变量和临时表的比较" class="headerlink" title="表变量和临时表的比较"></a>表变量和临时表的比较</h3><ul>
+<li>临时表是利用了硬盘(tempdb数据库) ，表名变量是占用内存，因此小数据量当然是内存中的表变量更快。当大数据量时，就不能用表变量了，太耗内存了。大数据量时适合用临时表。</li>
+<li>表变量缺省放在内存，速度快，所以在触发器，存储过程里如果数据量不大，应该用表变量。</li>
+<li>临时表缺省使用硬盘，一般来说速度比较慢，那是不是就不用临时表呢？也不是，在数据量比较大的时候，如果使用表变量，会把内存耗尽，然后使用 TEMPDB的空间，这样主要还是使用硬盘空间，但同时把内存基本耗尽，增加了内存调入调出的机会，反而降低速度。这种情况建议先给TEMPDB一次分配合适的空间，然后使用临时表。</li>
+<li>临时表相对而言表变量主要是多了I/O时间，但少了对内存资源的占用。数据量较大的时候，由于对内存资源的消耗较少，使用临时表比表变量有更好的性能。</li>
+<li>建议：触发器、自定义函数用表变量；存储过程看情况，大部分用表变量；特殊的应用，大数据量的场合用临时表。</li>
+<li>表变量有明确的作用域，在定义表变量的函数、存储过程或批处理结束时，会自动清除表变量。</li>
+<li>在存储过程中使用表变量与使用临时表相比，减少了存储过程的重新编译量。</li>
+<li>涉及表变量的事务只在表变量更新期间存在。这样就减少了表变量对锁定和记录资源的需求。</li>
+<li>表变量需要事先知道表结构，普通临时表，只在当前会话中可用与表变量相同into一下就可以了,方便；全局临时表：可在多个会话中使用存在于temp中需显示的drop。（不知道表结构情况下临时表方便一些）</li>
+<li>全局临时表的功能是表变量没法达到的。</li>
+<li>表变量不必删除，也就不会有命名冲突，临时表特别是全局临时表用的时候必须解决命名冲突。</li>
+<li>应避免频繁创建和删除临时表，减少系统表资源的消耗。</li>
+<li>在新建临时表时，如果一次性插入数据量很大，那么可以使用select into代替create table，避免log，提高速度；如果数据量不大，为了缓和系统表的资源，建议先create table，然后insert。</li>
+<li>如果临时表的数据量较大，需要建立索引，那么应该将创建临时表和建立索引的过程放在单独一个子存储过程中，这样才能保证系统能够很好的使用到该临时表的索引。</li>
+<li>如果使用到了临时表，在存储过程的最后务必将所有的临时表显式删除，先truncate table，然后drop table，这样可以避免系统表的较长时间锁定。</li>
+<li>慎用大的临时表与其他大表的连接查询和修改，减低系统表负担，因为这种操作会在一条语句中多次使用tempdb的系统表。</li>
+</ul>
 
       
     </div>
@@ -402,7 +407,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java集合框架/" rel="tag"># Java集合框架</a>
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
           
         </div>
       
@@ -415,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/26/Java中HashMap的总结/" rel="next" title="Java中HashMap的总结">
-                <i class="fa fa-chevron-left"></i> Java中HashMap的总结
+              <a href="/2017/04/17/双亲委派模型/" rel="next" title="双亲委派模型">
+                <i class="fa fa-chevron-left"></i> 双亲委派模型
               </a>
             
           </div>
@@ -425,8 +430,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/29/Java中List的总结/" rel="prev" title="Java中ArrayList的总结">
-                Java中ArrayList的总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/03/Semaphore类的使用/" rel="prev" title="Semaphore类的使用">
+                Semaphore类的使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -547,7 +552,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数"><span class="nav-number">2.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">3.</span> <span class="nav-text">源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashSet与HashMap的区别"><span class="nav-number">4.</span> <span class="nav-text">HashSet与HashMap的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#sql语句的优化"><span class="nav-number">1.</span> <span class="nav-text">sql语句的优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表变量和临时表的比较"><span class="nav-number">2.</span> <span class="nav-text">表变量和临时表的比较</span></a></li></ol></div>
             
 
           </div>
