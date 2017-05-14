@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="算法与数据结构," />
 
 
 
@@ -89,19 +89,88 @@
 
 
 
-<meta name="description" content="转自https://zhuanlan.zhihu.com/p/19637059
-概念​    abstract class和interface是Java语言中对于抽象类定义进行支持的两种机制，正是由于这两种机制的存在，才赋予了Java强大的面向对象能力。abstract class和interface之间在对于抽象类定义的支持方面具有很大的相似性，甚至可以相互替换，因此很多开发者在进行抽象类定义时">
+<meta name="description" content="简介KMP算法，是由Knuth，Morris，Pratt共同提出的模式匹配算法，其对于任何模式和目标序列，都可以在线性时间内完成匹配查找，而不会发生退化，是一个非常优秀的模式匹配算法。
+KMP算法对于朴素匹配算法的改进是引入了一个跳转表next[]。以模式字符串abcabcacab为例，其跳转表为：
+
+
+
+j
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+
+
+
+pattern[j]
+a
+b
+c
+a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【转】接口和抽象类的异同">
-<meta property="og:url" content="https://scnuyp.github.io/2017/03/11/接口和抽象类的区别/index.html">
+<meta property="og:title" content="KMP算法">
+<meta property="og:url" content="https://scnuyp.github.io/2017/05/14/KMP算法/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="转自https://zhuanlan.zhihu.com/p/19637059
-概念​    abstract class和interface是Java语言中对于抽象类定义进行支持的两种机制，正是由于这两种机制的存在，才赋予了Java强大的面向对象能力。abstract class和interface之间在对于抽象类定义的支持方面具有很大的相似性，甚至可以相互替换，因此很多开发者在进行抽象类定义时">
-<meta property="og:updated_time" content="2017-04-11T15:37:46.241Z">
+<meta property="og:description" content="简介KMP算法，是由Knuth，Morris，Pratt共同提出的模式匹配算法，其对于任何模式和目标序列，都可以在线性时间内完成匹配查找，而不会发生退化，是一个非常优秀的模式匹配算法。
+KMP算法对于朴素匹配算法的改进是引入了一个跳转表next[]。以模式字符串abcabcacab为例，其跳转表为：
+
+
+
+j
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+
+
+
+pattern[j]
+a
+b
+c
+a">
+<meta property="og:updated_time" content="2017-05-14T13:56:09.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【转】接口和抽象类的异同">
-<meta name="twitter:description" content="转自https://zhuanlan.zhihu.com/p/19637059
-概念​    abstract class和interface是Java语言中对于抽象类定义进行支持的两种机制，正是由于这两种机制的存在，才赋予了Java强大的面向对象能力。abstract class和interface之间在对于抽象类定义的支持方面具有很大的相似性，甚至可以相互替换，因此很多开发者在进行抽象类定义时">
+<meta name="twitter:title" content="KMP算法">
+<meta name="twitter:description" content="简介KMP算法，是由Knuth，Morris，Pratt共同提出的模式匹配算法，其对于任何模式和目标序列，都可以在线性时间内完成匹配查找，而不会发生退化，是一个非常优秀的模式匹配算法。
+KMP算法对于朴素匹配算法的改进是引入了一个跳转表next[]。以模式字符串abcabcacab为例，其跳转表为：
+
+
+
+j
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+
+
+
+pattern[j]
+a
+b
+c
+a">
 
 
 
@@ -129,13 +198,13 @@
 
 
 
-  <link rel="canonical" href="https://scnuyp.github.io/2017/03/11/接口和抽象类的区别/"/>
+  <link rel="canonical" href="https://scnuyp.github.io/2017/05/14/KMP算法/"/>
 
 
 
 
 
-  <title> 【转】接口和抽象类的异同 | 彦鹏的个人博客 </title>
+  <title> KMP算法 | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +323,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/03/11/接口和抽象类的区别/">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/05/14/KMP算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彦鹏">
@@ -275,7 +344,7 @@
             
             
               
-                【转】接口和抽象类的异同
+                KMP算法
               
             
           </h1>
@@ -290,8 +359,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-11T23:18:17+08:00">
-                2017-03-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-14T21:32:28+08:00">
+                2017-05-14
               </time>
             
 
@@ -308,7 +377,7 @@
 
           
           
-             <span id="/2017/03/11/接口和抽象类的区别/" class="leancloud_visitors" data-flag-title="【转】接口和抽象类的异同">
+             <span id="/2017/05/14/KMP算法/" class="leancloud_visitors" data-flag-title="KMP算法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -337,16 +406,60 @@
       
 
       
-        <p>转自<a href="https://zhuanlan.zhihu.com/p/19637059" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/19637059</a></p>
-<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>​    abstract class和interface是Java语言中对于抽象类定义进行支持的两种机制，正是由于这两种机制的存在，才赋予了Java强大的面向对象能力。abstract class和interface之间在对于抽象类定义的支持方面具有很大的相似性，甚至可以相互替换，因此很多开发者在进行抽象类定义时对于abstract class和interface的选择显得比较随意。其实，两者之间还是有很大的区别的，对于它们的选择甚至反映出对于问题领域本质的理解、对于设计意图的理解是否正确、合理。本文将对它们之间的区别进行一番剖析，试图给开发者提供一个在二者之间进行选择的依据。 </p>
-<p>​    abstract class和interface在Java语言中都是用来进行抽象类（本文中的抽象类并非从abstract class翻译而来，它表示的是一个抽象体，而abstract class为Java语言中用于定义抽象类的一种方法，请读者注意区分）定义的，那么什么是抽象类，使用抽象类能为我们带来什么好处呢？ </p>
-<p>​    在面向对象的概念中，我们知道所有的对象都是通过类来描绘的，但是反过来却不是这样。并不是所有的类都是用来描绘对象的，如果一个类中没有包含足够的信息来描绘一个具体的对象，这样的类就是抽象类。抽象类往往用来表征我们在对问题领域进行分析、设计中得出的抽象概念，是对一系列看上去不同，但是本质上相同的具体概念的抽象。比如：如果我们进行一个图形编辑软件的开发，就会发现问题领域存在着圆、三角形这样一些具体概念，它们是不同的，但是它们又都属于形状这样一个概念，形状这个概念在问题领域是不存在的，它就是一个抽象概念。正是因为抽象的概念在问题领域没有对应的具体概念，所以用以表征抽象概念的抽象类是不能够实例化的。 </p>
-<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><h4 id="从语法定义层面看abstract-class和interface"><a href="#从语法定义层面看abstract-class和interface" class="headerlink" title="从语法定义层面看abstract class和interface"></a>从语法定义层面看abstract class和interface</h4><p>在语法层面，Java语言对于abstract class和interface给出了不同的定义方式，下面以定义一个名为Demo的抽象类为例来说明这种不同。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> ｛ </span></div><div class="line">	<span class="title">abstract</span> <span class="title">void</span> <span class="title">method1</span>(); </div><div class="line">	<span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>; </div><div class="line">	… </div><div class="line">｝</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Demo</span> </span>&#123; </div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>; </div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>; </div><div class="line">	… </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>​    在abstract class方式中，Demo可以有自己的数据成员，也可以有非abstarct的成员方法，而在interface方式的实现中，Demo只能够有静态的不能被修改的数据成员（也就是必须是static final的，不过在interface中一般不定义数据成员），所有的成员方法都是abstract的。<strong>从某种意义上说，interface是一种特殊形式的abstract class</strong>。 </p>
-<h4 id="从编程的角度来看"><a href="#从编程的角度来看" class="headerlink" title="从编程的角度来看"></a>从编程的角度来看</h4><p>abstract class在Java语言中表示的是一种继承关系，一个类只能使用一次继承关系。但是，一个类却可以实现多个interface。也许，这是Java语言的设计者在考虑Java对于多重继承的支持方面的一种折中考虑吧。 </p>
-<p>其次，在abstract class的定义中，我们可以赋予方法的默认行为。但是在interface的定义中，方法却不能拥有默认行为，为了绕过这个限制，必须使用委托，但是这会 增加一些复杂性，有时会造成很大的麻烦。 </p>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><strong>KMP算法</strong>，是由Knuth，Morris，Pratt共同提出的模式匹配算法，其对于任何模式和目标序列，都可以在线性时间内完成匹配查找，而不会发生退化，是一个非常优秀的模式匹配算法。</p>
+<p>KMP算法对于朴素匹配算法的改进是引入了一个跳转表next[]。以模式字符串abcabcacab为例，其跳转表为：</p>
+<table>
+<thead>
+<tr>
+<th>j</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pattern[j]</td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+<td>a</td>
+<td>c</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr>
+<td>next[j]</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>5</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>跳转表的用途是，当目标串target中的某个子部target[m…m+(i-1)]与pattern串的前i个字符pattern[1…i]相匹配时，如果target[m+i]与pattern[i+1]匹配失败，程序不会像朴素匹配算法那样，将pattern[1]与target[m+1]对其，然后由target[m+1]向后逐一进行匹配，而是会将模式串向后移动i+1 - next[i+1]个字符，使得pattern[next[i+1]]与target[m+i]对齐，然后再由target[m+i]向后与依次执行匹配。</p>
+<h3 id="获得next数组"><a href="#获得next数组" class="headerlink" title="获得next数组"></a>获得next数组</h3><p>理解完KMP算法之后，我们就要考虑如何求出Next数组。在这里要注意一点，next数组表示的是长度，下标从1开始；但是在遍历原字符串时，下标还是从0开始。</p>
+<p>如果位置i和位置next[i]处的两个字符相同（下标从零开始），则next[i+1]等于next[i]加1。如果两个位置的字符不相同，我们可以将长度为next[i]的字符串继续分割，获得其最大公共长度next[next[i]]，然后再和位置i的字符比较。</p>
+<p>下面给出Java实现代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] getNext(String b)  </div><div class="line">&#123;  </div><div class="line">    <span class="keyword">int</span> len=b.length();  </div><div class="line">    <span class="keyword">int</span> j=<span class="number">0</span>;  </div><div class="line">          </div><div class="line">    <span class="keyword">int</span> next[]=<span class="keyword">new</span> <span class="keyword">int</span>[len+<span class="number">1</span>];<span class="comment">//next表示长度为i的字符串前缀和后缀的最长公共部分，从1开始  </span></div><div class="line">    next[<span class="number">0</span>]=next[<span class="number">1</span>]=<span class="number">0</span>;  </div><div class="line">          </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;len;i++)<span class="comment">//i表示字符串的下标，从0开始  </span></div><div class="line">    &#123;<span class="comment">//j在每次循环开始都表示next[i]的值，同时也表示需要比较的下一个位置  </span></div><div class="line">        <span class="keyword">while</span>(j&gt;<span class="number">0</span>&amp;&amp;b.charAt(i)!=b.charAt(j))j=next[j];  </div><div class="line">        <span class="keyword">if</span>(b.charAt(i)==b.charAt(j))j++;  </div><div class="line">        next[i+<span class="number">1</span>]=j;  </div><div class="line">    &#125;  </div><div class="line">          </div><div class="line">    <span class="keyword">return</span> next;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="字符串的匹配"><a href="#字符串的匹配" class="headerlink" title="字符串的匹配"></a>字符串的匹配</h3><p>计算完成next数组之后，我们就可以利用next数组在字符串O中寻找字符串f的出现位置。匹配的代码和求next数组的代码非常相似，因为匹配的过程和求next数组的过程其实是一样的。假设现在字符串f的前i个位置都和从某个位置开始的字符串O匹配，现在比较第i+1个位置。如果第i+1个位置相同，接着比较第i+2个位置；如果第i+1个位置不同，则出现不匹配，我们依旧要将长度为i的字符串分割，获得其最大公共长度next[i]，然后从next[i]继续比较两个字符串。这个过程和求next数组一致，所以可以匹配代码如下（java版）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">search</span><span class="params">(String original, String find, <span class="keyword">int</span> next[])</span> </span>&#123;  </div><div class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; original.length(); i++) &#123;  </div><div class="line">        <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; original.charAt(i) != find.charAt(j))  </div><div class="line">            j = next[j];  </div><div class="line">        <span class="keyword">if</span> (original.charAt(i) == find.charAt(j))  </div><div class="line">            j++;  </div><div class="line">        <span class="keyword">if</span> (j == find.length()) &#123;  </div><div class="line">            System.out.println(<span class="string">"find at position "</span> + (i - j));  </div><div class="line">            System.out.println(original.subSequence(i - j + <span class="number">1</span>, i + <span class="number">1</span>));  </div><div class="line">            j = next[j];  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -376,7 +489,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/算法与数据结构/" rel="tag"># 算法与数据结构</a>
           
         </div>
       
@@ -389,8 +502,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/12/项目介绍/" rel="next" title="项目介绍">
-                <i class="fa fa-chevron-left"></i> 项目介绍
+              <a href="/2017/05/13/数据库设计的三范式/" rel="next" title="数据库设计的三范式">
+                <i class="fa fa-chevron-left"></i> 数据库设计的三范式
               </a>
             
           </div>
@@ -398,10 +511,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/24/JSON/" rel="prev" title="浅析JSON">
-                浅析JSON <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -521,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相同点"><span class="nav-number">2.</span> <span class="nav-text">相同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同点"><span class="nav-number">3.</span> <span class="nav-text">不同点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从语法定义层面看abstract-class和interface"><span class="nav-number">3.1.</span> <span class="nav-text">从语法定义层面看abstract class和interface</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从编程的角度来看"><span class="nav-number">3.2.</span> <span class="nav-text">从编程的角度来看</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得next数组"><span class="nav-number">2.</span> <span class="nav-text">获得next数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的匹配"><span class="nav-number">3.</span> <span class="nav-text">字符串的匹配</span></a></li></ol></div>
             
 
           </div>
