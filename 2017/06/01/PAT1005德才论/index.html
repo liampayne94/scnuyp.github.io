@@ -1,0 +1,794 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="PAT," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="自己写的，不知道为什么过不了OJ
+解题思路：
+1、创建一个内部类，储存学生的信息；
+2、根据判断条件将他们分到不同的班级，班级用ArrayList
+3、对每一个班级内部的学生进行排序
+4、打印信息
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAT1005德才论">
+<meta property="og:url" content="https://scnuyp.github.io/2017/06/01/PAT1005德才论/index.html">
+<meta property="og:site_name" content="彦鹏的个人博客">
+<meta property="og:description" content="自己写的，不知道为什么过不了OJ
+解题思路：
+1、创建一个内部类，储存学生的信息；
+2、根据判断条件将他们分到不同的班级，班级用ArrayList
+3、对每一个班级内部的学生进行排序
+4、打印信息
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455">
+<meta property="og:updated_time" content="2017-06-01T02:13:36.530Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAT1005德才论">
+<meta name="twitter:description" content="自己写的，不知道为什么过不了OJ
+解题思路：
+1、创建一个内部类，储存学生的信息；
+2、根据判断条件将他们分到不同的班级，班级用ArrayList
+3、对每一个班级内部的学生进行排序
+4、打印信息
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scnuyp.github.io/2017/06/01/PAT1005德才论/"/>
+
+
+
+
+
+  <title> PAT1005德才论 | 彦鹏的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">彦鹏的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">scnuyp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/06/01/PAT1005德才论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PAT1005德才论
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T09:52:16+08:00">
+                2017-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/06/01/PAT1005德才论/" class="leancloud_visitors" data-flag-title="PAT1005德才论">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>自己写的，不知道为什么过不了OJ</p>
+<p>解题思路：</p>
+<p>1、创建一个内部类，储存学生的信息；</p>
+<p>2、根据判断条件将他们分到不同的班级，班级用ArrayList</p>
+<p>3、对每一个班级内部的学生进行排序</p>
+<p>4、打印信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span></span>&#123;</div><div class="line">		<span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</div><div class="line">			String s_id;</div><div class="line">			<span class="keyword">int</span> de;</div><div class="line">			<span class="keyword">int</span> cai;</div><div class="line">			Student(String s_id,<span class="keyword">int</span> de,<span class="keyword">int</span> cai)&#123;</div><div class="line">				<span class="keyword">this</span>.s_id = s_id;</div><div class="line">				<span class="keyword">this</span>.de  = de;</div><div class="line">				<span class="keyword">this</span>.cai = cai;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		ArrayList&lt;Student&gt; firstclass = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">		ArrayList&lt;Student&gt; secondclass = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">		ArrayList&lt;Student&gt; thirdclass = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">		ArrayList&lt;Student&gt; forthclass = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">		Scanner sc  = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">		<span class="keyword">int</span> num = sc.nextInt();</div><div class="line">		<span class="keyword">int</span> L = sc.nextInt();</div><div class="line">		<span class="keyword">int</span> H = sc.nextInt();</div><div class="line">		Student[] Student = <span class="keyword">new</span> Student[num];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num ;i++ ) &#123;</div><div class="line">			Student[i] = <span class="keyword">new</span> Student(sc.next(),sc.nextInt(),sc.nextInt());</div><div class="line">			<span class="keyword">if</span>(Student[i].de&gt;=H &amp;&amp; Student[i].cai&gt;=H)&#123;</div><div class="line">				firstclass.add(Student[i]);</div><div class="line"></div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(Student[i].de&gt;=H&amp;&amp;Student[i].cai&gt;=L)&#123;</div><div class="line">				secondclass.add(Student[i]);</div><div class="line"></div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(Student[i].de&gt;=L&amp;&amp;Student[i].cai&gt;=L&amp;&amp;Student[i].de&gt;Student[i].cai)&#123;</div><div class="line">				thirdclass.add(Student[i]);</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(Student[i].de&gt;=L&amp;&amp;Student[i].cai&gt;=L)&#123;</div><div class="line">				forthclass.add(Student[i]);</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125; </div><div class="line">		System.out.println(firstclass.size()+secondclass.size()+thirdclass.size()+forthclass.size());</div><div class="line">		Comparator&lt;Student&gt; comparator = <span class="keyword">new</span> Comparator&lt;Student&gt;()&#123;</div><div class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Student s1,Student s2)</span> </span>&#123;</div><div class="line">				<span class="keyword">if</span>(s1.cai+s1.de&gt;s2.cai+s2.de)</div><div class="line">					<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (s1.cai+s1.de&lt;s2.cai+s2.de) </div><div class="line">					<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">				<span class="keyword">else</span>&#123;</div><div class="line">					<span class="keyword">if</span> (s1.de&gt;s2.de) </div><div class="line">						<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (s1.de&lt;s2.de) </div><div class="line">						<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">					</div><div class="line">					<span class="keyword">else</span> &#123;</div><div class="line">						<span class="keyword">if</span> (Integer.valueOf(s1.s_id)&lt;Integer.valueOf(s2.s_id)) </div><div class="line">							<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">						<span class="keyword">else</span> </div><div class="line">							<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">		&#125;;</div><div class="line">		Collections.sort(firstclass,comparator);</div><div class="line">		Collections.sort(secondclass,comparator);</div><div class="line">		Collections.sort(thirdclass,comparator);</div><div class="line">		Collections.sort(forthclass,comparator);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; firstclass.size(); j++) &#123;</div><div class="line">			System.out.println(firstclass.get(j).s_id+<span class="string">" "</span>+firstclass.get(j).de+<span class="string">" "</span>+firstclass.get(j).cai);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; secondclass.size(); j++) &#123;</div><div class="line">			System.out.println(secondclass.get(j).s_id+<span class="string">" "</span>+secondclass.get(j).de+<span class="string">" "</span>+secondclass.get(j).cai);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; thirdclass.size(); j++) &#123;</div><div class="line">			System.out.println(thirdclass.get(j).s_id+<span class="string">" "</span>+thirdclass.get(j).de+<span class="string">" "</span>+thirdclass.get(j).cai);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; forthclass.size(); j++) &#123;</div><div class="line">			System.out.println(forthclass.get(j).s_id+<span class="string">" "</span>+forthclass.get(j).de+<span class="string">" "</span>+forthclass.get(j).cai);</div><div class="line">		&#125;</div><div class="line"></div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正确答案</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> answer;</div><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"> </div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by lang on 2016/1/18.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</div><div class="line">            String ID ;</div><div class="line">            <span class="keyword">int</span> morals;</div><div class="line">            <span class="keyword">int</span> talents;</div><div class="line">            Student(String ID,<span class="keyword">int</span> morals,<span class="keyword">int</span> talents)&#123;</div><div class="line">                <span class="keyword">this</span>.ID = ID;</div><div class="line">                <span class="keyword">this</span>.morals = morals;</div><div class="line">                <span class="keyword">this</span>.talents = talents;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        ArrayList&lt;Student&gt; firstClass = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">        ArrayList&lt;Student&gt; secondClass = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">        ArrayList&lt;Student&gt; thirdClass = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">        ArrayList&lt;Student&gt; fourthClass = <span class="keyword">new</span> ArrayList&lt;Student&gt;();</div><div class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">        <span class="keyword">int</span> num = sc.nextInt();</div><div class="line">        <span class="keyword">int</span> L = sc.nextInt();</div><div class="line">        <span class="keyword">int</span> H = sc.nextInt();</div><div class="line">        Student[] student = <span class="keyword">new</span> Student[num];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++) &#123;</div><div class="line">            student[i] = <span class="keyword">new</span> Student(sc.next(),sc.nextInt(),sc.nextInt());</div><div class="line">            <span class="keyword">if</span> (student[i].morals &gt;= H &amp;&amp; student[i].talents &gt;= H)</div><div class="line">                firstClass.add(student[i]);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (student[i].morals &gt;= H &amp;&amp; student[i].talents &gt;= L )</div><div class="line">                secondClass.add(student[i]);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (student[i].morals &gt;= L &amp;&amp; student[i].talents &gt;= L&amp;&amp;student[i].morals&gt;=student[i].talents)</div><div class="line">                thirdClass.add(student[i]);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (student[i].morals &gt;= L &amp;&amp; student[i].talents &gt;= L)</div><div class="line">                fourthClass.add(student[i]);</div><div class="line">        &#125;</div><div class="line">        System.out.println(firstClass.size()+secondClass.size()+thirdClass.size()+fourthClass.size());</div><div class="line">        Comparator&lt;Student&gt; com = <span class="keyword">new</span> Comparator&lt;Student&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Student o1, Student o2)</span> </span>&#123;</div><div class="line">                <span class="keyword">if</span> (o1.morals + o1.talents &gt; o2.morals + o2.talents)</div><div class="line">                    <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (o1.morals + o1.talents &lt; o2.morals + o2.talents)</div><div class="line">                    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">if</span> (o1.morals &gt; o2.morals)</div><div class="line">                        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (o1.morals &lt; o2.morals)</div><div class="line">                        <span class="keyword">return</span>  <span class="number">1</span>;</div><div class="line">                    <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="keyword">if</span> (Integer.valueOf(o1.ID) &lt; Integer.valueOf(o2.ID))</div><div class="line">                            <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">                        <span class="keyword">else</span></div><div class="line">                            <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        Collections.sort(firstClass, com );</div><div class="line">        Collections.sort(secondClass,com);</div><div class="line">        Collections.sort(thirdClass,com);</div><div class="line">        Collections.sort(fourthClass,com);</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; firstClass.size(); i++) &#123;</div><div class="line">            String id = firstClass.get(i).ID;</div><div class="line">            <span class="keyword">int</span> m = firstClass.get(i).morals;</div><div class="line">            <span class="keyword">int</span> t = firstClass.get(i).talents;</div><div class="line">            System.out.println( id+<span class="string">" "</span>+m+<span class="string">" "</span>+t);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; secondClass.size(); i++) &#123;</div><div class="line">            String id = secondClass.get(i).ID;</div><div class="line">            <span class="keyword">int</span> m = secondClass.get(i).morals;</div><div class="line">            <span class="keyword">int</span> t = secondClass.get(i).talents;</div><div class="line">            System.out.println( id+<span class="string">" "</span>+m+<span class="string">" "</span>+t);</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; thirdClass.size(); i++) &#123;</div><div class="line">            String id = thirdClass.get(i).ID;</div><div class="line">            <span class="keyword">int</span> m = thirdClass.get(i).morals;</div><div class="line">            <span class="keyword">int</span> t = thirdClass.get(i).talents;</div><div class="line">            System.out.println( id+<span class="string">" "</span>+m+<span class="string">" "</span>+t);</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; fourthClass.size(); i++) &#123;</div><div class="line">            String id = fourthClass.get(i).ID;</div><div class="line">            <span class="keyword">int</span> m = fourthClass.get(i).morals;</div><div class="line">            <span class="keyword">int</span> t = fourthClass.get(i).talents;</div><div class="line">            System.out.println( id+<span class="string">" "</span>+m+<span class="string">" "</span>+t);</div><div class="line">        &#125;</div><div class="line"> </div><div class="line"> </div><div class="line">    &#125;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PAT/" rel="tag"># PAT</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/27/AJAX/" rel="next" title="AJAX">
+                <i class="fa fa-chevron-left"></i> AJAX
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/01/PAT1003-数素数/" rel="prev" title="PAT1003 数素数">
+                PAT1003 数素数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="彦鹏" />
+          <p class="site-author-name" itemprop="name">彦鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">每天进步一点点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">彦鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("haf2k8DGCn9V9IdwRUfFd1m2-gzGzoHsz", "eeRJlUBaMcwABRrULhYN4f3S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
