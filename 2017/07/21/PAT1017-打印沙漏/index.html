@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java并发编程," />
+  <meta name="keywords" content="PAT," />
 
 
 
@@ -89,28 +89,28 @@
 
 
 
-<meta name="description" content="非阻塞队列非阻塞队列的特色就是队列里面没有数据的时候，操作多列会出现异常或者返回null，不具备等待/阻塞的特色，ConcurrentHashMap其中一种，它是支持并发操作的Map。
-HashmapHashMap并不支持并发操作，我们看下面的例子：
-MyService.java(创建一个HashMap)
-12345678package test1;import java.util.HashMap">
+<meta name="description" content="题目分析 本题要求你写个程序把给定的符号打印成沙漏的形状。例如给定17个“*”，要求按下列格式打印：
+12345***** ***  * ********
+ 所谓“沙漏形状”，是指每行输出奇数个符号；各行符号中心对齐；相邻两行符号数差2；符号数先从大到小顺序递减到1，再从小到大顺序递增；首尾符号数相等。
+ 给定任意N个符号，不一定能正好组成一个沙漏。要求打印出的沙漏能用掉尽可能多的符号。
+ 输入格">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ConcurrentHashmap的使用">
-<meta property="og:url" content="https://scnuyp.github.io/2017/05/04/‘ConcurrentHashmap的使用’/index.html">
+<meta property="og:title" content="PAT1017-打印沙漏">
+<meta property="og:url" content="https://scnuyp.github.io/2017/07/21/PAT1017-打印沙漏/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="非阻塞队列非阻塞队列的特色就是队列里面没有数据的时候，操作多列会出现异常或者返回null，不具备等待/阻塞的特色，ConcurrentHashMap其中一种，它是支持并发操作的Map。
-HashmapHashMap并不支持并发操作，我们看下面的例子：
-MyService.java(创建一个HashMap)
-12345678package test1;import java.util.HashMap">
-<meta property="og:image" content="https://scnuyp.github.io/F:\Blog\themes\next\source\images\微信截图_20170504150006.png">
-<meta property="og:image" content="https://scnuyp.github.io/F:\Blog\themes\next\source\images\微信截图_20170504150437.png">
-<meta property="og:updated_time" content="2017-05-04T07:13:37.165Z">
+<meta property="og:description" content="题目分析 本题要求你写个程序把给定的符号打印成沙漏的形状。例如给定17个“*”，要求按下列格式打印：
+12345***** ***  * ********
+ 所谓“沙漏形状”，是指每行输出奇数个符号；各行符号中心对齐；相邻两行符号数差2；符号数先从大到小顺序递减到1，再从小到大顺序递增；首尾符号数相等。
+ 给定任意N个符号，不一定能正好组成一个沙漏。要求打印出的沙漏能用掉尽可能多的符号。
+ 输入格">
+<meta property="og:updated_time" content="2017-07-21T06:27:11.977Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ConcurrentHashmap的使用">
-<meta name="twitter:description" content="非阻塞队列非阻塞队列的特色就是队列里面没有数据的时候，操作多列会出现异常或者返回null，不具备等待/阻塞的特色，ConcurrentHashMap其中一种，它是支持并发操作的Map。
-HashmapHashMap并不支持并发操作，我们看下面的例子：
-MyService.java(创建一个HashMap)
-12345678package test1;import java.util.HashMap">
-<meta name="twitter:image" content="https://scnuyp.github.io/F:\Blog\themes\next\source\images\微信截图_20170504150006.png">
+<meta name="twitter:title" content="PAT1017-打印沙漏">
+<meta name="twitter:description" content="题目分析 本题要求你写个程序把给定的符号打印成沙漏的形状。例如给定17个“*”，要求按下列格式打印：
+12345***** ***  * ********
+ 所谓“沙漏形状”，是指每行输出奇数个符号；各行符号中心对齐；相邻两行符号数差2；符号数先从大到小顺序递减到1，再从小到大顺序递增；首尾符号数相等。
+ 给定任意N个符号，不一定能正好组成一个沙漏。要求打印出的沙漏能用掉尽可能多的符号。
+ 输入格">
 
 
 
@@ -138,13 +138,13 @@ MyService.java(创建一个HashMap)
 
 
 
-  <link rel="canonical" href="https://scnuyp.github.io/2017/05/04/‘ConcurrentHashmap的使用’/"/>
+  <link rel="canonical" href="https://scnuyp.github.io/2017/07/21/PAT1017-打印沙漏/"/>
 
 
 
 
 
-  <title> ConcurrentHashmap的使用 | 彦鹏的个人博客 </title>
+  <title> PAT1017-打印沙漏 | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +263,7 @@ MyService.java(创建一个HashMap)
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/05/04/‘ConcurrentHashmap的使用’/">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/07/21/PAT1017-打印沙漏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彦鹏">
@@ -284,7 +284,7 @@ MyService.java(创建一个HashMap)
             
             
               
-                ConcurrentHashmap的使用
+                PAT1017-打印沙漏
               
             
           </h1>
@@ -299,8 +299,8 @@ MyService.java(创建一个HashMap)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-04T14:36:46+08:00">
-                2017-05-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T14:26:40+08:00">
+                2017-07-21
               </time>
             
 
@@ -317,7 +317,7 @@ MyService.java(创建一个HashMap)
 
           
           
-             <span id="/2017/05/04/‘ConcurrentHashmap的使用’/" class="leancloud_visitors" data-flag-title="ConcurrentHashmap的使用">
+             <span id="/2017/07/21/PAT1017-打印沙漏/" class="leancloud_visitors" data-flag-title="PAT1017-打印沙漏">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -346,23 +346,20 @@ MyService.java(创建一个HashMap)
       
 
       
-        <h3 id="非阻塞队列"><a href="#非阻塞队列" class="headerlink" title="非阻塞队列"></a>非阻塞队列</h3><p>非阻塞队列的特色就是队列里面没有数据的时候，操作多列会出现异常或者返回null，不具备等待/阻塞的特色，ConcurrentHashMap其中一种，它是支持并发操作的Map。</p>
-<h3 id="Hashmap"><a href="#Hashmap" class="headerlink" title="Hashmap"></a>Hashmap</h3><p>HashMap并不支持并发操作，我们看下面的例子：</p>
-<p>MyService.java(创建一个HashMap)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test1;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Myservice1</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> HashMap map=<span class="keyword">new</span> HashMap();</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>两个线程类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test1;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Myservice1</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> HashMap map=<span class="keyword">new</span> HashMap();</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test1;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread1B</span>  <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> Myservice1 myservice1;</div><div class="line">	<span class="function"><span class="keyword">public</span>  <span class="title">Thread1B</span><span class="params">(Myservice1 myservice1)</span> </span>&#123;</div><div class="line">		<span class="keyword">super</span>();</div><div class="line">		<span class="keyword">this</span>.myservice1 = myservice1;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">50000</span>; i++) &#123;</div><div class="line">			myservice1.map.put(<span class="string">"ThreadB"</span>+(i+<span class="number">1</span>), <span class="string">"ThreadB"</span>+i+<span class="number">1</span>);</div><div class="line">			System.out.println(<span class="string">"ThreadB"</span>+(i+<span class="number">1</span>));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Test.java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test1;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1_1</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> args</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		Myservice1 myservice1 = <span class="keyword">new</span> Myservice1();</div><div class="line">		Thread1A thread1a = <span class="keyword">new</span> Thread1A(myservice1);</div><div class="line">		Thread1B thread1b = <span class="keyword">new</span> Thread1B(myservice1);</div><div class="line">		thread1a.start();</div><div class="line">		thread1b.start();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到运行结果：</p>
-<p><img src="F:\Blog\themes\next\source\images\微信截图_20170504150006.png" alt="微信截图_20170504150006"></p>
-<p>程序进入“假死”状态，故线程不安全</p>
-<h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>上面的例子说明HashMap不适合在多线程条件下使用，想要在多线程的环境下使用key-value的数据结构，而HashTable则可以满足，把上述代码稍作修改，Myservice中新建一个HashTable</p>
-<p>可以看到运行结果：<img src="F:\Blog\themes\next\source\images\微信截图_20170504150437.png" alt="微信截图_20170504150437"></p>
-<p>说明，HashTable支持多线程操作</p>
-<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>仿照上面的例子，也可以得出ConcurrentHashMap支持多线程操作</p>
-<h3 id="ConcurrentHashMap和HashTable之间的差异"><a href="#ConcurrentHashMap和HashTable之间的差异" class="headerlink" title="ConcurrentHashMap和HashTable之间的差异"></a>ConcurrentHashMap和HashTable之间的差异</h3><p>他们之间的主要差异在于HashTable不支持remove()操作，也就是说当HashTable获得Iterator对象，不允许更改其结构否则出现java.util.ConcurrentModification异常</p>
+        <h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p> 本题要求你写个程序把给定的符号打印成沙漏的形状。例如给定17个“*”，要求按下列格式打印：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">*****</div><div class="line"> ***</div><div class="line">  *</div><div class="line"> ***</div><div class="line">*****</div></pre></td></tr></table></figure>
+<p> 所谓“沙漏形状”，是指每行输出奇数个符号；各行符号中心对齐；相邻两行符号数差2；符号数先从大到小顺序递减到1，再从小到大顺序递增；首尾符号数相等。</p>
+<p> 给定任意N个符号，不一定能正好组成一个沙漏。要求打印出的沙漏能用掉尽可能多的符号。</p>
+<p> 输入格式：</p>
+<p> 输入在一行给出1个正整数N（&lt;=1000）和一个符号，中间以空格分隔。</p>
+<p> 输出格式：</p>
+<p> 首先打印出由给定符号组成的最大的沙漏形状，最后在一行中输出剩下没用掉的符号数。</p>
+<p> 输入样例：<br> 19 *<br> 输出样例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">*****</div><div class="line"> ***</div><div class="line">  *</div><div class="line"> ***</div><div class="line">*****</div><div class="line">2</div></pre></td></tr></table></figure>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">		<span class="keyword">int</span> N = scanner.nextInt();</div><div class="line">		String string = scanner.next();</div><div class="line">		<span class="keyword">int</span> num = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> (N==<span class="number">1</span>) &#123;</div><div class="line">			System.out.print(string+<span class="string">"\n"</span>+<span class="number">0</span>);</div><div class="line">		&#125;<span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">int</span> sum =<span class="number">0</span>;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;; i+=<span class="number">2</span>) &#123;</div><div class="line">				<span class="keyword">if</span> (sum+<span class="number">2</span>*i&gt;N) &#123;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">				sum+=i;</div><div class="line">				num = i;</div><div class="line">				<span class="keyword">if</span> (i!=<span class="number">1</span>) &#123;</div><div class="line">					sum+=i;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;=num; i++) &#123;</div><div class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;=num; j++) &#123;</div><div class="line">					<span class="keyword">if</span> (Math.abs((num+<span class="number">1</span>)/<span class="number">2</span>-j)&lt;=Math.abs((num+<span class="number">1</span>)/<span class="number">2</span>-i)) &#123;</div><div class="line">						System.out.print(string);</div><div class="line">					&#125;<span class="keyword">else</span> <span class="keyword">if</span> ((num+<span class="number">1</span>)/<span class="number">2</span>-j&gt;<span class="number">0</span>) &#123;</div><div class="line">						System.out.print(<span class="string">" "</span>);					</div><div class="line">					&#125;</div><div class="line">				</div><div class="line">				&#125;</div><div class="line">				System.out.println();</div><div class="line">				</div><div class="line">			&#125;</div><div class="line">			System.out.println(N-sum);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>这里的难点是绘画出沙漏的形状</p>
+<p>我们可以利用中位值的方法，先记录下一行中最大的符号数（同时也是沙漏的行数），然后通过两层循环，外层打印每一行，内层打印每一列的符号。可以这么理解，第一行是全部打印的，第二行，两边都要削一个（只需要在左边打印一个空格就行了，右边不需要），依次类推。当打印到只有一个符号的时候，下一行开始反转，每一行两端都加一个，通过绝对值，可以实现这样的反转。（类比成偶函数那样的性质）</p>
+<p>代码实现就如上啦</p>
 
       
     </div>
@@ -392,7 +389,7 @@ MyService.java(创建一个HashMap)
       
         <div class="post-tags">
           
-            <a href="/tags/Java并发编程/" rel="tag"># Java并发编程</a>
+            <a href="/tags/PAT/" rel="tag"># PAT</a>
           
         </div>
       
@@ -405,8 +402,8 @@ MyService.java(创建一个HashMap)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/03/Semaphore类的使用/" rel="next" title="Semaphore类的使用">
-                <i class="fa fa-chevron-left"></i> Semaphore类的使用
+              <a href="/2017/07/21/Velocity语法/" rel="next" title="Velocity语法">
+                <i class="fa fa-chevron-left"></i> Velocity语法
               </a>
             
           </div>
@@ -414,10 +411,6 @@ MyService.java(创建一个HashMap)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/04/Java面试中常见的题目/" rel="prev" title="Java面试中常见的题目">
-                Java面试中常见的题目 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -537,7 +530,7 @@ MyService.java(创建一个HashMap)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞队列"><span class="nav-number">1.</span> <span class="nav-text">非阻塞队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashmap"><span class="nav-number">2.</span> <span class="nav-text">Hashmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">3.</span> <span class="nav-text">HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">4.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap和HashTable之间的差异"><span class="nav-number">5.</span> <span class="nav-text">ConcurrentHashMap和HashTable之间的差异</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目分析"><span class="nav-number">1.</span> <span class="nav-text">题目分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a></li></ol></div>
             
 
           </div>
