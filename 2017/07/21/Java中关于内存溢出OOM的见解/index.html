@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="彦鹏的个人博客" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -89,22 +89,27 @@
 
 
 
-<meta name="description" content="利用git使用coding.Net进行代码托管coding.Net是一个代码托管和项目管理的平台，相当于国外的Github。使用了一段时间，感觉挺方便的，使用起来比Github还要简单点。
-Git的下载和安装就且不介绍了，百度一下，windows、mac版的都能顺利的下载下来。下面简单介绍一下使用git把本地项目上传到coding.Net的一些命令行。
-一、初次创建项目1、创建本地仓库在本地磁盘创">
+<meta name="description" content="内存泄漏内存泄漏主要是指程序中动态分布了内存，但是当程序结束的时候没有把这部分内存释放掉，这样就容易导致内存溢出。
+下面列出几种常见的内存泄漏情况：
+1) 常发性内存泄漏。发生内存泄漏的代码会被多次执行到，每次被执行的时候都会导致一块内存泄漏。
+2) 偶发性内存泄漏。发生内存泄漏的代码只有在某些特定环境或操作过程下才会发生。常发性和偶发性是相对的。对于特定的环境，偶发性的也许就变成了常发性的。所以">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用git使用coding.Net进行代码托管">
-<meta property="og:url" content="https://scnuyp.github.io/2017/03/31/利用git使用coding-Net进行代码托管/index.html">
+<meta property="og:title" content="Java中关于内存溢出OOM的见解">
+<meta property="og:url" content="https://scnuyp.github.io/2017/07/21/Java中关于内存溢出OOM的见解/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="利用git使用coding.Net进行代码托管coding.Net是一个代码托管和项目管理的平台，相当于国外的Github。使用了一段时间，感觉挺方便的，使用起来比Github还要简单点。
-Git的下载和安装就且不介绍了，百度一下，windows、mac版的都能顺利的下载下来。下面简单介绍一下使用git把本地项目上传到coding.Net的一些命令行。
-一、初次创建项目1、创建本地仓库在本地磁盘创">
-<meta property="og:updated_time" content="2017-03-31T14:02:54.583Z">
+<meta property="og:description" content="内存泄漏内存泄漏主要是指程序中动态分布了内存，但是当程序结束的时候没有把这部分内存释放掉，这样就容易导致内存溢出。
+下面列出几种常见的内存泄漏情况：
+1) 常发性内存泄漏。发生内存泄漏的代码会被多次执行到，每次被执行的时候都会导致一块内存泄漏。
+2) 偶发性内存泄漏。发生内存泄漏的代码只有在某些特定环境或操作过程下才会发生。常发性和偶发性是相对的。对于特定的环境，偶发性的也许就变成了常发性的。所以">
+<meta property="og:image" content="https://scnuyp.github.io/F:\Blog\public\images\微信截图_20170411191541.png">
+<meta property="og:updated_time" content="2017-07-21T06:15:19.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用git使用coding.Net进行代码托管">
-<meta name="twitter:description" content="利用git使用coding.Net进行代码托管coding.Net是一个代码托管和项目管理的平台，相当于国外的Github。使用了一段时间，感觉挺方便的，使用起来比Github还要简单点。
-Git的下载和安装就且不介绍了，百度一下，windows、mac版的都能顺利的下载下来。下面简单介绍一下使用git把本地项目上传到coding.Net的一些命令行。
-一、初次创建项目1、创建本地仓库在本地磁盘创">
+<meta name="twitter:title" content="Java中关于内存溢出OOM的见解">
+<meta name="twitter:description" content="内存泄漏内存泄漏主要是指程序中动态分布了内存，但是当程序结束的时候没有把这部分内存释放掉，这样就容易导致内存溢出。
+下面列出几种常见的内存泄漏情况：
+1) 常发性内存泄漏。发生内存泄漏的代码会被多次执行到，每次被执行的时候都会导致一块内存泄漏。
+2) 偶发性内存泄漏。发生内存泄漏的代码只有在某些特定环境或操作过程下才会发生。常发性和偶发性是相对的。对于特定的环境，偶发性的也许就变成了常发性的。所以">
+<meta name="twitter:image" content="https://scnuyp.github.io/F:\Blog\public\images\微信截图_20170411191541.png">
 
 
 
@@ -132,13 +137,13 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
 
 
 
-  <link rel="canonical" href="https://scnuyp.github.io/2017/03/31/利用git使用coding-Net进行代码托管/"/>
+  <link rel="canonical" href="https://scnuyp.github.io/2017/07/21/Java中关于内存溢出OOM的见解/"/>
 
 
 
 
 
-  <title> 利用git使用coding.Net进行代码托管 | 彦鹏的个人博客 </title>
+  <title> Java中关于内存溢出OOM的见解 | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -257,7 +262,7 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/03/31/利用git使用coding-Net进行代码托管/">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/07/21/Java中关于内存溢出OOM的见解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彦鹏">
@@ -278,7 +283,7 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
             
             
               
-                利用git使用coding.Net进行代码托管
+                Java中关于内存溢出OOM的见解
               
             
           </h1>
@@ -293,8 +298,8 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-31T22:02:02+08:00">
-                2017-03-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-21T14:13:01+08:00">
+                2017-07-21
               </time>
             
 
@@ -311,7 +316,7 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
 
           
           
-             <span id="/2017/03/31/利用git使用coding-Net进行代码托管/" class="leancloud_visitors" data-flag-title="利用git使用coding.Net进行代码托管">
+             <span id="/2017/07/21/Java中关于内存溢出OOM的见解/" class="leancloud_visitors" data-flag-title="Java中关于内存溢出OOM的见解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -340,24 +345,27 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
       
 
       
-        <h2 id="利用git使用coding-Net进行代码托管"><a href="#利用git使用coding-Net进行代码托管" class="headerlink" title="利用git使用coding.Net进行代码托管"></a>利用git使用coding.Net进行代码托管</h2><p>coding.Net是一个代码托管和项目管理的平台，相当于国外的Github。使用了一段时间，感觉挺方便的，使用起来比Github还要简单点。</p>
-<p><a href="http://lib.csdn.net/base/git" target="_blank" rel="external">Git</a>的下载和安装就且不介绍了，百度一下，windows、mac版的都能顺利的下载下来。下面简单介绍一下使用git把本地项目上传到coding.Net的一些命令行。</p>
-<h3 id="一、初次创建项目"><a href="#一、初次创建项目" class="headerlink" title="一、初次创建项目"></a>一、初次创建项目</h3><h4 id="1、创建本地仓库"><a href="#1、创建本地仓库" class="headerlink" title="1、创建本地仓库"></a>1、创建本地仓库</h4><p>在本地磁盘创建一个文件夹</p>
-<p><code>mkdir scnuyp</code>(目录名)——做为你代码的父文件夹。</p>
-<p><code>git init</code>——此时文件夹生成一个.git的隐藏文件夹</p>
-<h4 id="2、将本地修改上传到暂存区"><a href="#2、将本地修改上传到暂存区" class="headerlink" title="2、将本地修改上传到暂存区"></a>2、将本地修改上传到暂存区</h4><p><code>git add .</code> 或者 <code>git add</code> <filename>——它会监控工作区的状态树，使用它会把工作时的<strong>所有变化提交</strong>到暂存区，包括文件内容修改(modified)以及新文件(new)，但不包括被删除的文件。</filename></p>
-<p><code>git commit –m ``&quot;项目描述&quot;</code>“项目描述”——将索引内容添加到仓库中</p>
-<h4 id="3、提交到仓库"><a href="#3、提交到仓库" class="headerlink" title="3、提交到仓库"></a>3、提交到仓库</h4><p><code>git remote add origin https:``// git.coding.net/用户名/项目名.git</code></p>
-<p><code>git push origin master</code></p>
-<p>此时上传成功！</p>
-<h3 id="二、初次从分支上传项目"><a href="#二、初次从分支上传项目" class="headerlink" title="二、初次从分支上传项目"></a>二、初次从分支上传项目</h3><h4 id="1、新建一个分支"><a href="#1、新建一个分支" class="headerlink" title="1、新建一个分支"></a>1、新建一个分支</h4><p><code>git branch xxx</code>        </p>
-<h4 id="2、切换到该分支"><a href="#2、切换到该分支" class="headerlink" title="2、切换到该分支"></a>2、切换到该分支</h4><p><code>git checkout xxx</code></p>
-<h4 id="3、重复执行一、中的2-3条"><a href="#3、重复执行一、中的2-3条" class="headerlink" title="3、重复执行一、中的2,3条"></a>3、重复执行一、中的2,3条</h4><p>此时上传成功！</p>
-<h3 id="三、服务端上面已经有代码，从分支上传"><a href="#三、服务端上面已经有代码，从分支上传" class="headerlink" title="三、服务端上面已经有代码，从分支上传"></a>三、服务端上面已经有代码，从分支上传</h3><h4 id="1、重复二中的1-2条，切换到该分支"><a href="#1、重复二中的1-2条，切换到该分支" class="headerlink" title="1、重复二中的1,2条，切换到该分支"></a>1、重复二中的1,2条，切换到该分支</h4><h4 id="2、从服务端获取该分支的最新版本"><a href="#2、从服务端获取该分支的最新版本" class="headerlink" title="2、从服务端获取该分支的最新版本"></a>2、从服务端获取该分支的最新版本</h4><p>（此时有两种方法）</p>
-<p><code>git pull origin &lt;分值名&gt;</code> （相当于是从远程获取最新版本并merge到本地）</p>
-<p><code>git fetch origin &lt;分值名&gt;</code>（相当于是从远程获取最新版本到本地，不会自动merge）</p>
-<p>相比之下，fetch方法会比较安全</p>
-<h4 id="3、重复执行一、中的2-3条-1"><a href="#3、重复执行一、中的2-3条-1" class="headerlink" title="3、重复执行一、中的2,3条"></a>3、重复执行一、中的2,3条</h4><p>此时上传成功！</p>
+        <h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>内存泄漏主要是指程序中动态分布了内存，但是当程序结束的时候没有把这部分内存释放掉，这样就容易导致内存溢出。</p>
+<p>下面列出几种常见的内存泄漏情况：</p>
+<p>1) 常发性内存泄漏。发生内存泄漏的代码会被多次执行到，每次被执行的时候都会导致一块内存泄漏。</p>
+<p>2) 偶发性内存泄漏。发生内存泄漏的代码只有在某些特定环境或操作过程下才会发生。常发性和偶发性是相对的。对于特定的环境，偶发性的也许就变成了常发性的。所以测试环境和测试方法对检测内存泄漏至关重要。</p>
+<p>3) 一次性内存泄漏。发生内存泄漏的代码只会被执行一次，或者由于算法上的缺陷，导致总会有一块仅且一块内存发生泄漏。比如，在类的构造函数中分配内存，在析构函数中却没有释放该内存，所以内存泄漏只会发生一次。</p>
+<p>4) 隐式内存泄漏。程序在运行过程中不停的分配内存，但是直到结束的时候才释放内存。严格的说这里并没有发生内存泄漏，因为最终程序释放了所有申请的内存。但是对于一个服务器程序，需要运行几天，几周甚至几个月，不及时释放内存也可能导致最终耗尽系统的所有内存。所以，我们称这类内存泄漏为隐式内存泄漏。</p>
+<h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>内存溢出错误(java.lang.OutOfMemoryError）又称OOM。内存溢出主要发生于虚拟机栈/本地方法栈，在HotSpot虚拟机，不区分以上两者。内存溢出主要有下面两种情况：</p>
+<p>当栈深度超过虚拟机分配给线程的栈大小时就会出现StackOverflowError</p>
+<p>以下面的代码为例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">*在本地机器上运行</div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackOverflowErrorMain</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> stackLength = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StackOverflowErrorMain</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addStackLength</span><span class="params">()</span></span>&#123;</div><div class="line">        stackLength++;<span class="comment">//递归增加栈深度</span></div><div class="line">        addStackLength();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        StackOverflowErrorMain sofem = <span class="keyword">new</span> StackOverflowErrorMain();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            sofem.addStackLength();</div><div class="line">        &#125;<span class="keyword">catch</span> (Throwable e)&#123;</div><div class="line">            System.out.println(sofem.stackLength);</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果如下：</p>
+<p><img src="F:\Blog\public\images\微信截图_20170411191541.png" alt="微信截图_20170411191541"></p>
+<p>当再申请新的内存时，虚拟机分配给线程的内存大小中无法再分配新的内存OutofMemoryError</p>
+<p>以下面的代码为例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StackOverflowErrorMain</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> threadCount = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StackOverflowErrorMain</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNewThread</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            threadCount++; <span class="comment">//线程的数量</span></div><div class="line">            <span class="keyword">new</span> Thread() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                    <span class="keyword">while</span> (<span class="keyword">true</span>) ; <span class="comment">//线程执行不能停</span></div><div class="line">                &#125;</div><div class="line">            &#125;.start();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        StackOverflowErrorMain sofem = <span class="keyword">new</span> StackOverflowErrorMain();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            sofem.addNewThread();</div><div class="line">        &#125;<span class="keyword">catch</span> (Throwable e)&#123;</div><div class="line">            System.out.println(sofem.threadCount);</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//在本地主机运行很容易死机。。别试</span></div></pre></td></tr></table></figure>
+<h3 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h3><ol>
+<li>-Xss1024M代表的是每个线程在创建启动时都会分配这个固定大小的内存吗，还是说这个内存是这个线程栈内存的最大值？</li>
+<li>linux中每个进程内存大小的限制是多少？</li>
+<li>如何实时查看一个进程占内存的大小？(top?)</li>
+<li>如何实时查看jvm虚拟机中每个线程占内存的大小？</li>
+</ol>
 
       
     </div>
@@ -385,6 +393,12 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
 
       
         
@@ -394,8 +408,8 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/29/Linux基本文件操作命令/" rel="next" title="Linux基本文件操作命令">
-                <i class="fa fa-chevron-left"></i> Linux基本文件操作命令
+              <a href="/2017/06/02/PAT1016-部分A-B/" rel="next" title="PAT1016 部分A+B">
+                <i class="fa fa-chevron-left"></i> PAT1016 部分A+B
               </a>
             
           </div>
@@ -404,8 +418,8 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/01/面试网络基础知识/" rel="prev" title="计算机网络必须懂的知识">
-                计算机网络必须懂的知识 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/21/java内存模型/" rel="prev" title="java内存模型">
+                java内存模型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -526,7 +540,7 @@ Git的下载和安装就且不介绍了，百度一下，windows、mac版的都�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#利用git使用coding-Net进行代码托管"><span class="nav-number">1.</span> <span class="nav-text">利用git使用coding.Net进行代码托管</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、初次创建项目"><span class="nav-number">1.1.</span> <span class="nav-text">一、初次创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、创建本地仓库"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、创建本地仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、将本地修改上传到暂存区"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、将本地修改上传到暂存区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、提交到仓库"><span class="nav-number">1.1.3.</span> <span class="nav-text">3、提交到仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、初次从分支上传项目"><span class="nav-number">1.2.</span> <span class="nav-text">二、初次从分支上传项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、新建一个分支"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、新建一个分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、切换到该分支"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、切换到该分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、重复执行一、中的2-3条"><span class="nav-number">1.2.3.</span> <span class="nav-text">3、重复执行一、中的2,3条</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、服务端上面已经有代码，从分支上传"><span class="nav-number">1.3.</span> <span class="nav-text">三、服务端上面已经有代码，从分支上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、重复二中的1-2条，切换到该分支"><span class="nav-number">1.3.1.</span> <span class="nav-text">1、重复二中的1,2条，切换到该分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、从服务端获取该分支的最新版本"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、从服务端获取该分支的最新版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、重复执行一、中的2-3条-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">3、重复执行一、中的2,3条</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存泄漏"><span class="nav-number">1.</span> <span class="nav-text">内存泄漏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存溢出"><span class="nav-number">2.</span> <span class="nav-text">内存溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题："><span class="nav-number">3.</span> <span class="nav-text">问题：</span></a></li></ol></div>
             
 
           </div>
