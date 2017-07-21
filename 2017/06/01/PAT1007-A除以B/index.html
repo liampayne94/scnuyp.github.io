@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="彦鹏的个人博客" />
+  <meta name="keywords" content="PAT," />
 
 
 
@@ -89,19 +89,31 @@
 
 
 
-<meta name="description" content="title: 腾讯2017实习生面试往年经验date: 2017-04-10 19:50:37tags:面试
-前人经验（来自各大论坛）：两轮技术面问了一些算法、多线程、项目、服务架构、数据库优化、操作系统、网络协议（TCP/IP、HTTP、UDP）、测试、如何学习一门新的开发语言等方面的问题，其中有个算法题要求现场手写解答，不能用伪代码，不过问的那个题目不难，此外还问了几个某些特定场景下问题的解决">
+<meta name="description" content="题目描述1本题要求计算A/B，其中A是不超过1000位的正整数，B是1位正整数。你需要输出商数Q和余数R，使得A = B * Q + R成立。
+输入描述:1输入在1行中依次给出A和B，中间以1空格分隔。
+输出描述:1在1行中依次输出Q和R，中间以1空格分隔。
+输入例子:1123456789050987654321 7
+输出例子:117636684150141093474 3
+这道题思路不难，但是要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="彦鹏的个人博客">
-<meta property="og:url" content="https://scnuyp.github.io/2017/04/10/腾讯2017实习生面试准备/index.html">
+<meta property="og:title" content="PAT1007 A除以B">
+<meta property="og:url" content="https://scnuyp.github.io/2017/06/01/PAT1007-A除以B/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="title: 腾讯2017实习生面试往年经验date: 2017-04-10 19:50:37tags:面试
-前人经验（来自各大论坛）：两轮技术面问了一些算法、多线程、项目、服务架构、数据库优化、操作系统、网络协议（TCP/IP、HTTP、UDP）、测试、如何学习一门新的开发语言等方面的问题，其中有个算法题要求现场手写解答，不能用伪代码，不过问的那个题目不难，此外还问了几个某些特定场景下问题的解决">
-<meta property="og:updated_time" content="2017-04-11T10:31:16.020Z">
+<meta property="og:description" content="题目描述1本题要求计算A/B，其中A是不超过1000位的正整数，B是1位正整数。你需要输出商数Q和余数R，使得A = B * Q + R成立。
+输入描述:1输入在1行中依次给出A和B，中间以1空格分隔。
+输出描述:1在1行中依次输出Q和R，中间以1空格分隔。
+输入例子:1123456789050987654321 7
+输出例子:117636684150141093474 3
+这道题思路不难，但是要">
+<meta property="og:updated_time" content="2017-06-06T02:56:37.661Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="彦鹏的个人博客">
-<meta name="twitter:description" content="title: 腾讯2017实习生面试往年经验date: 2017-04-10 19:50:37tags:面试
-前人经验（来自各大论坛）：两轮技术面问了一些算法、多线程、项目、服务架构、数据库优化、操作系统、网络协议（TCP/IP、HTTP、UDP）、测试、如何学习一门新的开发语言等方面的问题，其中有个算法题要求现场手写解答，不能用伪代码，不过问的那个题目不难，此外还问了几个某些特定场景下问题的解决">
+<meta name="twitter:title" content="PAT1007 A除以B">
+<meta name="twitter:description" content="题目描述1本题要求计算A/B，其中A是不超过1000位的正整数，B是1位正整数。你需要输出商数Q和余数R，使得A = B * Q + R成立。
+输入描述:1输入在1行中依次给出A和B，中间以1空格分隔。
+输出描述:1在1行中依次输出Q和R，中间以1空格分隔。
+输入例子:1123456789050987654321 7
+输出例子:117636684150141093474 3
+这道题思路不难，但是要">
 
 
 
@@ -129,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="https://scnuyp.github.io/2017/04/10/腾讯2017实习生面试准备/"/>
+  <link rel="canonical" href="https://scnuyp.github.io/2017/06/01/PAT1007-A除以B/"/>
 
 
 
 
 
-  <title>  | 彦鹏的个人博客 </title>
+  <title> PAT1007 A除以B | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +266,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/04/10/腾讯2017实习生面试准备/">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/06/01/PAT1007-A除以B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彦鹏">
@@ -275,7 +287,7 @@
             
             
               
-                
+                PAT1007 A除以B
               
             
           </h1>
@@ -290,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T19:50:37+08:00">
-                2017-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-01T17:06:02+08:00">
+                2017-06-01
               </time>
             
 
@@ -308,7 +320,7 @@
 
           
           
-             <span id="/2017/04/10/腾讯2017实习生面试准备/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2017/06/01/PAT1007-A除以B/" class="leancloud_visitors" data-flag-title="PAT1007 A除以B">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -337,35 +349,29 @@
       
 
       
-        <p>title: 腾讯2017实习生面试往年经验<br>date: 2017-04-10 19:50:37<br>tags:面试</p>
-<h3 id="前人经验（来自各大论坛）："><a href="#前人经验（来自各大论坛）：" class="headerlink" title="前人经验（来自各大论坛）："></a>前人经验（来自各大论坛）：</h3><p>两轮技术面问了一些算法、多线程、项目、服务架构、数据库优化、操作系统、网络协议（TCP/IP、HTTP、UDP）、测试、如何学习一门新的开发语言等方面的问题，其中有个算法题要求现场手写解答，不能用伪代码，不过问的那个题目不难，此外还问了几个某些特定场景下问题的解决方案一类的问题，HR面问了一些个人情况与职业规划等方面的问题。</p>
-<p>Linux进程间的通信方式。</p>
-<p>请说下数据库中事物的特征</p>
-<p>数据库索引有几种类别：位图索引，B+树索引，hash索引，也就是散列索引</p>
-<p>http返回码总结：</p>
-<p>HTTP协议状态码表示的意思主要分为五类 ,大体是 :  </p>
-<p>1×× 　　保留<br>2×× 　　表示请求成功地接收<br>3×× 　　为完成请求客户需进一步细化请求<br>4×× 　　客户错误<br>5×× 　　服务器错误 </p>
-<p>反转链表</p>
-<p> 包含min的栈</p>
-<p> 二叉树深度</p>
-<p>是否理解hadoop等大数据平台</p>
-<p>​    Hadoop是一个能够对大量数据进行<a href="http://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E5%A4%84%E7%90%86" target="_blank" rel="external">分布式处理</a>的<a href="http://baike.baidu.com/item/%E8%BD%AF%E4%BB%B6" target="_blank" rel="external">软件</a>框架。 Hadoop 以一种可靠、高效、可伸缩的方式进行数据处理。</p>
-<p>Hadoop 是可靠的，因为它假设计算元素和存储会失败，因此它维护多个工作数据副本，确保能够针对失败的节点重新<a href="http://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%A4%84%E7%90%86" target="_blank" rel="external">分布处理</a>。</p>
-<p>Hadoop 是高效的，因为它以并行的方式工作，通过<a href="http://baike.baidu.com/item/%E5%B9%B6%E8%A1%8C%E5%A4%84%E7%90%86" target="_blank" rel="external">并行处理</a>加快处理速度。</p>
-<p>Hadoop 还是可伸缩的，能够处理 <a href="http://baike.baidu.com/item/PB/399855" target="_blank" rel="external">PB</a> 级数据。</p>
-<p>此外，Hadoop 依赖于社区服务，因此它的成本比较低，任何人都可以使用。</p>
-<p>Hadoop是一个能够让用户轻松架构和使用的<a href="http://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/85448" target="_blank" rel="external">分布式计算</a>平台。用户可以轻松地在Hadoop上开发和运行处理海量数据的<a href="http://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F" target="_blank" rel="external">应用程序</a>。它主要有以下几个优点：</p>
-<ol>
-<li><strong>高可靠性</strong>。Hadoop按位存储和处理数据的能力值得人们信赖。</li>
-<li><strong>高扩展性</strong>。Hadoop是在可用的计算机集簇间分配数据并完成计算任务的，这些集簇可以方便地扩展到数以千计的节点中。</li>
-<li><strong>高效性</strong>。Hadoop能够在节点之间动态地移动数据，并保证各个节点的<a href="http://baike.baidu.com/item/%E5%8A%A8%E6%80%81%E5%B9%B3%E8%A1%A1" target="_blank" rel="external">动态平衡</a>，因此处理速度非常快。</li>
-<li><strong>高容错性</strong>。Hadoop能够自动保存数据的多个副本，并且能够自动将失败的任务重新分配。</li>
-<li><strong>低成本</strong>。与一体机、商用数据仓库以及QlikView、Yonghong Z-Suite等数据集市相比，hadoop是开源的，项目的软件成本因此会大大降低。</li>
-</ol>
-<p>Hadoop带有用<a href="http://baike.baidu.com/item/Java" target="_blank" rel="external">Java</a>语言编写的框架，因此运行在 Linux 生产平台上是非常理想的。Hadoop 上的<a href="http://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F" target="_blank" rel="external">应用程序</a>也可以使用其他语言编写，比如 <a href="http://baike.baidu.com/item/C%2B%2B" target="_blank" rel="external">C++</a>。  </p>
-<p>微信公众号的文章除了阅读量还有点赞的功能，在过去的很长一段时间内，我研究了上百个微信公众号，发现阅读量和点赞量的比率是1000：1.5左右，也就是说1000左右阅读量的文章，大概一个人或者两个人会点赞，但是有的公众号特别神奇，阅读一万量的时候，499人点赞，阅读两万的时候还是499，每天的文章，点赞数都是基本稳定的</p>
-<p>www.cnblogs.com/lavezhang/archive/2012/05/14/2498981.html</p>
-<h1 id="select、poll、epoll之间的区别总结-整理"><a href="#select、poll、epoll之间的区别总结-整理" class="headerlink" title="select、poll、epoll之间的区别总结[整理]"></a><a href="http://www.cnblogs.com/Anker/p/3265058.html" target="_blank" rel="external">select、poll、epoll之间的区别总结[整理]</a></h1>
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><strong>题目描述</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">本题要求计算A/B，其中A是不超过1000位的正整数，B是1位正整数。你需要输出商数Q和余数R，使得A = B * Q + R成立。</div></pre></td></tr></table></figure>
+<h3 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a><strong>输入描述:</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">输入在1行中依次给出A和B，中间以1空格分隔。</div></pre></td></tr></table></figure>
+<h3 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a><strong>输出描述:</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在1行中依次输出Q和R，中间以1空格分隔。</div></pre></td></tr></table></figure>
+<h3 id="输入例子"><a href="#输入例子" class="headerlink" title="输入例子:"></a><strong>输入例子:</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">123456789050987654321 7</div></pre></td></tr></table></figure>
+<h3 id="输出例子"><a href="#输出例子" class="headerlink" title="输出例子:"></a><strong>输出例子:</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">17636684150141093474 3</div></pre></td></tr></table></figure>
+<p>这道题思路不难，但是要注意的是从例子中看出，输入的范围可能比long还要大，这个时候我们对大数的处理使用</p>
+<p>BIgInteger类来进行处理，其基本运算如下：</p>
+<p>1.BigInteger(String val);构造函数</p>
+<p>2.add(); 大整数相加</p>
+<p>3.subtract(); 相减</p>
+<p> 4.multiply(); 相乘</p>
+<p> 5.divide();    相除取整</p>
+<p> 6.remainder();取余</p>
+<p> 7.pow();   a.pow(b)=a^b</p>
+<p> 8.gcd();   <a href="http://www.so.com/s?q=%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0&amp;ie=utf-8&amp;src=se_lighten_f" target="_blank" rel="external">最大公约数</a></p>
+<p> 9.abs(); <a href="http://www.so.com/s?q=%E7%BB%9D%E5%AF%B9%E5%80%BC&amp;ie=utf-8&amp;src=se_lighten_f" target="_blank" rel="external">绝对值</a></p>
+<p> 10.negate();取反数</p>
+<p> 11.mod(); a.mod(b)=a%b=a.remainder(b);</p>
+<p> 12.max(); min();</p>
+<p> 13.punlic int comareTo();</p>
+<p> 14.boolean equals(); 是否相等</p>
+<h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.math.BigInteger;</div><div class="line"><span class="keyword">import</span> java.util.Scanner;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Scanner in = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">       BigInteger A = in.nextBigInteger();</div><div class="line">       BigInteger B = in.nextBigInteger();</div><div class="line">       BigInteger C = A.divide(B);</div><div class="line">       BigInteger D = A.remainder(B);</div><div class="line">        </div><div class="line">        System.out.print(C);</div><div class="line">        System.out.print(<span class="string">" "</span>);</div><div class="line">        System.out.print(D);</div><div class="line">    &#125;</div><div class="line">   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -392,6 +398,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/PAT/" rel="tag"># PAT</a>
+          
+        </div>
+      
 
       
         
@@ -401,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/01/面试网络基础知识/" rel="next" title="计算机网络必须懂的知识">
-                <i class="fa fa-chevron-left"></i> 计算机网络必须懂的知识
+              <a href="/2017/06/01/PAT1003-数素数/" rel="next" title="PAT1003 数素数">
+                <i class="fa fa-chevron-left"></i> PAT1003 数素数
               </a>
             
           </div>
@@ -411,8 +423,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/11/‘Java中Map的总结’/" rel="prev" title="‘Java中Map的总结’">
-                ‘Java中Map的总结’ <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/02/PAT1016-部分A-B/" rel="prev" title="PAT1016 部分A+B">
+                PAT1016 部分A+B <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -485,31 +497,22 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
-            
-            
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
 
           
             
             
             <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">1</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
-              
+              </a>
             </div>
           
 
@@ -542,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前人经验（来自各大论坛）："><span class="nav-number">1.</span> <span class="nav-text">前人经验（来自各大论坛）：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#select、poll、epoll之间的区别总结-整理"><span class="nav-number"></span> <span class="nav-text">select、poll、epoll之间的区别总结[整理]</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入描述"><span class="nav-number">2.</span> <span class="nav-text">输入描述:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出描述"><span class="nav-number">3.</span> <span class="nav-text">输出描述:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入例子"><span class="nav-number">4.</span> <span class="nav-text">输入例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出例子"><span class="nav-number">5.</span> <span class="nav-text">输出例子:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#答案"><span class="nav-number">6.</span> <span class="nav-text">答案</span></a></li></ol></div>
             
 
           </div>
