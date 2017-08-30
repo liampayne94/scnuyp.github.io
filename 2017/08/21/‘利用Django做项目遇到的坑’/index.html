@@ -1,0 +1,852 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="引言最近在用Django开发一个商城项目，第一次用这种语言来进行开发，凭借自己薄弱的MVC（在Django叫MTV）知识，以及不断地查Stack Overflow（感觉国内相关的博客比Java少多了），还是勉强地开发出来了，其实最科学的方法是查Django的开发手册（但是我英文不太好hhh），现在谈谈自己踩过的坑。
+1、在models中filter和get的区别当我们要从某个模型（model）中取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Django做项目遇到的坑">
+<meta property="og:url" content="https://scnuyp.github.io/2017/08/21/‘利用Django做项目遇到的坑’/index.html">
+<meta property="og:site_name" content="彦鹏的个人博客">
+<meta property="og:description" content="引言最近在用Django开发一个商城项目，第一次用这种语言来进行开发，凭借自己薄弱的MVC（在Django叫MTV）知识，以及不断地查Stack Overflow（感觉国内相关的博客比Java少多了），还是勉强地开发出来了，其实最科学的方法是查Django的开发手册（但是我英文不太好hhh），现在谈谈自己踩过的坑。
+1、在models中filter和get的区别当我们要从某个模型（model）中取">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822101743.png">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822101639.png">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822103027.png">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822104231.png">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822105427.png">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822105839.png">
+<meta property="og:image" content="http://static.weixinzhuyi.com/pc1503317589300?imageView2/1/w/180/h/180/format/webp">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170823155717.png">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170823155702.png">
+<meta property="og:updated_time" content="2017-08-23T08:07:00.471Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用Django做项目遇到的坑">
+<meta name="twitter:description" content="引言最近在用Django开发一个商城项目，第一次用这种语言来进行开发，凭借自己薄弱的MVC（在Django叫MTV）知识，以及不断地查Stack Overflow（感觉国内相关的博客比Java少多了），还是勉强地开发出来了，其实最科学的方法是查Django的开发手册（但是我英文不太好hhh），现在谈谈自己踩过的坑。
+1、在models中filter和get的区别当我们要从某个模型（model）中取">
+<meta name="twitter:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822101743.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scnuyp.github.io/2017/08/21/‘利用Django做项目遇到的坑’/"/>
+
+
+
+
+
+  <title> 利用Django做项目遇到的坑 | 彦鹏的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">彦鹏的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">scnuyp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/08/21/‘利用Django做项目遇到的坑’/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                利用Django做项目遇到的坑
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T20:19:02+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/21/‘利用Django做项目遇到的坑’/" class="leancloud_visitors" data-flag-title="利用Django做项目遇到的坑">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><p>最近在用Django开发一个商城项目，第一次用这种语言来进行开发，凭借自己薄弱的MVC（在Django叫MTV）知识，以及不断地查Stack Overflow（感觉国内相关的博客比Java少多了），还是勉强地开发出来了，其实最科学的方法是查Django的开发手册（但是我英文不太好hhh），现在谈谈自己踩过的坑。</p>
+<h4 id="1、在models中filter和get的区别"><a href="#1、在models中filter和get的区别" class="headerlink" title="1、在models中filter和get的区别"></a>1、在models中filter和get的区别</h4><p>当我们要从某个模型（model）中取出特定条件的数据的时候，可以采用这两种方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">queryset = models.Commodity.objects.filter(cid=com_id)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v = models.Village.objects.get(vid=vid)</div></pre></td></tr></table></figure>
+<p>先观察他们的结果：</p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822101743.png" alt="img"></p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822101639.png" alt="img"></p>
+<p>他们的不同之处在于：<strong>filter()</strong>获得的是一个QuerySet，当符合条件的有多条数据的话，也会将这些数据全部存入QuerySeet，当数据不存在，返回空的QuerySet</p>
+<p>缺点：要取出里面的对象的值非常麻烦</p>
+<p>而<strong>get()</strong>获得的是一个实体对象，当符合条件的有多条数据的话或者数据不存在，会报错，</p>
+<p>优点：可以直接取出对象的值，如 vid = v.vid</p>
+<h4 id="2、simplejson输出的中文被转成ASCII码的解决办法"><a href="#2、simplejson输出的中文被转成ASCII码的解决办法" class="headerlink" title="2、simplejson输出的中文被转成ASCII码的解决办法"></a>2、simplejson输出的中文被转成ASCII码的解决办法</h4><p>由于后端的接口都是通过JSON来返回数据的，所以Python中的simplejson工具显得十分重要，但是初次使用出现这种情况</p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822103027.png" alt="img"></p>
+<p>这是由于中文被转化成ASCII码了，所有我们的结果中含有中文的时候，请记得加上</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">json_data = simplejson.dumps(queryset, ensure_ascii=<span class="keyword">False</span>)</div></pre></td></tr></table></figure>
+<h4 id="3、当接口用POST方法的时候，用POSTMAN等工具调试总是提示“403”错误"><a href="#3、当接口用POST方法的时候，用POSTMAN等工具调试总是提示“403”错误" class="headerlink" title="3、当接口用POST方法的时候，用POSTMAN等工具调试总是提示“403”错误"></a>3、当接口用POST方法的时候，用POSTMAN等工具调试总是提示“403”错误</h4><p>出现这样的问题，其实是因为Django有自己的csrf防御机制，我们可以假设这样一个情景：</p>
+<p>1.用户C打开浏览器，访问受信任网站A，输入用户名和密码请求登录网站A;</p>
+<p>2.在用户信息通过验证后，网站A产生Cookie信息并返回给浏览器，此时用户登录网站A成功，可以正常发送请求到网站A;</p>
+<p>3.用户未退出网站A之前，在同一浏览器中，打开一个TAB页访问网站B;</p>
+<p>4.网站B接收到用户请求后，返回一些攻击性代码，并发出一个请求要求访问第三方站点A;</p>
+<p>5.浏览器在接收到这些攻击性代码后，根据网站B的请求，在用户不知情的情况下携带Cookie信息，向网站A发出请求。网站A并不知道该请求其实是由B发起的，所以会根据用户C的Cookie信息以C的权限处理该请求，导致来自网站B的恶意代码被执行。</p>
+<p>好了跑题了，我们那我们要进行测试应该怎么解决这个问题呢？就是在方法前加上注解</p>
+<p><strong>@csrf_exempt</strong>，来取消csrf的防御</p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822104231.png" alt="img"></p>
+<h4 id="4、当我们要取出values-list里面的内容要怎么做"><a href="#4、当我们要取出values-list里面的内容要怎么做" class="headerlink" title="4、当我们要取出values_list里面的内容要怎么做"></a>4、当我们要取出values_list里面的内容要怎么做</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">olist=list(models.Order.objects.filter(user_id=openid).values_list(<span class="string">'oid'</span>,<span class="string">'total'</span>,<span class="string">'date'</span>,<span class="string">'address_id'</span>))</div></pre></td></tr></table></figure>
+<p>我已经提前把它转化为list，可以通过断点看出：</p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822105427.png" alt="img"></p>
+<p>它的外部是个list，内部是个tuple（元组），根据数据结构的知识（不懂百度下），我们可以遍历把他们都取出来，具体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">olen = len(olist)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(olen):</div><div class="line">        oid = olist[i][<span class="number">0</span>]</div><div class="line">        total = olist[i][<span class="number">1</span>]</div><div class="line">        date = olist[i][<span class="number">2</span>]</div><div class="line">        address_id = olist[i][<span class="number">3</span>]</div></pre></td></tr></table></figure>
+<p>注意：循环条件不能写成range[0:olen],否则会报错：“olen不是可以遍历的”</p>
+<p>结果如下：<img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170822105839.png" alt="img"></p>
+<p>总结：value_list获得的就是一个里面分别装有tuple的queryset</p>
+<h4 id="5、获取request中POST方法传来的JSON"><a href="#5、获取request中POST方法传来的JSON" class="headerlink" title="5、获取request中POST方法传来的JSON"></a>5、获取request中POST方法传来的JSON</h4><p>之前想通过表单的方式传来数据，但是一直不成功，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">oid = request.POST.get(<span class="string">"oid"</span>)</div></pre></td></tr></table></figure>
+<p>后来决定用JSON来传输，也比较符合现在互联网的规则，那么后台怎么解析呢，主要还是用simplejson，具体代码如下，仅供参考：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>:</div><div class="line">       <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</div><div class="line">           req = simplejson.loads(request.body)</div><div class="line">           <span class="string">'''</span></div><div class="line">           从JSON数组中获取一系列的参数</div><div class="line">           '''</div><div class="line">           openid = req[<span class="string">'openid'</span>]</div><div class="line">           area = req[<span class="string">'area'</span>]</div><div class="line">           detail = req[<span class="string">'detail'</span>]</div><div class="line">           name = req[<span class="string">'name'</span>]</div><div class="line">           phone = req[<span class="string">'phone'</span>]</div><div class="line"><span class="keyword">except</span> Exception:</div><div class="line">       <span class="keyword">import</span> sys</div><div class="line">       info = <span class="string">"%s || %s"</span> % (sys.exc_info()[<span class="number">0</span>], sys.exc_info()[<span class="number">1</span>])</div><div class="line">dict[<span class="string">'message'</span>] = info</div><div class="line">dict[<span class="string">'create_at'</span>] = str(ctime())</div><div class="line">json = simplejson.dumps(dict)</div></pre></td></tr></table></figure>
+<h4 id="6、注意Python2-7和Python3-5的包"><a href="#6、注意Python2-7和Python3-5的包" class="headerlink" title="6、注意Python2.7和Python3.5的包"></a>6、注意Python2.7和Python3.5的包</h4><p>举一个简单点的例子，当我用到了urlib来进行网络连接请求的时候，由于本机用了Python3.5，服务器的却是Python2.7（蛋疼），然后部署上去就有各种bug了，在Python2.7中，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">(url)</span>:</span></div><div class="line">    req = urllib2.Request(url)</div><div class="line">    result = urllib2.urlopen(req)</div><div class="line">    res = result.read()</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<p>在Python3.5中，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span><span class="params">(url)</span>:</span></div><div class="line">    req = urllib.request.Request(url)</div><div class="line">    result = urllib.request.urlopen(req)</div><div class="line">    res = result.read()</div><div class="line">    <span class="keyword">return</span> res</div></pre></td></tr></table></figure>
+<h4 id="7、输出的JSON带有"><a href="#7、输出的JSON带有" class="headerlink" title="7、输出的JSON带有\\"></a>7、输出的JSON带有\\</h4><p><img src="http://static.weixinzhuyi.com/pc1503317589300?imageView2/1/w/180/h/180/format/webp" alt="img"></p>
+<p>这个问题和前面的中文乱码不一样，这里要搞清楚simplejson的最基础一点：dumps方法是将元素转换成一个JSON格式的<strong>str</strong>（字符串），而loads方法则是读取json使之变成一个<strong>dict</strong>对象</p>
+<p>下面请看代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">json_add = simplejson.dumps(&#123;<span class="string">"area"</span>: area, <span class="string">"detail"</span>: detail, <span class="string">"name"</span>: name,<span class="string">"phone"</span>: phone&#125;,ensure_ascii=<span class="keyword">False</span>)</div><div class="line">aresult = json.loads(json_add)</div></pre></td></tr></table></figure>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170823155717.png" alt="img"></p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170823155702.png" alt="img"></p>
+<p>对于dict对象，我们可以用append方法来进行字典元素的拼接</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/21/树的遍历方法-莫里斯解法/" rel="next" title="树的遍历方法--莫里斯解法">
+                <i class="fa fa-chevron-left"></i> 树的遍历方法--莫里斯解法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/22/微信支付接口的开发（Python）/" rel="prev" title="微信支付接口的开发（Python）踩坑总结">
+                微信支付接口的开发（Python）踩坑总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="彦鹏" />
+          <p class="site-author-name" itemprop="name">彦鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">每天进步一点点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、在models中filter和get的区别"><span class="nav-number">2.</span> <span class="nav-text">1、在models中filter和get的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、simplejson输出的中文被转成ASCII码的解决办法"><span class="nav-number">3.</span> <span class="nav-text">2、simplejson输出的中文被转成ASCII码的解决办法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、当接口用POST方法的时候，用POSTMAN等工具调试总是提示“403”错误"><span class="nav-number">4.</span> <span class="nav-text">3、当接口用POST方法的时候，用POSTMAN等工具调试总是提示“403”错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、当我们要取出values-list里面的内容要怎么做"><span class="nav-number">5.</span> <span class="nav-text">4、当我们要取出values_list里面的内容要怎么做</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、获取request中POST方法传来的JSON"><span class="nav-number">6.</span> <span class="nav-text">5、获取request中POST方法传来的JSON</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、注意Python2-7和Python3-5的包"><span class="nav-number">7.</span> <span class="nav-text">6、注意Python2.7和Python3.5的包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、输出的JSON带有"><span class="nav-number">8.</span> <span class="nav-text">7、输出的JSON带有\\</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">彦鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("haf2k8DGCn9V9IdwRUfFd1m2-gzGzoHsz", "eeRJlUBaMcwABRrULhYN4f3S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

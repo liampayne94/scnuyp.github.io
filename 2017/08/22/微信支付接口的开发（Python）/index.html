@@ -1,0 +1,1098 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="引言首先，强推这个轮子，用Python语言来进行开发，包括最基本的工具类，还提供Django的demo供参考，看懂了直接拿来用就好了
+https://github.com/Skycrab/weixin-knife 
+http://www.cnblogs.com/myloveblogs/p/6623708.html这篇文章总结的很好，通俗易懂
+下面谈谈我自己的理解：
+首先，根据官方文档显示：
+
+1、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信支付接口的开发（Python）踩坑总结">
+<meta property="og:url" content="https://scnuyp.github.io/2017/08/22/微信支付接口的开发（Python）/index.html">
+<meta property="og:site_name" content="彦鹏的个人博客">
+<meta property="og:description" content="引言首先，强推这个轮子，用Python语言来进行开发，包括最基本的工具类，还提供Django的demo供参考，看懂了直接拿来用就好了
+https://github.com/Skycrab/weixin-knife 
+http://www.cnblogs.com/myloveblogs/p/6623708.html这篇文章总结的很好，通俗易懂
+下面谈谈我自己的理解：
+首先，根据官方文档显示：
+
+1、">
+<meta property="og:image" content="https://pay.weixin.qq.com/wiki/doc/api/img/wxa-7-2.jpg">
+<meta property="og:updated_time" content="2017-08-24T02:55:57.616Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信支付接口的开发（Python）踩坑总结">
+<meta name="twitter:description" content="引言首先，强推这个轮子，用Python语言来进行开发，包括最基本的工具类，还提供Django的demo供参考，看懂了直接拿来用就好了
+https://github.com/Skycrab/weixin-knife 
+http://www.cnblogs.com/myloveblogs/p/6623708.html这篇文章总结的很好，通俗易懂
+下面谈谈我自己的理解：
+首先，根据官方文档显示：
+
+1、">
+<meta name="twitter:image" content="https://pay.weixin.qq.com/wiki/doc/api/img/wxa-7-2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scnuyp.github.io/2017/08/22/微信支付接口的开发（Python）/"/>
+
+
+
+
+
+  <title> 微信支付接口的开发（Python）踩坑总结 | 彦鹏的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">彦鹏的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">scnuyp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/08/22/微信支付接口的开发（Python）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                微信支付接口的开发（Python）踩坑总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T10:02:09+08:00">
+                2017-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/22/微信支付接口的开发（Python）/" class="leancloud_visitors" data-flag-title="微信支付接口的开发（Python）踩坑总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><p>首先，强推这个轮子，用Python语言来进行开发，包括最基本的工具类，还提供Django的demo供参考，看懂了直接拿来用就好了</p>
+<p><a href="https://github.com/Skycrab/weixin-knife" target="_blank" rel="external">https://github.com/Skycrab/weixin-knife</a> </p>
+<p><a href="http://www.cnblogs.com/myloveblogs/p/6623708.html这篇文章总结的很好，通俗易懂" target="_blank" rel="external">http://www.cnblogs.com/myloveblogs/p/6623708.html这篇文章总结的很好，通俗易懂</a></p>
+<p><strong>下面谈谈我自己的理解：</strong></p>
+<p>首先，根据官方文档显示：</p>
+<p><img src="https://pay.weixin.qq.com/wiki/doc/api/img/wxa-7-2.jpg" alt="小程序支付时序图"></p>
+<h5 id="1、登录，获取openid"><a href="#1、登录，获取openid" class="headerlink" title="1、登录，获取openid"></a>1、登录，获取openid</h5><p>这个不用说了，做小程序的人基本上都知道怎么获取吧，这里我就不展开了。</p>
+<h5 id="2、生成用户订单"><a href="#2、生成用户订单" class="headerlink" title="2、生成用户订单"></a>2、生成用户订单</h5><p>这个由商户自己的服务端自行处理，这里给出我写的代码来参考（没有优化，只是简单地实现功能，求Python大佬轻喷）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@csrf_exempt</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveOrder</span><span class="params">(request)</span>:</span>  <span class="comment"># 保存订单中的商品</span></div><div class="line">    dict = &#123;&#125;</div><div class="line">    info = <span class="string">'Data log save success'</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</div><div class="line">            req = simplejson.loads(request.body)</div><div class="line">            <span class="string">'''</span></div><div class="line">            从JSON数组中获取一系列的参数</div><div class="line">            '''</div><div class="line">            openid = req[<span class="string">'openid'</span>]</div><div class="line">            area = req[<span class="string">'area'</span>]</div><div class="line">            detail = req[<span class="string">'detail'</span>]</div><div class="line">            name = req[<span class="string">'name'</span>]</div><div class="line">            phone = req[<span class="string">'phone'</span>]</div><div class="line">            queryset = models.Address.objects.filter(detail=detail, name=name, phone=phone, user_id=openid)</div><div class="line">            <span class="string">'''</span></div><div class="line">            新地址的情况</div><div class="line">            '''</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> queryset.exists():</div><div class="line">                aid = uuid1_hex()</div><div class="line">                address = models.Address(aid=aid, area=area, detail=detail, name=name, phone=phone, first=<span class="number">0</span>,</div><div class="line">                                         user_id=openid)</div><div class="line">                address.save()</div><div class="line"></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="comment"># 查询与所填信息相关的模型</span></div><div class="line">                a = models.Address.objects.get(detail=detail, name=name, phone=phone, user_id=openid)</div><div class="line">                <span class="comment"># 获取他的aid</span></div><div class="line">                aid = a.aid</div><div class="line">            count = req[<span class="string">'count'</span>]</div><div class="line">            sum = req[<span class="string">'sum'</span>]</div><div class="line">            vid = req[<span class="string">'vid'</span>]</div><div class="line">            except_time = req[<span class="string">'time'</span>]</div><div class="line">            commoditys = req[<span class="string">'fields'</span>]</div><div class="line">            oid = uuid1_hex()</div><div class="line">            order = models.Order(user_id=openid, total=sum, village_id=vid, state=<span class="number">1</span>, address_id=aid, oid=oid,except_time=except_time)</div><div class="line">            order.save()</div><div class="line">            <span class="string">'''</span></div><div class="line">            遍历载入商品信息</div><div class="line">            '''</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, count):</div><div class="line">                comid = commoditys[i][<span class="string">'comid'</span>]</div><div class="line">                com_count = commoditys[i][<span class="string">'com_count'</span>]</div><div class="line">                c = models.Commodity.objects.get(cid=comid)</div><div class="line">                c.inventory = c.inventory - int(com_count)</div><div class="line">                c.sale = c.sale + int(com_count)</div><div class="line">                c.save()</div><div class="line">                o = models.Order.objects.get(oid=oid)</div><div class="line">                <span class="comment"># o.commodity.add(c)</span></div><div class="line">                member = models.Membership(order=o, Commodity=c, com_count=com_count)</div><div class="line">                member.save()</div><div class="line">    <span class="keyword">except</span> Exception:</div><div class="line">        <span class="keyword">import</span> sys</div><div class="line">        info = <span class="string">"%s || %s"</span> % (sys.exc_info()[<span class="number">0</span>], sys.exc_info()[<span class="number">1</span>])</div><div class="line">    dict[<span class="string">'message'</span>] = info</div><div class="line">    dict[<span class="string">'create_at'</span>] = str(ctime())</div><div class="line">    dict[<span class="string">'order_id'</span>] = str(oid)</div><div class="line">    json = simplejson.dumps(dict)</div><div class="line">    <span class="keyword">return</span> HttpResponse(json)</div></pre></td></tr></table></figure>
+<h5 id="3、调用统一下单api"><a href="#3、调用统一下单api" class="headerlink" title="3、调用统一下单api"></a>3、调用统一下单api</h5><p>官方解释：商户在小程序中先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易后调起支付。</p>
+<p>URL地址：<a href="https://api.mch.weixin.qq.com/pay/unifiedorder" target="_blank" rel="external">https://api.mch.weixin.qq.com/pay/unifiedorder</a></p>
+<p>通过XML的方式向微信后台发送请求信息</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>变量名</th>
+<th>必填</th>
+<th>类型</th>
+<th>示例值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小程序ID</td>
+<td>appid</td>
+<td>是</td>
+<td>String(32)</td>
+<td>wxd678efh567hg6787</td>
+<td>微信分配的小程序ID</td>
+</tr>
+<tr>
+<td>商户号</td>
+<td>mch_id</td>
+<td>是</td>
+<td>String(32)</td>
+<td>1230000109</td>
+<td>微信支付分配的商户号</td>
+</tr>
+<tr>
+<td>设备号</td>
+<td>device_info</td>
+<td>否</td>
+<td>String(32)</td>
+<td>013467007045764</td>
+<td>终端设备号(门店号或收银设备ID)，注意：PC网页或公众号内支付请传”WEB”</td>
+</tr>
+<tr>
+<td>随机字符串</td>
+<td>nonce_str</td>
+<td>是</td>
+<td>String(32)</td>
+<td>5K8264ILTKCH16CQ2502SI8ZNMTM67VS</td>
+<td>随机字符串，不长于32位。推荐<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_3" target="_blank" rel="external">随机数生成算法</a></td>
+</tr>
+<tr>
+<td>签名</td>
+<td>sign</td>
+<td>是</td>
+<td>String(32)</td>
+<td>C380BEC2BFD727A4B6845133519F3AD6</td>
+<td>签名，详见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_3" target="_blank" rel="external">签名生成算法</a></td>
+</tr>
+<tr>
+<td>签名类型</td>
+<td>sign_type</td>
+<td>否</td>
+<td>String(32)</td>
+<td>HMAC-SHA256</td>
+<td>签名类型，目前支持HMAC-SHA256和MD5，默认为MD5</td>
+</tr>
+<tr>
+<td>商品描述</td>
+<td>body</td>
+<td>是</td>
+<td>String(128)</td>
+<td>腾讯充值中心-QQ会员充值</td>
+<td>商品简单描述，该字段须严格按照规范传递，具体请见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2" target="_blank" rel="external">参数规定</a></td>
+</tr>
+<tr>
+<td>商品详情</td>
+<td>detail</td>
+<td>否</td>
+<td>String(6000)</td>
+<td></td>
+<td>单品优惠字段(暂未上线)</td>
+</tr>
+<tr>
+<td>附加数据</td>
+<td>attach</td>
+<td>否</td>
+<td>String(127)</td>
+<td>深圳分店</td>
+<td>附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据</td>
+</tr>
+<tr>
+<td>商户订单号</td>
+<td>out_trade_no</td>
+<td>是</td>
+<td>String(32)</td>
+<td>20150806125346</td>
+<td>商户系统内部的订单号,32个字符内、可包含字母, 其他说明见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2" target="_blank" rel="external">商户订单号</a></td>
+</tr>
+<tr>
+<td>货币类型</td>
+<td>fee_type</td>
+<td>否</td>
+<td>String(16)</td>
+<td>CNY</td>
+<td>符合ISO 4217标准的三位字母代码，默认人民币：CNY，其他值列表详见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2" target="_blank" rel="external">货币类型</a></td>
+</tr>
+<tr>
+<td>总金额</td>
+<td>total_fee</td>
+<td>是</td>
+<td>Int</td>
+<td>888</td>
+<td>订单总金额，单位为分，详见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2" target="_blank" rel="external">支付金额</a></td>
+</tr>
+<tr>
+<td>终端IP</td>
+<td>spbill_create_ip</td>
+<td>是</td>
+<td>String(16)</td>
+<td>123.12.12.123</td>
+<td>APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。</td>
+</tr>
+<tr>
+<td>交易起始时间</td>
+<td>time_start</td>
+<td>否</td>
+<td>String(14)</td>
+<td>20091225091010</td>
+<td>订单生成时间，格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010。其他详见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2" target="_blank" rel="external">时间规则</a></td>
+</tr>
+<tr>
+<td>交易结束时间</td>
+<td>time_expire</td>
+<td>否</td>
+<td>String(14)</td>
+<td>20091227091010</td>
+<td>订单失效时间，格式为yyyyMMddHHmmss，如2009年12月27日9点10分10秒表示为20091227091010。其他详见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2" target="_blank" rel="external">时间规则</a><strong>注意：最短失效时间间隔必须大于5分钟</strong></td>
+</tr>
+<tr>
+<td>商品标记</td>
+<td>goods_tag</td>
+<td>否</td>
+<td>String(32)</td>
+<td>WXG</td>
+<td>商品标记，代金券或立减优惠功能的参数，说明详见<a href="https://pay.weixin.qq.com/wiki/doc/api/tools/sp_coupon.php?chapter=12_1" target="_blank" rel="external">代金券或立减优惠</a></td>
+</tr>
+<tr>
+<td>通知地址</td>
+<td>notify_url</td>
+<td>是</td>
+<td>String(256)</td>
+<td><a href="http://www.weixin.qq.com/wxpay/pay.php" target="_blank" rel="external">http://www.weixin.qq.com/wxpay/pay.php</a></td>
+<td>接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。</td>
+</tr>
+<tr>
+<td>交易类型</td>
+<td>trade_type</td>
+<td>是</td>
+<td>String(16)</td>
+<td>JSAPI</td>
+<td>小程序取值如下：JSAPI，详细说明见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2" target="_blank" rel="external">参数规定</a></td>
+</tr>
+<tr>
+<td>指定支付方式</td>
+<td>limit_pay</td>
+<td>否</td>
+<td>String(32)</td>
+<td>no_credit</td>
+<td>no_credit–指定不能使用信用卡支付</td>
+</tr>
+<tr>
+<td>用户标识</td>
+<td>openid</td>
+<td>否</td>
+<td>String(128)</td>
+<td>oUpF8uMuAJO_M2pxb1Q9zNjWeS6o</td>
+<td>trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识。openid如何获取，可参考【<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html?t=20161122" target="_blank" rel="external">获取openid</a>】。</td>
+</tr>
+</tbody>
+</table>
+<p>参考实例：</p>
+<xml><br>   <appid>wx2421b1c4370ec43b</appid><br>   <attach>支付测试</attach><br>   <body>JSAPI支付测试</body><br>   <mch_id>10000100</mch_id><br>   <detail>&lt;![CDATA[{ “goods_detail”:[ { “goods_id”:”iphone6s_16G”, “wxpay_goods_id”:”1001”, “goods_name”:”iPhone6s 16G”, “quantity”:1, “price”:528800, “goods_category”:”123456”, “body”:”苹果手机” }, { “goods_id”:”iphone6s_32G”, “wxpay_goods_id”:”1002”, “goods_name”:”iPhone6s 32G”, “quantity”:1, “price”:608800, “goods_category”:”123789”, “body”:”苹果手机” } ] }]]&gt;</detail><br>   <nonce_str>1add1a30ac87aa2db72f57a2375d8fec</nonce_str><br>   <notify_url><a href="http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php" target="_blank" rel="external">http://wxpay.wxutil.com/pub_v2/pay/notify.v2.php</a></notify_url><br>   <openid>oUpF8uMuAJO_M2pxb1Q9zNjWeS6o</openid><br>   <out_trade_no>1415659990</out_trade_no><br>   <spbill_create_ip>14.23.150.211</spbill_create_ip><br>   <total_fee>1</total_fee><br>   <trade_type>JSAPI</trade_type><br>   <sign>0CB01533B8C1EF103065174F50BCA001</sign><br></xml>
+
+
+
+<p>那么我们就应该提供一个输出xml的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createXml</span><span class="params">(self)</span>:</span></div><div class="line">       <span class="string">"""生成接口参数xml"""</span></div><div class="line">       <span class="comment">#检测必填参数</span></div><div class="line">       <span class="keyword">if</span> any(self.parameters[key] <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">for</span> key <span class="keyword">in</span> (<span class="string">"out_trade_no"</span>, <span class="string">"body"</span>, <span class="string">"total_fee"</span>, <span class="string">"notify_url"</span>, <span class="string">"trade_type"</span>)):</div><div class="line">           <span class="keyword">raise</span> ValueError(<span class="string">"missing parameter"</span>)</div><div class="line">       <span class="keyword">if</span> self.parameters[<span class="string">"trade_type"</span>] == <span class="string">"JSAPI"</span> <span class="keyword">and</span> self.parameters[<span class="string">"openid"</span>] <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">           <span class="keyword">raise</span> ValueError(<span class="string">"JSAPI need openid parameters"</span>)</div><div class="line"></div><div class="line">       self.parameters[<span class="string">"appid"</span>] = WxPayConf_pub.APPID  <span class="comment">#公众账号ID</span></div><div class="line">       self.parameters[<span class="string">"mch_id"</span>] = WxPayConf_pub.MCHID  <span class="comment">#商户号</span></div><div class="line">       self.parameters[<span class="string">"spbill_create_ip"</span>] = <span class="string">"127.0.0.1"</span>  <span class="comment">#终端ip      </span></div><div class="line">       self.parameters[<span class="string">"nonce_str"</span>] = self.createNoncestr()  <span class="comment">#随机字符串</span></div><div class="line">       self.parameters[<span class="string">"sign"</span>] = self.getSign(self.parameters)  <span class="comment">#签名</span></div><div class="line">       <span class="keyword">return</span>  self.arrayToXml(self.parameters)</div></pre></td></tr></table></figure>
+<p>而当以下字段在return_code 和result_code都为SUCCESS的时候有返回</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>变量名</th>
+<th>必填</th>
+<th>类型</th>
+<th>示例值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交易类型</td>
+<td>trade_type</td>
+<td>是</td>
+<td>String(16)</td>
+<td>JSAPI</td>
+<td>调用接口提交的交易类型，取值如下：JSAPI，详细说明见<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_2" target="_blank" rel="external">参数规定</a></td>
+</tr>
+<tr>
+<td>预支付交易会话标识</td>
+<td>prepay_id</td>
+<td>是</td>
+<td>String(64)</td>
+<td>wx201410272009395522657a690389285100</td>
+<td>微信生成的预支付回话标识，用于后续接口调用中使用，该值有效期为2小时</td>
+</tr>
+</tbody>
+</table>
+<p>可以看出，prepay_id是我们所需要返回到前端小程序的一个重要信息，因此我们需要这样一个方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPrepayId</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="string">"""获取prepay_id"""</span></div><div class="line">    self.postXml()</div><div class="line">    self.result = self.xmlToArray(self.response)</div><div class="line">    prepay_id = self.result[<span class="string">"prepay_id"</span>]</div><div class="line">    <span class="keyword">return</span> prepay_id</div></pre></td></tr></table></figure>
+<h5 id="小程序调起支付API"><a href="#小程序调起支付API" class="headerlink" title="小程序调起支付API"></a>小程序调起支付API</h5><p>小程序调起支付数据签名字段列表：</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>变量名</th>
+<th>必填</th>
+<th>类型</th>
+<th>示例值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小程序ID</td>
+<td>appId</td>
+<td>是</td>
+<td>String</td>
+<td>wxd678efh567hg6787</td>
+<td>微信分配的小程序ID</td>
+</tr>
+<tr>
+<td>时间戳</td>
+<td>timeStamp</td>
+<td>是</td>
+<td>String</td>
+<td>1490840662</td>
+<td>时间戳从1970年1月1日00:00:00至今的秒数,即当前的时间</td>
+</tr>
+<tr>
+<td>随机串</td>
+<td>nonceStr</td>
+<td>是</td>
+<td>String</td>
+<td>5K8264ILTKCH16CQ2502SI8ZNMTM67VS</td>
+<td>随机字符串，不长于32位。推荐<a href="https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_3" target="_blank" rel="external">随机数生成算法</a></td>
+</tr>
+<tr>
+<td>数据包</td>
+<td>package</td>
+<td>是</td>
+<td>String</td>
+<td>prepay_id=<em>wx2017033010242291fcfe0db70013231072</em></td>
+<td>统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=<em>wx2017033010242291fcfe0db70013231072</em></td>
+</tr>
+<tr>
+<td>签名方式</td>
+<td>signType</td>
+<td>是</td>
+<td>String</td>
+<td>MD5</td>
+<td>签名算法，暂支持 MD5</td>
+</tr>
+</tbody>
+</table>
+<p>举例说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">paySign = MD5(appId=wxd678efh567hg6787&amp;nonceStr=5K8264ILTKCH16CQ2502SI8ZNMTM67VS&amp;package=prepay_id=wx2017033010242291fcfe0db70013231072&amp;signType=MD5&amp;timeStamp=1490840662&amp;key=qazwsxedcrfvtgbyhnujmikolp111111) = 22D9B4E54AB1950F51E0649E8810ACD6</div></pre></td></tr></table></figure>
+<p>调用wx.requestPayment(OBJECT)发起微信支付：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">wx.requestPayment(</div><div class="line">&#123;</div><div class="line">&apos;timeStamp&apos;: &apos;&apos;,</div><div class="line">&apos;nonceStr&apos;: &apos;&apos;,</div><div class="line">&apos;package&apos;: &apos;&apos;,</div><div class="line">&apos;signType&apos;: &apos;MD5&apos;,</div><div class="line">&apos;paySign&apos;: &apos;&apos;,</div><div class="line">&apos;success&apos;:function(res)&#123;&#125;,</div><div class="line">&apos;fail&apos;:function(res)&#123;&#125;,</div><div class="line">&apos;complete&apos;:function(res)&#123;&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>至此，支付接口调用成功，大家快去尝试吧</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/21/‘利用Django做项目遇到的坑’/" rel="next" title="利用Django做项目遇到的坑">
+                <i class="fa fa-chevron-left"></i> 利用Django做项目遇到的坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/25/树的遍历/" rel="prev" title="树的遍历">
+                树的遍历 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="彦鹏" />
+          <p class="site-author-name" itemprop="name">彦鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">每天进步一点点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、登录，获取openid"><span class="nav-number">1.1.</span> <span class="nav-text">1、登录，获取openid</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、生成用户订单"><span class="nav-number">1.2.</span> <span class="nav-text">2、生成用户订单</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、调用统一下单api"><span class="nav-number">1.3.</span> <span class="nav-text">3、调用统一下单api</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#小程序调起支付API"><span class="nav-number">1.4.</span> <span class="nav-text">小程序调起支付API</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">彦鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("haf2k8DGCn9V9IdwRUfFd1m2-gzGzoHsz", "eeRJlUBaMcwABRrULhYN4f3S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

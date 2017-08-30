@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="彦鹏的个人博客" />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -89,16 +89,19 @@
 
 
 
-<meta name="description" content="每天进步一点点">
+<meta name="description" content="C++类继承的规则下列程序编译时会出现错误，请根据行号选择错误位置( )
+1234567891011121314151617181920212223242526272829303132333435#include &amp;lt;iostream&amp;gt;using namespace std;class A&amp;#123;  int a1;protected:  int a2;public:  int a3;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++相关经常错的题目">
 <meta property="og:url" content="https://scnuyp.github.io/2017/08/09/C-相关经常错的题目/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="每天进步一点点">
-<meta property="og:updated_time" content="2017-08-09T01:27:46.525Z">
+<meta property="og:description" content="C++类继承的规则下列程序编译时会出现错误，请根据行号选择错误位置( )
+1234567891011121314151617181920212223242526272829303132333435#include &amp;lt;iostream&amp;gt;using namespace std;class A&amp;#123;  int a1;protected:  int a2;public:  int a3;">
+<meta property="og:updated_time" content="2017-08-12T03:32:03.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++相关经常错的题目">
-<meta name="twitter:description" content="每天进步一点点">
+<meta name="twitter:description" content="C++类继承的规则下列程序编译时会出现错误，请根据行号选择错误位置( )
+1234567891011121314151617181920212223242526272829303132333435#include &amp;lt;iostream&amp;gt;using namespace std;class A&amp;#123;  int a1;protected:  int a2;public:  int a3;">
 
 
 
@@ -334,7 +337,24 @@
       
 
       
-        
+        <h3 id="C-类继承的规则"><a href="#C-类继承的规则" class="headerlink" title="C++类继承的规则"></a>C++类继承的规则</h3><p>下列程序编译时会出现错误，请根据行号选择错误位置( )</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> A&#123;</div><div class="line">  <span class="keyword">int</span> a1;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">  <span class="keyword">int</span> a2;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">  <span class="keyword">int</span> a3;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> B: <span class="keyword">public</span> A&#123;</div><div class="line">  <span class="keyword">int</span> b1;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">  <span class="keyword">int</span> b2;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">  <span class="keyword">int</span> b3;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">class</span> C:<span class="keyword">private</span> B&#123;</div><div class="line">  <span class="keyword">int</span> c1;</div><div class="line"><span class="keyword">protected</span>:</div><div class="line">  <span class="keyword">int</span> c2;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">  <span class="keyword">int</span> c3;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">  B obb;</div><div class="line">  C obc;</div><div class="line">  <span class="built_in">cout</span>&lt;&lt;obb.a1;<span class="comment">//1</span></div><div class="line">  <span class="built_in">cout</span>&lt;&lt;obb.a2;<span class="comment">//2</span></div><div class="line">  <span class="built_in">cout</span>&lt;&lt;obb.a3;<span class="comment">//3</span></div><div class="line">  <span class="built_in">cout</span>&lt;&lt;obc.b1;<span class="comment">//4</span></div><div class="line">  <span class="built_in">cout</span>&lt;&lt;obc.b2;<span class="comment">//5</span></div><div class="line">  <span class="built_in">cout</span>&lt;&lt;obc.b3;<span class="comment">//6</span></div><div class="line">  <span class="built_in">cout</span>&lt;&lt;obc.c3;<span class="comment">//7</span></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">A、1,2</div><div class="line">B、2,5,7</div><div class="line">C、3,4,7</div><div class="line">D、4,5,6</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">答案：A、D</div></pre></td></tr></table></figure>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p><strong>类的继承后方法属性变化：</strong></p>
+<p>private 属性不能够被继承。</p>
+<p>使用private继承，父类的protected和public属性在子类中变为private；</p>
+<p>使用protected继承，父类的protected和public属性在子类中变为protected；</p>
+<p>使用public继承，父类中的protected和public属性不发生改变; </p>
+<p><strong>private, public, protected 访问标号的访问范围：</strong></p>
+<p>private：只能由1.该类中的函数、2.其友元函数访问。</p>
+<p>不能被任何其他访问，该类的对象也不能访问。</p>
+<p>protected：可以被1.该类中的函数、2.子类的函数、以及3.其友元函数访问。</p>
+<p>但不能被该类的对象访问。</p>
+<p>public：可以被1.该类中的函数、2.子类的函数、3.其友元函数访问，也可以由4.该类的对象访问。</p>
+<h3 id="指针的使用"><a href="#指针的使用" class="headerlink" title="指针的使用"></a>指针的使用</h3><p>请将下列构造函数补充完整，使得程序的运行结果是5</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">#include&lt;iostream&gt;</div><div class="line">using namespace std;</div><div class="line">class Sample&#123;</div><div class="line">    public:</div><div class="line">        Sample(int x)&#123;</div><div class="line">            ________</div><div class="line">        &#125;</div><div class="line">        ~Sample()&#123;</div><div class="line">            if(p) delete p;</div><div class="line">        &#125;</div><div class="line">        int show()&#123;</div><div class="line">            return *p;</div><div class="line">        &#125;</div><div class="line">    private:</div><div class="line">        int*p;</div><div class="line">&#125;;</div><div class="line">int main()&#123;</div><div class="line">    Sample S(5);</div><div class="line">    cout&lt;&lt;S.show()&lt;&lt;endl;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -360,6 +380,12 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
       
 
       
@@ -429,8 +455,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -445,7 +480,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -458,7 +493,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -483,6 +518,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-类继承的规则"><span class="nav-number">1.</span> <span class="nav-text">C++类继承的规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解析"><span class="nav-number">1.1.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针的使用"><span class="nav-number">2.</span> <span class="nav-text">指针的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

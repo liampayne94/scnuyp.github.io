@@ -99,14 +99,14 @@
 <meta property="og:description" content="定义Semaphore的中文含义是信号/信号系统，其实它就是synchronized关键字的升级版，它主要的功能就是控制线程并发的数量
 同步性多线程中的他同步是指任务一个个地执行，而不能并行执行，这样做的优点是保证了程序逻辑的正确性，不会出现非线程安全的问题，下面实现一个简单的例子：其中Service的代码如下：
 1234567891011121314151617package service;i">
-<meta property="og:image" content="https://scnuyp.github.io/F:\Blog\themes\next\source\images\微信截图_20170503163449.png">
-<meta property="og:updated_time" content="2017-05-03T08:42:51.021Z">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170503163449.png">
+<meta property="og:updated_time" content="2017-08-22T01:57:37.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Semaphore类的使用">
 <meta name="twitter:description" content="定义Semaphore的中文含义是信号/信号系统，其实它就是synchronized关键字的升级版，它主要的功能就是控制线程并发的数量
 同步性多线程中的他同步是指任务一个个地执行，而不能并行执行，这样做的优点是保证了程序逻辑的正确性，不会出现非线程安全的问题，下面实现一个简单的例子：其中Service的代码如下：
 1234567891011121314151617package service;i">
-<meta name="twitter:image" content="https://scnuyp.github.io/F:\Blog\themes\next\source\images\微信截图_20170503163449.png">
+<meta name="twitter:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170503163449.png">
 
 
 
@@ -353,7 +353,7 @@
 <p>执行类Run.java代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> test;</div><div class="line"></div><div class="line"><span class="keyword">import</span> extthread.ThreadA;</div><div class="line"><span class="keyword">import</span> extthread.ThreadB;</div><div class="line"><span class="keyword">import</span> extthread.ThreadC;</div><div class="line"><span class="keyword">import</span> service.Service;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Run</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * <span class="doctag">@param</span> args</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">// TODO Auto-generated method stub</span></div><div class="line">		Service service = <span class="keyword">new</span> Service();</div><div class="line">		ThreadA a = <span class="keyword">new</span> ThreadA(service);</div><div class="line">		a.setName(<span class="string">"A"</span>);</div><div class="line">		ThreadB b = <span class="keyword">new</span> ThreadB(service);</div><div class="line">		b.setName(<span class="string">"B"</span>);</div><div class="line">		ThreadC c = <span class="keyword">new</span> ThreadC(service);</div><div class="line">		c.setName(<span class="string">"C"</span>);</div><div class="line">		a.start();</div><div class="line">		b.start();</div><div class="line">		c.start();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>运行结果为：</p>
-<p><img src="F:\Blog\themes\next\source\images\微信截图_20170503163449.png" alt="微信截图_20170503163449"></p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170503163449.png" alt="微信截图_20170503163449"></p>
 
       
     </div>
@@ -480,7 +480,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -493,7 +493,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
