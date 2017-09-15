@@ -1,0 +1,820 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Redis简介​    Redis,是我学习的第一款Nosql型的数据库。它是一种就是一个key-value的储存系统。Redis的键值可以包括字符串（strings）、哈希（hashes）、列表（lists）、集合（sets）和 有序集合（sorted sets）等数据类型；
+​    Redis同样支持主从复制（master-slave replication），并且具有非常快速的非阻塞首次同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用Jedis对Redis进行操作">
+<meta property="og:url" content="https://scnuyp.github.io/2017/09/05/利用Jedis对Redis进行操作/index.html">
+<meta property="og:site_name" content="彦鹏的个人博客">
+<meta property="og:description" content="Redis简介​    Redis,是我学习的第一款Nosql型的数据库。它是一种就是一个key-value的储存系统。Redis的键值可以包括字符串（strings）、哈希（hashes）、列表（lists）、集合（sets）和 有序集合（sorted sets）等数据类型；
+​    Redis同样支持主从复制（master-slave replication），并且具有非常快速的非阻塞首次同">
+<meta property="og:updated_time" content="2017-09-15T09:22:05.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用Jedis对Redis进行操作">
+<meta name="twitter:description" content="Redis简介​    Redis,是我学习的第一款Nosql型的数据库。它是一种就是一个key-value的储存系统。Redis的键值可以包括字符串（strings）、哈希（hashes）、列表（lists）、集合（sets）和 有序集合（sorted sets）等数据类型；
+​    Redis同样支持主从复制（master-slave replication），并且具有非常快速的非阻塞首次同">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scnuyp.github.io/2017/09/05/利用Jedis对Redis进行操作/"/>
+
+
+
+
+
+  <title> 利用Jedis对Redis进行操作 | 彦鹏的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">彦鹏的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">scnuyp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/09/05/利用Jedis对Redis进行操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                利用Jedis对Redis进行操作
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T23:10:06+08:00">
+                2017-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/05/利用Jedis对Redis进行操作/" class="leancloud_visitors" data-flag-title="利用Jedis对Redis进行操作">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h4><p>​    Redis,是我学习的第一款Nosql型的数据库。它是一种就是一个key-value的储存系统。Redis的键值可以包括字符串（strings）、哈希（hashes）、列表（lists）、集合（sets）和 有序集合（sorted sets）等数据类型；</p>
+<p>​    Redis同样支持主从复制（master-slave replication），并且具有非常快速的非阻塞首次同步(non-blocking first synchronization)、网络断开自动重连等功能。同时Redis还具有其它一些特性，其中包括简单的check-and-set机制、pub/sub和配置设置等，以便使得Redis能够表现得更像<strong>缓存（cache）</strong>。</p>
+<p>​    Redis的安装这里就不赘述了，大家可以自行百度。</p>
+<h5 id="补充：aof，rdb是两种-redis持久化的机制。"><a href="#补充：aof，rdb是两种-redis持久化的机制。" class="headerlink" title="补充：aof，rdb是两种 redis持久化的机制。"></a>补充：aof，rdb是两种 redis持久化的机制。</h5><p>其中aof是用持续的写入日记操作，crash（数据库不工作）能够利用日志进行恢复工作；而rdb是平时写数据的时候均不触发，只有当手动save或者关闭命令的时候，才进行备份操作</p>
+<p>两种方法各有好处：其中aof更加安全，但是IO使用率比较高，同时恢复速度比较慢，而rdb恰好相反</p>
+<h4 id="Redis在Java中的应用——Jedis"><a href="#Redis在Java中的应用——Jedis" class="headerlink" title="Redis在Java中的应用——Jedis"></a>Redis在Java中的应用——Jedis</h4><p>我们可以通过Maven对Jedis进行引入：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>然后像JDBC操作一样，首先我们要连接到Redis所在的服务器当中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Jedis jedis = <span class="keyword">new</span> Jedis(<span class="string">"redis://localhost:3306/9"</span>);</div><div class="line">jedis.flushDB();</div><div class="line">jedis.set(<span class="string">"h"</span>,<span class="string">"hello"</span>);</div><div class="line">System.out.println(jedis.get(<span class="string">"h"</span>));</div></pre></td></tr></table></figure>
+<p>1、①同时，对于String结构的数据，可以用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jedis.setx(<span class="string">"h"</span>,<span class="number">15</span>,<span class="string">"hello"</span>);</div></pre></td></tr></table></figure>
+<p>使得数据的有效时长为15秒</p>
+<p>②如果需要在一些经常要作出增加或者删除的操作的数，我们可以把它放在Redis中,以保持性能且不产生并发问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">jedis.set(<span class="string">"pv"</span>,<span class="number">100</span>);</div><div class="line">jedis.incr(<span class="string">"pv"</span>);</div><div class="line">System.out.println(jedis.get(<span class="string">"h"</span>));</div><div class="line">jedis.decr(<span class="string">"pv"</span>);</div><div class="line">System.out.println(jedis.get(<span class="string">"h"</span>));</div></pre></td></tr></table></figure>
+<p>2、①对于list的操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String listName = <span class="string">"alist"</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;++i)&#123;</div><div class="line">  jedis.lpush(listName,<span class="string">"a"</span>+String.valueOf(i));</div><div class="line">&#125;</div><div class="line">System.out.println(jedis.lrange(listName,<span class="number">0</span>,<span class="number">10</span>));</div></pre></td></tr></table></figure>
+<p>②看到push，我们同时可以知道pop结构（类比于栈）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> len = jedis.llen(listName);</div><div class="line">jedis.lpop(listName);</div><div class="line">len = jedis.llen(listName);</div></pre></td></tr></table></figure>
+<p>我们可以看到，list的长度饭生了改变</p>
+<p>3、对于hash（字典）的操作（可以跟HashMap进行类比）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">String userKey = &quot;userxx&quot;;</div><div class="line">        jedis.hset(userKey, &quot;name&quot;, &quot;jim&quot;);</div><div class="line">        jedis.hset(userKey, &quot;age&quot;, &quot;12&quot;);</div><div class="line">        jedis.hset(userKey, &quot;phone&quot;, &quot;18618181818&quot;);</div><div class="line">        print(12, jedis.hget(userKey, &quot;name&quot;));</div><div class="line">        print(13, jedis.hgetAll(userKey));</div><div class="line">        jedis.hdel(userKey, &quot;phone&quot;);</div><div class="line">        print(14, jedis.hgetAll(userKey));</div><div class="line">        print(15, jedis.hexists(userKey, &quot;email&quot;));</div><div class="line">        print(16, jedis.hexists(userKey, &quot;age&quot;));</div><div class="line">        print(17, jedis.hkeys(userKey));</div><div class="line">        print(18, jedis.hvals(userKey));</div><div class="line">        jedis.hsetnx(userKey, &quot;school&quot;, &quot;zju&quot;);</div><div class="line">        jedis.hsetnx(userKey, &quot;name&quot;, &quot;yxy&quot;);</div><div class="line">        print(19, jedis.hgetAll(userKey));</div></pre></td></tr></table></figure>
+<p>4、对于Set(去重)的操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">String likeKey1 = <span class="string">"commentLike1"</span>;</div><div class="line">        String likeKey2 = <span class="string">"commentLike2"</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</div><div class="line">            jedis.sadd(likeKey1, String.valueOf(i));</div><div class="line">            jedis.sadd(likeKey2, String.valueOf(i*i));</div><div class="line">        &#125;</div><div class="line">        print(<span class="number">20</span>, jedis.smembers(likeKey1));</div><div class="line">        print(<span class="number">21</span>, jedis.smembers(likeKey2));</div><div class="line">        print(<span class="number">22</span>, jedis.sunion(likeKey1, likeKey2));<span class="comment">//求并集</span></div><div class="line">        print(<span class="number">23</span>, jedis.sdiff(likeKey1, likeKey2));<span class="comment">//求差集</span></div><div class="line">        print(<span class="number">24</span>, jedis.sinter(likeKey1, likeKey2));<span class="comment">//求交集</span></div><div class="line">        print(<span class="number">25</span>, jedis.sismember(likeKey1, <span class="string">"12"</span>));</div><div class="line">        print(<span class="number">26</span>, jedis.sismember(likeKey2, <span class="string">"16"</span>));</div><div class="line">        jedis.srem(likeKey1, <span class="string">"5"</span>); <span class="comment">//remove，删除</span></div><div class="line">        print(<span class="number">27</span>, jedis.smembers(likeKey1));</div><div class="line">        jedis.smove(likeKey2, likeKey1, <span class="string">"25"</span>); <span class="comment">//移动</span></div><div class="line">        print(<span class="number">28</span>, jedis.smembers(likeKey1));<span class="comment">//查看成员</span></div><div class="line">        print(<span class="number">29</span>, jedis.scard(likeKey1));<span class="comment">//返回数目</span></div></pre></td></tr></table></figure>
+<p>5、对于Sorted Set（有序集合）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">String rankKey = <span class="string">"rankKey"</span>;</div><div class="line">       jedis.zadd(rankKey, <span class="number">15</span>, <span class="string">"jim"</span>);</div><div class="line">       jedis.zadd(rankKey, <span class="number">60</span>, <span class="string">"Ben"</span>);</div><div class="line">       jedis.zadd(rankKey, <span class="number">90</span>, <span class="string">"Lee"</span>);</div><div class="line">       jedis.zadd(rankKey, <span class="number">75</span>, <span class="string">"Lucy"</span>);</div><div class="line">       jedis.zadd(rankKey, <span class="number">80</span>, <span class="string">"Mei"</span>);</div><div class="line">       print(<span class="number">30</span>, jedis.zcard(rankKey));</div><div class="line">       print(<span class="number">31</span>, jedis.zcount(rankKey, <span class="number">61</span>, <span class="number">100</span>));</div><div class="line">       print(<span class="number">32</span>, jedis.zscore(rankKey, <span class="string">"Lucy"</span>));</div><div class="line">       jedis.zincrby(rankKey, <span class="number">2</span>, <span class="string">"Lucy"</span>);<span class="comment">//+2</span></div><div class="line">       print(<span class="number">33</span>, jedis.zscore(rankKey, <span class="string">"Lucy"</span>));</div><div class="line">       jedis.zincrby(rankKey, <span class="number">2</span>, <span class="string">"Luc"</span>);</div><div class="line">       print(<span class="number">34</span>, jedis.zscore(rankKey, <span class="string">"Luc"</span>));</div><div class="line">       print(<span class="number">35</span>, jedis.zrange(rankKey, <span class="number">0</span>, <span class="number">100</span>));</div><div class="line">       print(<span class="number">36</span>, jedis.zrange(rankKey, <span class="number">0</span>, <span class="number">10</span>));<span class="comment">//依次展示</span></div><div class="line">       print(<span class="number">36</span>, jedis.zrange(rankKey, <span class="number">1</span>, <span class="number">3</span>));</div><div class="line">        print(<span class="number">36</span>, jedis.zrevrange(rankKey, <span class="number">1</span>, <span class="number">3</span>));</div><div class="line">       <span class="keyword">for</span> (Tuple tuple : jedis.zrangeByScoreWithScores(rankKey, <span class="string">"60"</span>, <span class="string">"100"</span>)) &#123;</div><div class="line">           print(<span class="number">37</span>, tuple.getElement() + <span class="string">":"</span> + String.valueOf(tuple.getScore()));</div><div class="line">       &#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/30/反转单向或者双向链表/" rel="next" title="反转单向或者双向链表">
+                <i class="fa fa-chevron-left"></i> 反转单向或者双向链表
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/15/秋招面经准备（一）/" rel="prev" title="秋招面经准备（一）">
+                秋招面经准备（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="彦鹏" />
+          <p class="site-author-name" itemprop="name">彦鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">每天进步一点点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis简介"><span class="nav-number">1.</span> <span class="nav-text">Redis简介</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#补充：aof，rdb是两种-redis持久化的机制。"><span class="nav-number">1.1.</span> <span class="nav-text">补充：aof，rdb是两种 redis持久化的机制。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis在Java中的应用——Jedis"><span class="nav-number">2.</span> <span class="nav-text">Redis在Java中的应用——Jedis</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">彦鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("haf2k8DGCn9V9IdwRUfFd1m2-gzGzoHsz", "eeRJlUBaMcwABRrULhYN4f3S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

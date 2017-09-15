@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="彦鹏的个人博客" />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -89,16 +89,22 @@
 
 
 
-<meta name="description" content="每天进步一点点">
+<meta name="description" content="分别实现反转单向链表和双向链表，要求时间复杂度为O(N)，空间复杂度为O(1)
+因为要求的空间复杂度为1，所以只能直接在链表上进行操作，代码如下
+1234567891011121314151617public class Node()&amp;#123;  public int value;  public Node next;  public Node(int data)&amp;#123;    this.v">
 <meta property="og:type" content="article">
-<meta property="og:title" content="''反转单向或者双向链表">
+<meta property="og:title" content="反转单向或者双向链表">
 <meta property="og:url" content="https://scnuyp.github.io/2017/08/30/反转单向或者双向链表/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="每天进步一点点">
-<meta property="og:updated_time" content="2017-08-30T03:01:51.514Z">
+<meta property="og:description" content="分别实现反转单向链表和双向链表，要求时间复杂度为O(N)，空间复杂度为O(1)
+因为要求的空间复杂度为1，所以只能直接在链表上进行操作，代码如下
+1234567891011121314151617public class Node()&amp;#123;  public int value;  public Node next;  public Node(int data)&amp;#123;    this.v">
+<meta property="og:updated_time" content="2017-08-30T03:34:51.971Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="''反转单向或者双向链表">
-<meta name="twitter:description" content="每天进步一点点">
+<meta name="twitter:title" content="反转单向或者双向链表">
+<meta name="twitter:description" content="分别实现反转单向链表和双向链表，要求时间复杂度为O(N)，空间复杂度为O(1)
+因为要求的空间复杂度为1，所以只能直接在链表上进行操作，代码如下
+1234567891011121314151617public class Node()&amp;#123;  public int value;  public Node next;  public Node(int data)&amp;#123;    this.v">
 
 
 
@@ -132,7 +138,7 @@
 
 
 
-  <title> ''反转单向或者双向链表 | 彦鹏的个人博客 </title>
+  <title> 反转单向或者双向链表 | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -272,7 +278,7 @@
             
             
               
-                ''反转单向或者双向链表
+                反转单向或者双向链表
               
             
           </h1>
@@ -305,7 +311,7 @@
 
           
           
-             <span id="/2017/08/30/反转单向或者双向链表/" class="leancloud_visitors" data-flag-title="''反转单向或者双向链表">
+             <span id="/2017/08/30/反转单向或者双向链表/" class="leancloud_visitors" data-flag-title="反转单向或者双向链表">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -334,7 +340,11 @@
       
 
       
-        
+        <p>分别实现反转单向链表和双向链表，要求时间复杂度为O(N)，空间复杂度为O(1)</p>
+<p>因为要求的空间复杂度为1，所以只能直接在链表上进行操作，代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> class <span class="title">Node</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">public</span> <span class="keyword">int</span> value;</div><div class="line">  <span class="keyword">public</span> Node next;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;</div><div class="line">    <span class="keyword">this</span>.value = data;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> Node <span class="title">reverse</span><span class="params">(Node head)</span></span>&#123;</div><div class="line">    Node next = <span class="keyword">null</span>;</div><div class="line">    Node pre = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">while</span>(head!=<span class="keyword">null</span>)&#123;</div><div class="line">      next = head.next</div><div class="line">      head,next = pre </div><div class="line">      head = next</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> pre;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面几个图摘自博客（<a href="http://blog.csdn.net/coding__madman/article/details/51179562），帮助理解" target="_blank" rel="external">http://blog.csdn.net/coding__madman/article/details/51179562），帮助理解</a></p>
+
       
     </div>
 
@@ -361,6 +371,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
 
       
         
@@ -379,6 +395,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/05/利用Jedis对Redis进行操作/" rel="prev" title="利用Jedis对Redis进行操作">
+                利用Jedis对Redis进行操作 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -441,7 +461,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
