@@ -1,0 +1,907 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java框架," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="[摘录自《Spring In Action》]
+通常，JavaBean的属性是私有的，同时拥有一组存取器方法，setXXX()和getXXX()形式存在。Spring可以借助属性的set方法来配置属性的值，以实现setter方式的注入。
+Kenny是一个很有天赋的乐曲演奏家，由Intrumentalist类定义，如下：
+123456789101112131415161718192021222324">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring中注入Bean的属性">
+<meta property="og:url" content="https://scnuyp.github.io/2017/09/21/Spring中注入Bean的属性/index.html">
+<meta property="og:site_name" content="彦鹏的个人博客">
+<meta property="og:description" content="[摘录自《Spring In Action》]
+通常，JavaBean的属性是私有的，同时拥有一组存取器方法，setXXX()和getXXX()形式存在。Spring可以借助属性的set方法来配置属性的值，以实现setter方式的注入。
+Kenny是一个很有天赋的乐曲演奏家，由Intrumentalist类定义，如下：
+123456789101112131415161718192021222324">
+<meta property="og:updated_time" content="2017-09-21T04:57:34.997Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring中注入Bean的属性">
+<meta name="twitter:description" content="[摘录自《Spring In Action》]
+通常，JavaBean的属性是私有的，同时拥有一组存取器方法，setXXX()和getXXX()形式存在。Spring可以借助属性的set方法来配置属性的值，以实现setter方式的注入。
+Kenny是一个很有天赋的乐曲演奏家，由Intrumentalist类定义，如下：
+123456789101112131415161718192021222324">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scnuyp.github.io/2017/09/21/Spring中注入Bean的属性/"/>
+
+
+
+
+
+  <title> Spring中注入Bean的属性 | 彦鹏的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">彦鹏的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">scnuyp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/09/21/Spring中注入Bean的属性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring中注入Bean的属性
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-21T12:56:55+08:00">
+                2017-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/21/Spring中注入Bean的属性/" class="leancloud_visitors" data-flag-title="Spring中注入Bean的属性">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[摘录自《Spring In Action》]</p>
+<p>通常，JavaBean的属性是私有的，同时拥有一组存取器方法，setXXX()和getXXX()形式存在。Spring可以借助属性的set方法来配置属性的值，以实现setter方式的注入。</p>
+<p>Kenny是一个很有天赋的乐曲演奏家，由Intrumentalist类定义，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.springinaction.springidol;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Instrumentalist</span> <span class="keyword">implements</span> <span class="title">Performer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Instrumentalist</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span> <span class="keyword">throws</span> PerformanceException </span>&#123;</div><div class="line">        System.out.println(<span class="string">"Playing "</span> + song + <span class="string">" : "</span>);</div><div class="line">        instrument.play();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String song;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSong</span><span class="params">(String song)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.song = song;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getSong</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> song;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">screamSong</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> song;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Instrument instrument;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInstrument</span><span class="params">(Instrument instrument)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.instrument = instrument;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Instrument接口定义如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.springinaction.springidol;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Instrument</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="1-注入简单值"><a href="#1-注入简单值" class="headerlink" title="1 注入简单值"></a>1 注入简单值</h2><p>在spring中可以使用<code>&lt;property&gt;</code>元素配置bean的属性，如下例子展示了kenny bean的配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"kenny"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.Instrumentalist"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"song"</span> <span class="attr">value</span>=<span class="string">"Jingle Bells"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="2-引入其他Bean"><a href="#2-引入其他Bean" class="headerlink" title="2 引入其他Bean"></a>2 引入其他Bean</h2><p>Kenny是一个天才的演奏家，他可以演奏任何乐器，只要这个乐器实现了Instrument接口，定义一个乐器类Saxophone:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.springinaction.springidol;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Saxophone</span> <span class="keyword">implements</span> <span class="title">Instrument</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Saxophone</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"TOOT TOOT TOOT"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在Kenny演奏萨克斯之前，我们现在spring中将它声明为一个bean，如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"saxophone"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.Saxophone"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>声明之后就可以把它赋给Kenny演奏了，我们对Kenny的配置做如下修改：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"kenny"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.Instrumentalist"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"song"</span> <span class="attr">value</span>=<span class="string">"Jingle Bells"</span> /&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"instrument"</span> <span class="attr">ref</span>=<span class="string">"saxophone"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>下面我们可以执行如下代码让Kenny表演：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"spring-idol.xml"</span>);</div><div class="line">Performer performer = (Performer)ctx.getBean(<span class="string">"kenny"</span>);</div><div class="line">performer.perform();</div></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<blockquote>
+<p>Playing Jingle Bells :<br>  TOOT TOOT TOOT</p>
+</blockquote>
+<p><strong>注入内部bean</strong><br>内部bean是定义在其他bean内部的bean，如下配置将萨克斯声明为内部bean：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"kenny"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.Instrumentalist"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"song"</span> <span class="attr">value</span>=<span class="string">"Jingle Bells"</span> /&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"instrument"</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.Saxophone"</span> /&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>内部bean并不仅限于setter注入，我们还可以把内部bean装配到构造方法的入参中，正如下面的duke的新声明所展示的：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"duke"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.PoeticJuggler"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"25"</span> /&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">constructor-arg</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.Sonnet29"</span> /&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>123456</div></pre></td></tr></table></figure>
+<p>内部bean没有ID属性，虽然为内部bean配置一个ID属性完全是合法的，但是却没有必要。内部类最大的缺点：<strong>不能被复用</strong>。内部bean仅适用于一次注入，而且也不能被其他bean应用。使用内部bean会影响Spring XML配置的可读性。</p>
+<h2 id="3-使用spring的命名空间p装配属性"><a href="#3-使用spring的命名空间p装配属性" class="headerlink" title="3 使用spring的命名空间p装配属性"></a>3 使用spring的命名空间p装配属性</h2><p>spring的命名空间p提供了另一种bean属性的装配方式，该方式不需要配置如此多的尖括号。<br>命名空间p的schema URI为<code>http://www.springframework.org/schema/p</code>。如果你想使用命名空间p，主需要在spring的XML配置中增加如下一段声明：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">       <span class="attr">xmlns:p</span>=<span class="string">"http://www.springframework.org/schema/p"</span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></div><div class="line">       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"&gt;</div></pre></td></tr></table></figure>
+<p>使用范例如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"kenny2"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.Instrumentalist"</span></span></div><div class="line">    <span class="attr">p:song</span>=<span class="string">"Jingle Bells"</span></div><div class="line">    <span class="attr">p:instrument-ref</span>=<span class="string">"saxophone"</span> /&gt;123</div></pre></td></tr></table></figure>
+<p><code>-ref</code>后缀作为一个标识来告知spring应该装配一个引用而不是字面值。</p>
+<h2 id="4-装配集合"><a href="#4-装配集合" class="headerlink" title="4 装配集合"></a>4 装配集合</h2><p>当配置集合类型的bean属性时，spring提供了4种类型的集合配置元素。</p>
+<table>
+<thead>
+<tr>
+<th>集合元素</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;list&gt;</code></td>
+<td>装配list类型的值，允许重复</td>
+</tr>
+<tr>
+<td><code>&lt;set&gt;</code></td>
+<td>装配set类型的值，不允许重复</td>
+</tr>
+<tr>
+<td><code>&lt;map&gt;</code></td>
+<td>装配map类型的值，名称和值可以是任意类型</td>
+</tr>
+<tr>
+<td><code>&lt;props&gt;</code></td>
+<td>装配properties类型的值，名称和值必须是String类型</td>
+</tr>
+</tbody>
+</table>
+<p>当属性为任意的java.util.Collection类型时，<code>&lt;list&gt;</code>和<code>&lt;set&gt;</code>几乎可以完全互换。<br><code>&lt;map&gt;</code>和<code>&lt;props&gt;</code>这两个元素分别对应java.util.Map和java.util.Properties。当我们需要由键-值对组成的集合时，这两种配置元素非常有用。</p>
+<p>Hank能够同时演奏多种乐器，由类OneManBand定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">package com.springinaction.springidol;</div><div class="line"></div><div class="line">import java.util.Collection;</div><div class="line"></div><div class="line">public class OneManBand implements Performer &#123;</div><div class="line">    public OneManBand() &#123;&#125;</div><div class="line"></div><div class="line">    public void perform() throws PerformanceException &#123;</div><div class="line">        for (Instrument instrument : instruments) &#123;</div><div class="line">            instrument.play();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private Collection&lt;Instrument&gt; instruments;</div><div class="line"></div><div class="line">    public void setInstruments(Collection&lt;Instrument&gt; instruments) &#123;</div><div class="line">        this.instruments = instruments;</div><div class="line">    &#125;</div><div class="line">&#125;12345678910111213141516171819</div></pre></td></tr></table></figure>
+<p>我们使用list配置元素为Hank赋予表演时所用到的乐器集合：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"hank"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.OneManBand"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"instruments"</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">list</span>&gt;</span></div><div class="line">                     <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"guitar"</span> /&gt;</span></div><div class="line">                     <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"cymbal"</span> /&gt;</span></div><div class="line">                     <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"harmonica"</span> /&gt;</span></div><div class="line">              <span class="tag">&lt;/<span class="name">list</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>list元素包含一个或多个值，这里的ref元素用来定义在spring上下文中的其他bean引用。当然还可以使用其他的spring设置元素作为list的成员，包括<code>&lt;vaue&gt;</code>、<code>&lt;bean&gt;</code>和<code>&lt;null&gt;</code>。实际上，list可以包含另一个list作为其成员，形成多维列表。</p>
+<p><strong>Note</strong>：无论<code>&lt;list&gt;</code>还是<code>&lt;set&gt;</code>，都可以用来装配类型为java.util.Collection的任意实现或者数组的属性。</p>
+<p><strong>装配Map集合</strong><br>当OneManBand表演时，假设我们还想知道每一个音符是由哪种乐器产生的，OneManBand可以调整如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.springinaction.springidol;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Collection;</div><div class="line"><span class="keyword">import</span> java.util.Map;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OneManBand</span> <span class="keyword">implements</span> <span class="title">Performer</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">OneManBand</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">perform</span><span class="params">()</span> <span class="keyword">throws</span> PerformanceException </span>&#123;</div><div class="line">        <span class="keyword">for</span> (String key : instruments.keySet()) &#123;</div><div class="line">            System.out.println(key + <span class="string">":"</span>);</div><div class="line">            Instrument instrument = instruments.get(key);</div><div class="line">            instrument.play();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Map&lt;String, Instrument&gt; instruments;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setInstruments</span><span class="params">(Map&lt;String, Instrument&gt; instruments)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.instruments = instruments;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用map元素配置instruments属性，如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"hank"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.OneManBand"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"instruments"</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">map</span>&gt;</span></div><div class="line">                     <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"GUITAR"</span> <span class="attr">value-ref</span>=<span class="string">"guitar"</span> /&gt;</span></div><div class="line">                     <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"CYMBAL"</span> <span class="attr">value-ref</span>=<span class="string">"cymbal"</span> /&gt;</span></div><div class="line">                     <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"HARMONICA"</span> <span class="attr">value-ref</span>=<span class="string">"harmonica"</span> /&gt;</span></div><div class="line">              <span class="tag">&lt;/<span class="name">map</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span>123456789</div></pre></td></tr></table></figure>
+<p>map中的entry元素由一个键和一个值组成，键和值可以是简单类型，也可以是其他类型的引用，这些属性将帮助我们指定entry的键和值：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>指定map中entry的键为String</td>
+</tr>
+<tr>
+<td>key-ref</td>
+<td>指定map中entry的键为spring上下文中其他bean的引用</td>
+</tr>
+<tr>
+<td>value</td>
+<td>指定map中entry的值为String</td>
+</tr>
+<tr>
+<td>value-ref</td>
+<td>指定map中entry的值为spring上下文中其他bean的引用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>装配Properties集合</strong><br>一个范例如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"hank"</span> <span class="attr">class</span>=<span class="string">"com.springinaction.springidol.XXX"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"instruments"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">props</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"GUITAR"</span>&gt;</span>STRUM STRUM STRUM<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"CYMBAL"</span>&gt;</span>CRASH CRASH CRASH<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"HARMONICA"</span>&gt;</span>HUM HUM HUM<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">props</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>Note</strong>：术语比较</p>
+<ul>
+<li><code>&lt;property&gt;</code>元素用于把值或bean引用注入到bean的属性中</li>
+<li><code>&lt;props&gt;</code>元素用于定义一个java.util.Properties类型的集合值</li>
+<li><code>&lt;prop&gt;</code>元素用于定义<code>&lt;props&gt;</code>集合的一个成员。</li>
+</ul>
+<h2 id="5-装配空值"><a href="#5-装配空值" class="headerlink" title="5 装配空值"></a>5 装配空值</h2><p>通常情况下bean属性的最初值都是null，直到你为它赋值，但是有些bean会为它的属性默认设置一个非空值。如果因为某些特殊原因，必须把属性设置为空值，则可以显式地为该属性装配一个null值。<br>为属性设置null值，只需使用<code>&lt;null/&gt;</code>元素，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"someNonNullProperty"</span>&gt;</span><span class="tag">&lt;<span class="name">null</span>/&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>显式地为属性装配null值的另一个理由是覆盖自动装配的值。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java框架/" rel="tag"># Java框架</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/21/Spring中三种注入的方式、/" rel="next" title="Spring中三种依赖注入的方式">
+                <i class="fa fa-chevron-left"></i> Spring中三种依赖注入的方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/21/Spring中AOP编程详解/" rel="prev" title="Spring中AOP编程详解">
+                Spring中AOP编程详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="彦鹏" />
+          <p class="site-author-name" itemprop="name">彦鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">每天进步一点点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-注入简单值"><span class="nav-number">1.</span> <span class="nav-text">1 注入简单值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-引入其他Bean"><span class="nav-number">2.</span> <span class="nav-text">2 引入其他Bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用spring的命名空间p装配属性"><span class="nav-number">3.</span> <span class="nav-text">3 使用spring的命名空间p装配属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-装配集合"><span class="nav-number">4.</span> <span class="nav-text">4 装配集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-装配空值"><span class="nav-number">5.</span> <span class="nav-text">5 装配空值</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">彦鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("haf2k8DGCn9V9IdwRUfFd1m2-gzGzoHsz", "eeRJlUBaMcwABRrULhYN4f3S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
