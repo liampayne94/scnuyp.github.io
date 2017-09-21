@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="Java框架," />
 
 
 
@@ -89,22 +89,30 @@
 
 
 
-<meta name="description" content="总括我们在Java中比较两个字符串对象是否相等的时候，经常会使用equals()、equalsIgnoreCase（)和==这三种方法，然而他们是有区别的。
-====是最经典的判断方式，它比较的是两个对象的值，即对象的内存地址，例如：
-123String s1 = new String(&quot;abc&quot;); String s2 = new String(&quot;abc&quot;); System.out.printl">
+<meta name="description" content="SpringMVC的处理流程 
+（1），客户端通过http协议将请求提交到DispatcherServlet当中
+（2），由DispatcherServlet控制器查询一个或者多个HandlerMapping，直到找到对应的控制器
+（3），DispatcherServlet把请求发送到控制器（Controller）
+（4）（5），Controller调用完业务逻辑之后，返回ModelAndView">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java中几种相等的比较">
-<meta property="og:url" content="https://scnuyp.github.io/2017/05/23/Java中几种相等的比较/index.html">
+<meta property="og:title" content="SpringMVC流程理解">
+<meta property="og:url" content="https://scnuyp.github.io/2017/09/22/SpringMVC流程理解/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="总括我们在Java中比较两个字符串对象是否相等的时候，经常会使用equals()、equalsIgnoreCase（)和==这三种方法，然而他们是有区别的。
-====是最经典的判断方式，它比较的是两个对象的值，即对象的内存地址，例如：
-123String s1 = new String(&quot;abc&quot;); String s2 = new String(&quot;abc&quot;); System.out.printl">
-<meta property="og:updated_time" content="2017-05-23T06:45:45.385Z">
+<meta property="og:description" content="SpringMVC的处理流程 
+（1），客户端通过http协议将请求提交到DispatcherServlet当中
+（2），由DispatcherServlet控制器查询一个或者多个HandlerMapping，直到找到对应的控制器
+（3），DispatcherServlet把请求发送到控制器（Controller）
+（4）（5），Controller调用完业务逻辑之后，返回ModelAndView">
+<meta property="og:image" content="http://img.blog.csdn.net/20160427094830780">
+<meta property="og:updated_time" content="2017-09-21T16:20:37.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java中几种相等的比较">
-<meta name="twitter:description" content="总括我们在Java中比较两个字符串对象是否相等的时候，经常会使用equals()、equalsIgnoreCase（)和==这三种方法，然而他们是有区别的。
-====是最经典的判断方式，它比较的是两个对象的值，即对象的内存地址，例如：
-123String s1 = new String(&quot;abc&quot;); String s2 = new String(&quot;abc&quot;); System.out.printl">
+<meta name="twitter:title" content="SpringMVC流程理解">
+<meta name="twitter:description" content="SpringMVC的处理流程 
+（1），客户端通过http协议将请求提交到DispatcherServlet当中
+（2），由DispatcherServlet控制器查询一个或者多个HandlerMapping，直到找到对应的控制器
+（3），DispatcherServlet把请求发送到控制器（Controller）
+（4）（5），Controller调用完业务逻辑之后，返回ModelAndView">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160427094830780">
 
 
 
@@ -132,13 +140,13 @@
 
 
 
-  <link rel="canonical" href="https://scnuyp.github.io/2017/05/23/Java中几种相等的比较/"/>
+  <link rel="canonical" href="https://scnuyp.github.io/2017/09/22/SpringMVC流程理解/"/>
 
 
 
 
 
-  <title> Java中几种相等的比较 | 彦鹏的个人博客 </title>
+  <title> SpringMVC流程理解 | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -257,7 +265,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/05/23/Java中几种相等的比较/">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/09/22/SpringMVC流程理解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="彦鹏">
@@ -278,7 +286,7 @@
             
             
               
-                Java中几种相等的比较
+                SpringMVC流程理解
               
             
           </h1>
@@ -293,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-23T10:25:39+08:00">
-                2017-05-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-22T00:19:34+08:00">
+                2017-09-22
               </time>
             
 
@@ -311,7 +319,7 @@
 
           
           
-             <span id="/2017/05/23/Java中几种相等的比较/" class="leancloud_visitors" data-flag-title="Java中几种相等的比较">
+             <span id="/2017/09/22/SpringMVC流程理解/" class="leancloud_visitors" data-flag-title="SpringMVC流程理解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -340,20 +348,23 @@
       
 
       
-        <h3 id="总括"><a href="#总括" class="headerlink" title="总括"></a>总括</h3><p>我们在Java中比较两个字符串对象是否相等的时候，经常会使用equals()、equalsIgnoreCase（)和==这三种方法，然而他们是有区别的。</p>
-<h3 id=""><a href="#" class="headerlink" title="=="></a>==</h3><p>==是最经典的判断方式，它比较的是两个对象的值，即对象的内存地址，例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>); </div><div class="line">String s2 = <span class="keyword">new</span> String(<span class="string">"abc"</span>); </div><div class="line">System.out.println(s1 == s2);</div></pre></td></tr></table></figure>
-<p>这两个字符串字符是相同的，但是内存地址不同，用==判断输出结果是：false；</p>
-<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><p>equals是Object的方法，在用于字符串的时候，用来判断两个对象的内容是否相等</p>
-<h3 id="equalsIgnoreCase"><a href="#equalsIgnoreCase" class="headerlink" title="equalsIgnoreCase()"></a>equalsIgnoreCase()</h3><p>equalsIgnoreCase（)是String的方法，用来判断两个字符串对象是否相同</p>
-<p>请看下面的例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>); </div><div class="line">String s2 = <span class="keyword">new</span> String(<span class="string">"ABC"</span>); </div><div class="line">System.out.println(s1.equals(s2)); </div><div class="line">System.out.println(s1.equalsIgnoreCase(s2));</div></pre></td></tr></table></figure>
-<p>结果是false，true，因为equalsIgnoreCase()对大小写不敏感</p>
-<h3 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h3><p>如果上面的例子改成：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">String s1 = <span class="string">"abc"</span>;</div><div class="line">String s2 = <span class="string">"abc"</span>; </div><div class="line">System.out.println(s1 == s2);</div></pre></td></tr></table></figure>
-<p>结果是true。因为直接用=来赋值，如果变量池中有相同值的字符串，则会直接将这个变量的地址赋给新的变量</p>
-<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>通过把字符串常量放在比较函数equals()比较项的左侧来防止偶然的 NullPointerException 从来都不是一个坏主意</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Bad</span></div><div class="line"><span class="keyword">if</span> (variable.equals(<span class="string">"literal"</span>)) &#123; ... &#125;</div><div class="line"> </div><div class="line"><span class="comment">// Good</span></div><div class="line"><span class="keyword">if</span> (<span class="string">"literal"</span>.equals(variable)) &#123; ... &#125;</div></pre></td></tr></table></figure>
+        <h4 id="SpringMVC的处理流程"><a href="#SpringMVC的处理流程" class="headerlink" title="SpringMVC的处理流程"></a>SpringMVC的处理流程</h4><p> <img src="http://img.blog.csdn.net/20160427094830780" alt="这里写图片描述"></p>
+<p>（1），客户端通过http协议将<strong>请求提交</strong>到DispatcherServlet当中</p>
+<p>（2），由DispatcherServlet控制器<strong>查询</strong>一个或者多个HandlerMapping，直到找到对应的控制器</p>
+<p>（3），DispatcherServlet把请求发送到控制器（Controller）</p>
+<p>（4）（5），Controller调用完业务逻辑之后，返回ModelAndView</p>
+<p>（6）（7），DispatcherServlet查询一个或者多个（视图解析器）ViewResoler，找到ModelAndView对应的视图</p>
+<p>（9）视图将结果返回到客户端</p>
+<h4 id="接口解析"><a href="#接口解析" class="headerlink" title="接口解析"></a>接口解析</h4><p><strong>（1）DispatcherServlet接口</strong>： </p>
+<p>Spring提供的前端控制器，所有的请求都有经过它来统一分发。在DispatcherServlet将请求分发给Spring Controller之前，需要借助于Spring提供的HandlerMapping定位到具体的Controller。 </p>
+<p><strong>（2）HandlerMapping接口</strong>： </p>
+<p>能够完成客户请求到Controller映射。 </p>
+<p><strong>（3）Controller接口</strong>： </p>
+<p>需要为并发用户处理上述请求，因此实现Controller接口时，必须保证线程安全并且可重用。 </p>
+<p>Controller将处理用户请求，这和Struts<br>Action扮演的角色是一致的。一旦Controller处理完用户请求，则返回ModelAndView对象给DispatcherServlet前<br>端控制器，ModelAndView中包含了模型（Model）和视图（View）。 </p>
+<p>从宏观角度考虑，DispatcherServlet是整个Web应用的控制器；从微观考虑，Controller是单个Http请求处理过程中的控制器，而ModelAndView是Http请求过程中返回的模型（Model）和视图（View）。 </p>
+<p><strong>（4）ViewResolver接口</strong>： </p>
+<p>Spring提供的视图解析器（ViewResolver）在Web应用中查找View对象，从而将相应结果渲染给客户。</p>
 
       
     </div>
@@ -383,7 +394,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/Java框架/" rel="tag"># Java框架</a>
           
         </div>
       
@@ -396,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/23/静态块/" rel="next" title="静态块">
-                <i class="fa fa-chevron-left"></i> 静态块
+              <a href="/2017/09/21/Hadoop-Spark面试常见问题/" rel="next" title="Hadoop/Spark面试常见问题">
+                <i class="fa fa-chevron-left"></i> Hadoop/Spark面试常见问题
               </a>
             
           </div>
@@ -405,10 +416,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/23/POJO和JavaBean的区别/" rel="prev" title="POJO和JavaBean的区别">
-                POJO和JavaBean的区别 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -528,7 +535,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#总括"><span class="nav-number">1.</span> <span class="nav-text">总括</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">==</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equals"><span class="nav-number">3.</span> <span class="nav-text">equals()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equalsIgnoreCase"><span class="nav-number">4.</span> <span class="nav-text">equalsIgnoreCase()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延伸"><span class="nav-number">5.</span> <span class="nav-text">延伸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际应用"><span class="nav-number">6.</span> <span class="nav-text">实际应用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringMVC的处理流程"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC的处理流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口解析"><span class="nav-number">2.</span> <span class="nav-text">接口解析</span></a></li></ol></div>
             
 
           </div>
