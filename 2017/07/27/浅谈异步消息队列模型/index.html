@@ -89,16 +89,73 @@
 
 
 
-<meta name="description" content="每天进步一点点">
+<meta name="description" content="教你如何征服面试官系列—–安卓消息处理机制既然我们要讲消息处理了，就必要知道与消息处理相关的类
+Looper
+
+  ​
+
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程：所谓Looper线程就是循环工作的线程
+
+
+Handler
+
+  ​
+
+handler扮演了往MQ上添加消息和处理消息的角色（只处理由自己发出的消息）
+
+
+Message
+
+  ​
+
+messa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈异步消息队列模型">
 <meta property="og:url" content="https://scnuyp.github.io/2017/07/27/浅谈异步消息队列模型/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="每天进步一点点">
-<meta property="og:updated_time" content="2017-07-27T07:06:21.467Z">
+<meta property="og:description" content="教你如何征服面试官系列—–安卓消息处理机制既然我们要讲消息处理了，就必要知道与消息处理相关的类
+Looper
+
+  ​
+
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程：所谓Looper线程就是循环工作的线程
+
+
+Handler
+
+  ​
+
+handler扮演了往MQ上添加消息和处理消息的角色（只处理由自己发出的消息）
+
+
+Message
+
+  ​
+
+messa">
+<meta property="og:updated_time" content="2017-09-22T06:55:40.702Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈异步消息队列模型">
-<meta name="twitter:description" content="每天进步一点点">
+<meta name="twitter:description" content="教你如何征服面试官系列—–安卓消息处理机制既然我们要讲消息处理了，就必要知道与消息处理相关的类
+Looper
+
+  ​
+
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程：所谓Looper线程就是循环工作的线程
+
+
+Handler
+
+  ​
+
+handler扮演了往MQ上添加消息和处理消息的角色（只处理由自己发出的消息）
+
+
+Message
+
+  ​
+
+messa">
 
 
 
@@ -334,7 +391,126 @@
       
 
       
-        
+        <h1 id="教你如何征服面试官系列—–安卓消息处理机制"><a href="#教你如何征服面试官系列—–安卓消息处理机制" class="headerlink" title="教你如何征服面试官系列—–安卓消息处理机制"></a>教你如何征服面试官系列—–安卓消息处理机制</h1><h2 id="既然我们要讲消息处理了，就必要知道与消息处理相关的类"><a href="#既然我们要讲消息处理了，就必要知道与消息处理相关的类" class="headerlink" title="既然我们要讲消息处理了，就必要知道与消息处理相关的类"></a>既然我们要讲消息处理了，就必要知道与消息处理相关的类</h2><ul>
+<li>Looper</li>
+</ul>
+<p>  ​</p>
+<ul>
+<li>Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程：所谓Looper线程就是循环工作的线程</li>
+</ul>
+<ul>
+<li>Handler</li>
+</ul>
+<p>  ​</p>
+<ul>
+<li>handler扮演了往MQ上添加消息和处理消息的角色（只处理由自己发出的消息）</li>
+</ul>
+<ul>
+<li>Message</li>
+</ul>
+<p>  ​</p>
+<ul>
+<li>message又叫task，封装了任务携带的信息和处理该任务的handler</li>
+</ul>
+<h2 id="按照思路一点点来-常规的步骤如下"><a href="#按照思路一点点来-常规的步骤如下" class="headerlink" title="按照思路一点点来 常规的步骤如下"></a>按照思路一点点来 常规的步骤如下</h2><p>1.创建一个Handler对象: new Handler();</p>
+<p>2.发消息 sendMessage();</p>
+<p>3.处理消息 handleMessage();</p>
+<p>当面试官问我们的时候，我们肯定不能按照上面这样说啊，起码说一下原理吧？</p>
+<h2 id="深入解析第一步：创建Handler的时候我们做了什么？"><a href="#深入解析第一步：创建Handler的时候我们做了什么？" class="headerlink" title="深入解析第一步：创建Handler的时候我们做了什么？"></a>深入解析第一步：创建Handler的时候我们做了什么？</h2><p>这个时候 我们应该看一下源码了;</p>
+<blockquote>
+<p>在Handler的构造方法中我们发现了如下有价值的代码：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mLooper = Looper.myLooper();//关联当前线程的looper </div><div class="line">if (mLooper == null) &#123;</div><div class="line">        throw new RuntimeException(</div><div class="line">            &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);</div><div class="line">    &#125;</div><div class="line"> mQueue = mLooper.mQueue;//直接在当前线程关联的looper上插入消息</div><div class="line"> mCallback = null;  //让mCallback为空</div></pre></td></tr></table></figure>
+<p>通过构造方法呢，我们可以发现：</p>
+<p>a:mLooper不能为空，否则会抛异常</p>
+<p>b:非常重要的一点！直接把关联looper的MQ作为自己的MQ，因此它的消息将发送到关联looper的MQ上</p>
+<p>c:Looper.myLooper();这个可能是不太懂的东西，所以需要研究一下，我为大家讲一下</p>
+<h2 id="深入解析第二步：Looper作为一个循环者，是怎样实现整体步骤的？"><a href="#深入解析第二步：Looper作为一个循环者，是怎样实现整体步骤的？" class="headerlink" title="深入解析第二步：Looper作为一个循环者，是怎样实现整体步骤的？"></a>深入解析第二步：Looper作为一个循环者，是怎样实现整体步骤的？</h2><p>好吧，继续翻源代码</p>
+<blockquote>
+<p>我们就找到了Loop.myLooper()这个方法，那么发现：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final Looper myLooper() &#123;</div><div class="line">    //在任意线程调用Looper.myLooper()返回的都是那个线程的looper</div><div class="line">    return (Looper)sThreadLocal.get();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是不是发现ThreadLocal又不知道是啥了？解释一下啊：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//其实就是一个成员变量，可以理解为每一个线程中的Looper对象就是一个ThreadLocal</div><div class="line">private static final ThreadLocal sThreadLocal = new ThreadLocal();</div></pre></td></tr></table></figure>
+<p>那我们继续，发现有以下方法：prepare();prepareMainLooper();loop(); private Looper();<br>这里边翻源码边给大家说明一下。</p>
+<p>我们在这个过程中发现了构造方法是私有的private Looper();那么我怎么创建这个Looper对象呢？</p>
+<ul>
+<li><p>构造方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">private Looper() &#123;</div><div class="line">//每创建一个Looper都会创建一个消息队列以及它所属的线程</div><div class="line">    mQueue = new MessageQueue();</div><div class="line">    mRun = true;</div><div class="line">    mThread = Thread.currentThread();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每一个Looper都有一个消息队列</p>
+</li>
+<li><p>prepare()方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public static final void prepare() &#123;</div><div class="line">  //ThreadLocal只能有一个</div><div class="line">    if (sThreadLocal.get() != null) &#123;</div><div class="line">      //如果试图创建的话，就会抛出异常</div><div class="line">        throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);</div><div class="line">    &#125;</div><div class="line">    //将looper创建出对象，然后定义为ThreadLocal</div><div class="line">    sThreadLocal.set(new Looper());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们在prepare()里面找到了我们想要的答案，并且发现了，一个Thread只能有一个Looper对象</p>
+</li>
+<li><p>loop()方法: 抽取有用的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public static final void loop() &#123;</div><div class="line">   Looper me = myLooper(); //得到当前线程的loop</div><div class="line">   MessageQueue queue = me.mQueue;//得到当前loop的MQ</div><div class="line">   .......</div><div class="line">   while (true) &#123;</div><div class="line">       Message msg = queue.next(); // 从消息队列中取出msg</div><div class="line">         //将真正的处理工作交给handler</div><div class="line">       msg.target.dispatchMessage(msg);</div><div class="line">         //回收</div><div class="line">       msg.recycle();</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>这个loop()被调用以后，looper线程就真正的开始工作了，不断取出消息，将这些消息通过dispatchMessage(msg)方法交给handler；在这里你可能会说，没有发现handler啊，怎么交给它的？那我们就去找找Message和Handler这两个类吧！</p>
+<ul>
+<li><p>message类中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public void setTarget(Handler target) &#123;</div><div class="line">    this.target = target;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Handler类中 还是抽取有用的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public void dispatchMessage(Message msg) &#123;</div><div class="line">........</div><div class="line">   //如果没有callback接口  调用handlemessage方法</div><div class="line">    handleMessage(msg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以到这儿应该理解了，底层调用了 handleMessage()方法，让我们具体实现;</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第三步：对Looper做一个总结"><a href="#第三步：对Looper做一个总结" class="headerlink" title="第三步：对Looper做一个总结"></a>第三步：对Looper做一个总结</h2><ul>
+<li>我们已经看完了Looper的源码，发现这个循环者（消息泵），工作原理是这样的</li>
+</ul>
+<p>  ​</p>
+<ul>
+<li>prepare()方法将looper创建出对象，然后定义为sThreadLocal，以及一个MessageQueue</li>
+<li>Looper对象通过MessageQueue按照时间顺序来存放消息和事件</li>
+<li>queue.next(); 取出消息 → msg.target.dispatchMessage(msg);提交给Handler。</li>
+<li>画个图来理解一下</li>
+</ul>
+<h2 id="深入解析第四步：谁给消息队列发消息呢？"><a href="#深入解析第四步：谁给消息队列发消息呢？" class="headerlink" title="深入解析第四步：谁给消息队列发消息呢？"></a>深入解析第四步：谁给消息队列发消息呢？</h2><p>前面已经提到过了啊，没错!就是Handler：添加消息和处理消息的角色（只处理由自己发出的消息），默认的构造方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public Handler() &#123;</div><div class="line">.....</div><div class="line">    //默认关联当前线程的looper</div><div class="line">    mLooper = Looper.myLooper();</div><div class="line">    if (mLooper == null) &#123;</div><div class="line">        throw new RuntimeException(</div><div class="line">            &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);</div><div class="line">    &#125;</div><div class="line">    //直接在当前线程关联的looper上插入消息</div><div class="line">    mQueue = mLooper.mQueue;</div><div class="line">    //让Callback为空</div><div class="line">    mCallback = null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以！！！一个线程可以有多个Handler，但是只能有一个Looper！ 画图理解</p>
+<blockquote>
+<p>好吧！那我们来具体的分析一下如何发消息</p>
+</blockquote>
+<ul>
+<li><p>第一类：sendMessage(Message)类</p>
+<ul>
+<li>有4种直接发送Message对象的方法，稍微带大家看一下</li>
+</ul>
+</li>
+<li><p>第二类：post(Runnable); </p>
+<ul>
+<li>有3中通过Runnable对象转换成Message对象，间接发消息的方法，以post为例，走一下源码</li>
+<li>post(Runnable r)→getPostMessage(r)→interface Callback→handleMessage</li>
+<li>上个项目的RollViewPager里面 </li>
+</ul>
+<p>​</p>
+<blockquote>
+<p>其实以上两类是一种方式：Handler发消息的方式</p>
+</blockquote>
+</li>
+</ul>
+<p>第三类：runOnUiThread</p>
+<ul>
+<li><p>咦？发现在Handler中没有，原来他在Activity中！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public final void runOnUiThread(Runnable action) &#123;</div><div class="line">    //如果不是UI线程就post出去</div><div class="line">    if (Thread.currentThread() != mUiThread) &#123;</div><div class="line">        mHandler.post(action);</div><div class="line">    &#125; else &#123;</div><div class="line">        //如果是UI线程就直接run</div><div class="line">        action.run();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>特殊的更新UI的方式：View.post()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public boolean post(Runnable action) &#123;</div><div class="line">    Handler handler;</div><div class="line">    if (mAttachInfo != null) &#123;</div><div class="line">        handler = mAttachInfo.mHandler;</div><div class="line">    &#125; else &#123;</div><div class="line">        // Assume that post will succeed later</div><div class="line">        ViewRoot.getRunQueue().post(action);</div><div class="line">        return true;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return handler.post(action);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="深入解析第五步：对Handler做一个总结"><a href="#深入解析第五步：对Handler做一个总结" class="headerlink" title="深入解析第五步：对Handler做一个总结"></a>深入解析第五步：对Handler做一个总结</h2><ul>
+<li>handler创建时会关联一个looper，默认的构造方法将关联当前线程的looper；</li>
+<li>通知MQ它要执行一个任务(sendMessage)，并在loop到自己的时候执行该任务(handleMessage)，</li>
+<li>整个过程是异步的。</li>
+<li>画出整个流程图</li>
+</ul>
+<h2 id="深入解析第六步：Message的一些细节"><a href="#深入解析第六步：Message的一些细节" class="headerlink" title="深入解析第六步：Message的一些细节"></a>深入解析第六步：Message的一些细节</h2><ul>
+<li>消息类（Message）被存放在MessageQueue中，一个MessageQueue中可以包含多个Message对象</li>
+<li>不要用构造方法而是用Message.obtain()，消息池，复用，提高性能</li>
+<li>message只需要携带简单的int信息，请优先使用Message.arg1和 Message.arg2来传递信息，这比用Bundle更省内存</li>
+</ul>
+<h2 id="来了解一下AsyncTask，封装好的异步处理任务的工具"><a href="#来了解一下AsyncTask，封装好的异步处理任务的工具" class="headerlink" title="来了解一下AsyncTask，封装好的异步处理任务的工具"></a>来了解一下AsyncTask，封装好的异步处理任务的工具</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">1、是一个抽象类，如果想使用它，酒席须创建一个子类去继承它，继承时指定三个泛型参数</div><div class="line">    Params  执行AsyncTask时需要传入的参数，可用在后台任务中使用 指定为void(不需要)</div><div class="line">    Progress    如果需要在界面上显示当前的君度 指定为Integer(整型)</div><div class="line">    Result  如果需要对结果进行返回 指定为Boolean(布尔型返回结果)</div><div class="line"></div><div class="line">2、四个方法</div><div class="line">onPreExecute()  开始之前的初始化，薄如显示一个对话框</div><div class="line">doInBackground(Params。。。)   处理所有的耗时任务 可以执行publicProgress(Progress..方法)</div><div class="line">onProgressUpdate(Progress..)    更新UI操作</div><div class="line"></div><div class="line">3、不要忘了 .execute();启动这个任务</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -429,8 +605,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -483,6 +668,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#教你如何征服面试官系列—–安卓消息处理机制"><span class="nav-number">1.</span> <span class="nav-text">教你如何征服面试官系列—–安卓消息处理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#既然我们要讲消息处理了，就必要知道与消息处理相关的类"><span class="nav-number">1.1.</span> <span class="nav-text">既然我们要讲消息处理了，就必要知道与消息处理相关的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按照思路一点点来-常规的步骤如下"><span class="nav-number">1.2.</span> <span class="nav-text">按照思路一点点来 常规的步骤如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入解析第一步：创建Handler的时候我们做了什么？"><span class="nav-number">1.3.</span> <span class="nav-text">深入解析第一步：创建Handler的时候我们做了什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入解析第二步：Looper作为一个循环者，是怎样实现整体步骤的？"><span class="nav-number">1.4.</span> <span class="nav-text">深入解析第二步：Looper作为一个循环者，是怎样实现整体步骤的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三步：对Looper做一个总结"><span class="nav-number">1.5.</span> <span class="nav-text">第三步：对Looper做一个总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入解析第四步：谁给消息队列发消息呢？"><span class="nav-number">1.6.</span> <span class="nav-text">深入解析第四步：谁给消息队列发消息呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入解析第五步：对Handler做一个总结"><span class="nav-number">1.7.</span> <span class="nav-text">深入解析第五步：对Handler做一个总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深入解析第六步：Message的一些细节"><span class="nav-number">1.8.</span> <span class="nav-text">深入解析第六步：Message的一些细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#来了解一下AsyncTask，封装好的异步处理任务的工具"><span class="nav-number">1.9.</span> <span class="nav-text">来了解一下AsyncTask，封装好的异步处理任务的工具</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
