@@ -89,16 +89,40 @@
 
 
 
-<meta name="description" content="左神说过，所有能用暴力递归解决的题目都是可以用动态规划来解决的，动态规划其实理解起来还是挺难的，我们结合一下具体的题目来进行分析吧">
+<meta name="description" content="左神说过，所有能用暴力递归解决的题目都是可以用动态规划来解决的，动态规划其实理解起来还是挺难的，我们结合一下具体的题目来进行分析吧
+题目有一排正数，玩家A和玩家B都可以看到。
+每位玩家在拿走数字的时候，都只能从最左和最右的数中选择一个。
+玩家A先拿，玩家B再拿，两人交替拿走所有的数字，
+两人都力争自己拿到的数的总和比对方多。请返回最后获胜者的分数。
+例如：
+5,2,3,4
+玩家A先拿，当前他只能拿">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从暴力递归到动态规划">
 <meta property="og:url" content="https://scnuyp.github.io/2017/08/11/从暴力递归到动态规划/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="左神说过，所有能用暴力递归解决的题目都是可以用动态规划来解决的，动态规划其实理解起来还是挺难的，我们结合一下具体的题目来进行分析吧">
-<meta property="og:updated_time" content="2017-08-11T16:01:46.011Z">
+<meta property="og:description" content="左神说过，所有能用暴力递归解决的题目都是可以用动态规划来解决的，动态规划其实理解起来还是挺难的，我们结合一下具体的题目来进行分析吧
+题目有一排正数，玩家A和玩家B都可以看到。
+每位玩家在拿走数字的时候，都只能从最左和最右的数中选择一个。
+玩家A先拿，玩家B再拿，两人交替拿走所有的数字，
+两人都力争自己拿到的数的总和比对方多。请返回最后获胜者的分数。
+例如：
+5,2,3,4
+玩家A先拿，当前他只能拿">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170928102724.png">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170928103103.png">
+<meta property="og:updated_time" content="2017-09-28T03:19:37.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从暴力递归到动态规划">
-<meta name="twitter:description" content="左神说过，所有能用暴力递归解决的题目都是可以用动态规划来解决的，动态规划其实理解起来还是挺难的，我们结合一下具体的题目来进行分析吧">
+<meta name="twitter:description" content="左神说过，所有能用暴力递归解决的题目都是可以用动态规划来解决的，动态规划其实理解起来还是挺难的，我们结合一下具体的题目来进行分析吧
+题目有一排正数，玩家A和玩家B都可以看到。
+每位玩家在拿走数字的时候，都只能从最左和最右的数中选择一个。
+玩家A先拿，玩家B再拿，两人交替拿走所有的数字，
+两人都力争自己拿到的数的总和比对方多。请返回最后获胜者的分数。
+例如：
+5,2,3,4
+玩家A先拿，当前他只能拿">
+<meta name="twitter:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170928102724.png">
 
 
 
@@ -335,6 +359,23 @@
 
       
         <p>左神说过，所有能用暴力递归解决的题目都是可以用动态规划来解决的，动态规划其实理解起来还是挺难的，我们结合一下具体的题目来进行分析吧</p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>有一排正数，玩家A和玩家B都可以看到。</p>
+<p>每位玩家在拿走数字的时候，都只能从最左和最右的数中选择一个。</p>
+<p>玩家A先拿，玩家B再拿，两人交替拿走所有的数字，</p>
+<p>两人都力争自己拿到的数的总和比对方多。请返回最后获胜者的分数。</p>
+<p>例如：</p>
+<p>5,2,3,4</p>
+<p>玩家A先拿，当前他只能拿走5或者4。</p>
+<p>如果玩家A拿走5，那么剩下2，3，4。轮到玩家B，此时玩家B可以选择2或4中的一个，…</p>
+<p>如果玩家A拿走4，那么剩下5，2，3。轮到玩家B，此时玩家B可以选择5或3中的一个，…</p>
+<h3 id="解法1——暴力递归"><a href="#解法1——暴力递归" class="headerlink" title="解法1——暴力递归"></a>解法1——暴力递归</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">win1</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length == <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> Math.max(f(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>), s(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>));</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;   <span class="comment">//先手</span></div><div class="line">		<span class="keyword">if</span> (i == j) &#123;</div><div class="line">			<span class="keyword">return</span> arr[i];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> Math.max(arr[i] + s(arr, i + <span class="number">1</span>, j), arr[j] + s(arr, i, j - <span class="number">1</span>));</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">s</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;   <span class="comment">//后手</span></div><div class="line">		<span class="keyword">if</span> (i == j) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> Math.min(f(arr, i + <span class="number">1</span>, j), f(arr, i, j - <span class="number">1</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="解法2——简单的动态规划"><a href="#解法2——简单的动态规划" class="headerlink" title="解法2——简单的动态规划"></a>解法2——简单的动态规划</h3><p>如图所示，构建一张二维表，表的对角线上面填的是题目给出的那些数</p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170928102724.png" alt="img"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">win2</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length == <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span>[][] f = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length][arr.length];</div><div class="line">		<span class="keyword">int</span>[][] s = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length][arr.length];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; arr.length; j++) &#123;</div><div class="line">			f[j][j] = arr[j];</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = j - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</div><div class="line">				f[i][j] = Math.max(arr[i] + s[i + <span class="number">1</span>][j], arr[j] + s[i][j - <span class="number">1</span>]);</div><div class="line">				s[i][j] = Math.min(f[i + <span class="number">1</span>][j], f[i][j - <span class="number">1</span>]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> Math.max(f[<span class="number">0</span>][arr.length - <span class="number">1</span>], s[<span class="number">0</span>][arr.length - <span class="number">1</span>]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中f二维表依赖于s二维表，比如说下表，f 表中？格子依赖于s表上两个x位置的结果。<img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170928103103.png" alt="img"></p>
+<h3 id="解法3——逆向思维法"><a href="#解法3——逆向思维法" class="headerlink" title="解法3——逆向思维法"></a>解法3——逆向思维法</h3><p>依然是使用动态规划，但是我们现在可以换一个思路，只用一张二维表，另一张二维表m通过sum-f求得</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">win3</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length == <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">			sum += arr[i];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> scores = p(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</div><div class="line">		<span class="keyword">return</span> Math.max(sum - scores, scores);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">p</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (i == j) &#123;</div><div class="line">			<span class="keyword">return</span> arr[i];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (i + <span class="number">1</span> == j) &#123;</div><div class="line">			<span class="keyword">return</span> Math.max(arr[i], arr[j]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> Math.max(arr[i] + Math.min(p(arr, i + <span class="number">2</span>, j), p(arr, i + <span class="number">1</span>, j - <span class="number">1</span>)),</div><div class="line">				arr[j] + Math.min(p(arr, i + <span class="number">1</span>, j - <span class="number">1</span>), p(arr, i, j - <span class="number">2</span>)));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="解法4——对解法3的优化"><a href="#解法4——对解法3的优化" class="headerlink" title="解法4——对解法3的优化"></a>解法4——对解法3的优化</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">win4</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length == <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (arr.length == <span class="number">1</span>) &#123;</div><div class="line">			<span class="keyword">return</span> arr[<span class="number">0</span>];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (arr.length == <span class="number">2</span>) &#123;</div><div class="line">			<span class="keyword">return</span> Math.max(arr[<span class="number">0</span>], arr[<span class="number">1</span>]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">			sum += arr[i];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length][arr.length];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length - <span class="number">1</span>; i++) &#123;</div><div class="line">			dp[i][i] = arr[i];</div><div class="line">			dp[i][i + <span class="number">1</span>] = Math.max(arr[i], arr[i + <span class="number">1</span>]);</div><div class="line">		&#125;</div><div class="line">		dp[arr.length - <span class="number">1</span>][arr.length - <span class="number">1</span>] = arr[arr.length - <span class="number">1</span>];</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">2</span>; k &lt; arr.length; k++) &#123;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = k; j &lt; arr.length; j++) &#123;</div><div class="line">				<span class="keyword">int</span> i = j - k;</div><div class="line">				dp[i][j] = Math.max(arr[i] + Math.min(dp[i + <span class="number">2</span>][j], dp[i + <span class="number">1</span>][j - <span class="number">1</span>]),</div><div class="line">						arr[j] + Math.min(dp[i + <span class="number">1</span>][j - <span class="number">1</span>], dp[i][j - <span class="number">2</span>]));</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> Math.max(dp[<span class="number">0</span>][arr.length - <span class="number">1</span>], sum - dp[<span class="number">0</span>][arr.length - <span class="number">1</span>]);</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -436,8 +477,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -452,7 +502,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -465,7 +515,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -490,6 +540,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法1——暴力递归"><span class="nav-number">2.</span> <span class="nav-text">解法1——暴力递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法2——简单的动态规划"><span class="nav-number">3.</span> <span class="nav-text">解法2——简单的动态规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法3——逆向思维法"><span class="nav-number">4.</span> <span class="nav-text">解法3——逆向思维法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法4——对解法3的优化"><span class="nav-number">5.</span> <span class="nav-text">解法4——对解法3的优化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

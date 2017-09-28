@@ -90,33 +90,27 @@
 
 
 <meta name="description" content="今天在牛客看到一篇虎牙的面试，是一位中大的大佬，链接（https://www.nowcoder.com/discuss/42941）
-1、垃圾回收机制，共享变量，线程栈，cas，JVM中的GC会把视为可回收对象的对象进行处理，具体有以下三种可能：
+【JVM垃圾回收/数据库引擎（原理）】1、垃圾回收机制，共享变量，线程栈，cas，JVM中的GC会把视为可回收对象的对象进行处理，具体有以下三种可能：
 1、某个引用指向null或者说已经指向某个应用的引用指向了新的对象
 2、局部引用的对象
-3、只有弱引用与之关联的对象
-而典型的垃圾回收算法包括：
-1、引">
+3、只有弱引用与之关联的对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="秋招面经准备（二）">
 <meta property="og:url" content="https://scnuyp.github.io/2017/09/17/秋招面经准备（二）/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
 <meta property="og:description" content="今天在牛客看到一篇虎牙的面试，是一位中大的大佬，链接（https://www.nowcoder.com/discuss/42941）
-1、垃圾回收机制，共享变量，线程栈，cas，JVM中的GC会把视为可回收对象的对象进行处理，具体有以下三种可能：
+【JVM垃圾回收/数据库引擎（原理）】1、垃圾回收机制，共享变量，线程栈，cas，JVM中的GC会把视为可回收对象的对象进行处理，具体有以下三种可能：
 1、某个引用指向null或者说已经指向某个应用的引用指向了新的对象
 2、局部引用的对象
-3、只有弱引用与之关联的对象
-而典型的垃圾回收算法包括：
-1、引">
-<meta property="og:updated_time" content="2017-09-17T14:27:25.669Z">
+3、只有弱引用与之关联的对">
+<meta property="og:updated_time" content="2017-09-26T03:59:44.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="秋招面经准备（二）">
 <meta name="twitter:description" content="今天在牛客看到一篇虎牙的面试，是一位中大的大佬，链接（https://www.nowcoder.com/discuss/42941）
-1、垃圾回收机制，共享变量，线程栈，cas，JVM中的GC会把视为可回收对象的对象进行处理，具体有以下三种可能：
+【JVM垃圾回收/数据库引擎（原理）】1、垃圾回收机制，共享变量，线程栈，cas，JVM中的GC会把视为可回收对象的对象进行处理，具体有以下三种可能：
 1、某个引用指向null或者说已经指向某个应用的引用指向了新的对象
 2、局部引用的对象
-3、只有弱引用与之关联的对象
-而典型的垃圾回收算法包括：
-1、引">
+3、只有弱引用与之关联的对">
 
 
 
@@ -352,16 +346,16 @@
       
 
       
-        <p>今天在牛客看到一篇虎牙的面试，是一位中大的大佬，链接（<a href="https://www.nowcoder.com/discuss/42941）" target="_blank" rel="external">https://www.nowcoder.com/discuss/42941）</a></p>
-<h4 id="1、垃圾回收机制，共享变量，线程栈，cas，"><a href="#1、垃圾回收机制，共享变量，线程栈，cas，" class="headerlink" title="1、垃圾回收机制，共享变量，线程栈，cas，"></a>1、垃圾回收机制，共享变量，线程栈，cas，</h4><p>JVM中的GC会把视为可回收对象的对象进行处理，具体有以下三种可能：</p>
+        <p>今天在牛客看到一篇<strong>虎牙</strong>的面试，是一位中大的大佬，链接（<a href="https://www.nowcoder.com/discuss/42941）" target="_blank" rel="external">https://www.nowcoder.com/discuss/42941）</a></p>
+<h4 id="【JVM垃圾回收-数据库引擎（原理）】"><a href="#【JVM垃圾回收-数据库引擎（原理）】" class="headerlink" title="【JVM垃圾回收/数据库引擎（原理）】"></a>【JVM垃圾回收/数据库引擎（原理）】</h4><h4 id="1、垃圾回收机制，共享变量，线程栈，cas，"><a href="#1、垃圾回收机制，共享变量，线程栈，cas，" class="headerlink" title="1、垃圾回收机制，共享变量，线程栈，cas，"></a>1、垃圾回收机制，共享变量，线程栈，cas，</h4><p>JVM中的GC会把视为可回收对象的对象进行处理，具体有以下三种可能：</p>
 <p>1、某个引用指向null或者说已经指向某个应用的引用指向了新的对象</p>
 <p>2、局部引用的对象</p>
 <p>3、只有弱引用与之关联的对象</p>
 <p>而典型的垃圾回收算法包括：</p>
-<p>1、引用计数法（堆里面每个对象实例都有一个计数器，然后当对象被创建的时候，计数器设置为1;当有任何其他变量被赋值为这个对象的引用时，技术器+1，当引用超过了其生命周期的时候，计数器-1；直到计数器为0；则可以被视为垃圾了</p>
+<p>①、引用计数法（堆里面每个对象实例都有一个计数器，然后当对象被创建的时候，计数器设置为1;当有任何其他变量被赋值为这个对象的引用时，技术器+1，当引用超过了其生命周期的时候，计数器-1；直到计数器为0；则可以被视为垃圾了</p>
 <p>缺点：无法解决循环引用的问题</p>
-<p>2、Copying（复制）算法</p>
-<p>3、Mark-Sweep（标记-清除）算法</p>
+<p>②、Copying（复制）算法</p>
+<p>③、Mark-Sweep（标记-清除）算法</p>
 <p>线程栈：多线程则为每个线程都分配一个栈，并且这些栈的地址不同，而共享变量存在堆中，为各个线程共享</p>
 <h4 id="Mysql引擎，B-树"><a href="#Mysql引擎，B-树" class="headerlink" title="Mysql引擎，B+树"></a>Mysql引擎，B+树</h4>
       
@@ -489,7 +483,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">77</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -502,7 +496,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -537,7 +531,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、垃圾回收机制，共享变量，线程栈，cas，"><span class="nav-number">1.</span> <span class="nav-text">1、垃圾回收机制，共享变量，线程栈，cas，</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql引擎，B-树"><span class="nav-number">2.</span> <span class="nav-text">Mysql引擎，B+树</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#【JVM垃圾回收-数据库引擎（原理）】"><span class="nav-number">1.</span> <span class="nav-text">【JVM垃圾回收/数据库引擎（原理）】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、垃圾回收机制，共享变量，线程栈，cas，"><span class="nav-number">2.</span> <span class="nav-text">1、垃圾回收机制，共享变量，线程栈，cas，</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql引擎，B-树"><span class="nav-number">3.</span> <span class="nav-text">Mysql引擎，B+树</span></a></li></ol></div>
             
 
           </div>
