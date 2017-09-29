@@ -73,7 +73,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="彦鹏的个人博客" />
+  <meta name="keywords" content="分布式," />
 
 
 
@@ -89,15 +89,21 @@
 
 
 
-<meta name="description" content="每天进步一点点">
-<meta property="og:type" content="website">
-<meta property="og:title" content="彦鹏的个人博客">
-<meta property="og:url" content="https://scnuyp.github.io/tags/Linux/index.html">
+<meta name="description" content="Kafka简介kafka消息队列具有很高的扩展性以及高性能，在卡夫卡中，一个topic可以被视为一类信息。topic可以被分为多个区，其实底层实现是log文件，任何发布到partition的文件都会被直接追加到log文件的尾部。卡夫卡集群不需要维护生产者和消费者的信息，Kafka的目的是通过Hadoop的并行加载机制来统一线上和离线的消息处理，也是为了通过集群来提供实时的消费。
+Kafka技术架构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识Kafka">
+<meta property="og:url" content="https://scnuyp.github.io/2017/09/29/初识Kafka/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="每天进步一点点">
+<meta property="og:description" content="Kafka简介kafka消息队列具有很高的扩展性以及高性能，在卡夫卡中，一个topic可以被视为一类信息。topic可以被分为多个区，其实底层实现是log文件，任何发布到partition的文件都会被直接追加到log文件的尾部。卡夫卡集群不需要维护生产者和消费者的信息，Kafka的目的是通过Hadoop的并行加载机制来统一线上和离线的消息处理，也是为了通过集群来提供实时的消费。
+Kafka技术架构">
+<meta property="og:image" content="http://jbcdn2.b0.upaiyun.com/2014/08/975609a391574a15645c2d2e2494114f.png">
+<meta property="og:updated_time" content="2017-09-29T03:32:21.909Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="彦鹏的个人博客">
-<meta name="twitter:description" content="每天进步一点点">
+<meta name="twitter:title" content="初识Kafka">
+<meta name="twitter:description" content="Kafka简介kafka消息队列具有很高的扩展性以及高性能，在卡夫卡中，一个topic可以被视为一类信息。topic可以被分为多个区，其实底层实现是log文件，任何发布到partition的文件都会被直接追加到log文件的尾部。卡夫卡集群不需要维护生产者和消费者的信息，Kafka的目的是通过Hadoop的并行加载机制来统一线上和离线的消息处理，也是为了通过集群来提供实时的消费。
+Kafka技术架构">
+<meta name="twitter:image" content="http://jbcdn2.b0.upaiyun.com/2014/08/975609a391574a15645c2d2e2494114f.png">
 
 
 
@@ -125,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://scnuyp.github.io/tags/Linux/"/>
+  <link rel="canonical" href="https://scnuyp.github.io/2017/09/29/初识Kafka/"/>
 
 
 
 
 
-  <title> 标签: Linux | 彦鹏的个人博客 </title>
+  <title> 初识Kafka | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -156,7 +162,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -240,74 +246,195 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Linux
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/05/26/Linux文件权限/" itemprop="url">
-              
-                <span itemprop="name">Linux文件权限</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-26T17:49:18+08:00"
-              content="2017-05-26" >
-          05-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/29/Linux基本文件操作命令/" itemprop="url">
-              
-                <span itemprop="name">Linux基本文件操作命令</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-29T23:53:59+08:00"
-              content="2017-03-29" >
-          03-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/09/29/初识Kafka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                初识Kafka
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-29T11:31:40+08:00">
+                2017-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/29/初识Kafka/" class="leancloud_visitors" data-flag-title="初识Kafka">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Kafka简介"><a href="#Kafka简介" class="headerlink" title="Kafka简介"></a>Kafka简介</h3><p>kafka消息队列具有很高的扩展性以及高性能，在卡夫卡中，一个topic可以被视为一类信息。topic可以被分为多个区，其实底层实现是log文件，任何发布到partition的文件都会被直接追加到log文件的尾部。卡夫卡集群不需要维护生产者和消费者的信息，Kafka的目的是通过Hadoop的并行加载机制来统一线上和离线的消息处理，也是为了通过<a href="https://baike.baidu.com/item/%E9%9B%86%E7%BE%A4" target="_blank" rel="external">集群</a>来提供实时的消费。</p>
+<h3 id="Kafka技术架构"><a href="#Kafka技术架构" class="headerlink" title="Kafka技术架构"></a>Kafka技术架构</h3><ul>
+<li><p>Broker</p>
+<p>Kafka集群包含一个或多个服务器，这种服务器被称为broker</p>
+</li>
+<li><p>Topic</p>
+<p>每条发布到Kafka集群的消息都有一个类别，这个类别被称为Topic。（物理上不同Topic的消息分开存储，逻辑上一个Topic的消息虽然保存于一个或多个broker上但用户只需指定消息的Topic即可生产或消费数据而不必关心数据存于何处）</p>
+</li>
+<li><p>Partition</p>
+<p>Parition是物理上的概念，每个Topic包含一个或多个Partition.</p>
+</li>
+<li><p>Producer</p>
+<p>负责发布消息到Kafka broker</p>
+</li>
+<li><p>Consumer</p>
+<p>消息消费者，向Kafka broker读取消息的客户端。</p>
+</li>
+<li><p>Consumer Group</p>
+<p>每个Consumer属于一个特定的Consumer Group（可为每个Consumer指定group name，若不指定group name则属于默认的group）。</p>
+<p><img src="http://jbcdn2.b0.upaiyun.com/2014/08/975609a391574a15645c2d2e2494114f.png" alt="kafka"></p>
+</li>
+</ul>
+<h3 id="Kafka，Mq，Redis作为消息队列使用时的差异？"><a href="#Kafka，Mq，Redis作为消息队列使用时的差异？" class="headerlink" title="Kafka，Mq，Redis作为消息队列使用时的差异？"></a>Kafka，Mq，Redis作为消息队列使用时的差异？</h3><p>不管数据大小，Redis的<strong>出队</strong>性能都表现的非常优秀，而<strong>入队性能</strong>在数据比较大时，慢的无法忍受。</p>
+<p>不管数据大小，RabbitMQ的<strong>入队和出队</strong>性能都保持一个均衡的状态，但总体上，出队性能远低于入队性能。</p>
+<p>而kafka适合于数据量比较大的，吞吐量要求比较大的场景。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/分布式/" rel="tag"># 分布式</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/27/JavaNIO/" rel="next" title="JavaNIO">
+                <i class="fa fa-chevron-left"></i> JavaNIO
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/29/并发量大的场景/" rel="prev" title="并发量大的场景">
+                并发量大的场景 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
           
           </div>
@@ -315,6 +442,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -334,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -388,6 +528,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka简介"><span class="nav-number">1.</span> <span class="nav-text">Kafka简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka技术架构"><span class="nav-number">2.</span> <span class="nav-text">Kafka技术架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kafka，Mq，Redis作为消息队列使用时的差异？"><span class="nav-number">3.</span> <span class="nav-text">Kafka，Mq，Redis作为消息队列使用时的差异？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -498,6 +654,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
