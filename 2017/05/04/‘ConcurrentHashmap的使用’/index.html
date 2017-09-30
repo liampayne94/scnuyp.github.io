@@ -103,7 +103,7 @@ MyService.java(创建一个HashMap)
 12345678package test1;import java.util.HashMap">
 <meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170504150006.png">
 <meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170504150437.png">
-<meta property="og:updated_time" content="2017-08-22T01:55:05.646Z">
+<meta property="og:updated_time" content="2017-09-30T03:16:10.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ConcurrentHashmap的使用">
 <meta name="twitter:description" content="非阻塞队列非阻塞队列的特色就是队列里面没有数据的时候，操作多列会出现异常或者返回null，不具备等待/阻塞的特色，ConcurrentHashMap其中一种，它是支持并发操作的Map。
@@ -361,9 +361,10 @@ MyService.java(创建一个HashMap)
 <h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><p>上面的例子说明HashMap不适合在多线程条件下使用，想要在多线程的环境下使用key-value的数据结构，而HashTable则可以满足，把上述代码稍作修改，Myservice中新建一个HashTable</p>
 <p>可以看到运行结果：<img src="http://ov2c4ir42.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20170504150437.png" alt="微信截图_20170504150437"></p>
 <p>说明，HashTable支持多线程操作</p>
-<h3 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h3><p>仿照上面的例子，也可以得出ConcurrentHashMap支持多线程操作</p>
+<p>### </p>
+<p>仿照上面的例子，也可以得出ConcurrentHashMap支持多线程操作</p>
 <h3 id="ConcurrentHashMap和HashTable之间的差异"><a href="#ConcurrentHashMap和HashTable之间的差异" class="headerlink" title="ConcurrentHashMap和HashTable之间的差异"></a>ConcurrentHashMap和HashTable之间的差异</h3><p>他们之间的主要差异在于HashTable不支持remove()操作，也就是说当HashTable获得Iterator对象，不允许更改其结构否则出现java.util.ConcurrentModification异常</p>
-
+<h3 id="ConcurrentHashMap源码分析"><a href="#ConcurrentHashMap源码分析" class="headerlink" title="ConcurrentHashMap源码分析"></a>ConcurrentHashMap源码分析</h3>
       
     </div>
 
@@ -489,7 +490,7 @@ MyService.java(创建一个HashMap)
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">79</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -537,7 +538,7 @@ MyService.java(创建一个HashMap)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞队列"><span class="nav-number">1.</span> <span class="nav-text">非阻塞队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashmap"><span class="nav-number">2.</span> <span class="nav-text">Hashmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">3.</span> <span class="nav-text">HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">4.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap和HashTable之间的差异"><span class="nav-number">5.</span> <span class="nav-text">ConcurrentHashMap和HashTable之间的差异</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#非阻塞队列"><span class="nav-number">1.</span> <span class="nav-text">非阻塞队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashmap"><span class="nav-number">2.</span> <span class="nav-text">Hashmap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTable"><span class="nav-number">3.</span> <span class="nav-text">HashTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap和HashTable之间的差异"><span class="nav-number">4.</span> <span class="nav-text">ConcurrentHashMap和HashTable之间的差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ConcurrentHashMap源码分析"><span class="nav-number">5.</span> <span class="nav-text">ConcurrentHashMap源码分析</span></a></li></ol></div>
             
 
           </div>

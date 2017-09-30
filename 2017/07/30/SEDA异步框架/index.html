@@ -1,0 +1,815 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="分布式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言​      我在实习期间做过的一个项目是统一能力开放系统 ，它主要包括运营者门户，开发者门户，能力运营三个模块，主动串接产业链中的上下游能力与业务流程。系统采用SEDA异步框架开发，通过Kfaka集群写入日志信息并通过Hadoop统计处理，运用责任链设计模式，运用Redis做分布式缓存，同时以Oracle作为数据持久层开发。
+​    我对这个SEDA异步框架非常感兴趣，于是请教公司里面的资">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SEDA异步框架">
+<meta property="og:url" content="https://scnuyp.github.io/2017/07/30/SEDA异步框架/index.html">
+<meta property="og:site_name" content="彦鹏的个人博客">
+<meta property="og:description" content="前言​      我在实习期间做过的一个项目是统一能力开放系统 ，它主要包括运营者门户，开发者门户，能力运营三个模块，主动串接产业链中的上下游能力与业务流程。系统采用SEDA异步框架开发，通过Kfaka集群写入日志信息并通过Hadoop统计处理，运用责任链设计模式，运用Redis做分布式缓存，同时以Oracle作为数据持久层开发。
+​    我对这个SEDA异步框架非常感兴趣，于是请教公司里面的资">
+<meta property="og:image" content="http://blog.chinaunix.net/attachment/201103/23/22939760_1300886218PsOW.png">
+<meta property="og:image" content="http://blog.chinaunix.net/attachment/201103/23/22939760_1300886551Ir5r.png">
+<meta property="og:image" content="http://blog.chinaunix.net/attachment/201103/23/22939760_1300887035y4z4.png">
+<meta property="og:updated_time" content="2017-09-30T03:44:24.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SEDA异步框架">
+<meta name="twitter:description" content="前言​      我在实习期间做过的一个项目是统一能力开放系统 ，它主要包括运营者门户，开发者门户，能力运营三个模块，主动串接产业链中的上下游能力与业务流程。系统采用SEDA异步框架开发，通过Kfaka集群写入日志信息并通过Hadoop统计处理，运用责任链设计模式，运用Redis做分布式缓存，同时以Oracle作为数据持久层开发。
+​    我对这个SEDA异步框架非常感兴趣，于是请教公司里面的资">
+<meta name="twitter:image" content="http://blog.chinaunix.net/attachment/201103/23/22939760_1300886218PsOW.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://scnuyp.github.io/2017/07/30/SEDA异步框架/"/>
+
+
+
+
+
+  <title> SEDA异步框架 | 彦鹏的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">彦鹏的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">scnuyp</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://scnuyp.github.io/2017/07/30/SEDA异步框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="彦鹏">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="彦鹏的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SEDA异步框架
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-30T11:13:08+08:00">
+                2017-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/07/30/SEDA异步框架/" class="leancloud_visitors" data-flag-title="SEDA异步框架">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​      我在实习期间做过的一个项目是<strong>统一能力开放系统</strong> ，它主要包括运营者门户，开发者门户，能力运营三个模块，主动串接产业链中的上下游能力与业务流程。系统采用SEDA异步框架开发，通过Kfaka集群写入日志信息并通过Hadoop统计处理，运用责任链设计模式，运用Redis做分布式缓存，同时以Oracle作为数据持久层开发。</p>
+<p>​    我对这个SEDA异步框架非常感兴趣，于是请教公司里面的资深开发人士以及在博客上面搜索资料，整理成这一篇博客。</p>
+<h3 id="常见的并发编程框架——Thread-based模型"><a href="#常见的并发编程框架——Thread-based模型" class="headerlink" title="常见的并发编程框架——Thread-based模型"></a>常见的并发编程框架——Thread-based模型</h3><p><img src="http://blog.chinaunix.net/attachment/201103/23/22939760_1300886218PsOW.png" alt="img"></p>
+<pre><code>可以看出，它为每个传过来的请求分配一个线程或者进程去处理，操作系统负责调度这些处理每个请求的Thread, 来保证每个请求可以透明的分享计算机的CPU，I/O等资源
+</code></pre><p>​    这样做的优点在于编程起来简单，可以将处理一个完整请求的代码编写在一个代码路径中，并且据有很好的隔离性，每一个请求的处理都被隔离在一个Thread/Process中。请求请求之间的交换只有通过访问共享数据结构来实现</p>
+<p>​       这样做的缺点在于资源管理粒度太粗，导致可扩展性差。更重要的一点是计多线程(进程)模型是为了共享计算机的资源。随着线程(进程)数的上升，这个模型引起了更高的资源消耗，操作系统在这些线程(进程)之间的频繁切换，内存交换，缺页更加频繁，锁竞争更加激烈等，将急剧降低系统的性能，急剧降低系统的吞吐量和增加每个请求的响应时间。</p>
+<h3 id="Event-driven-concurrency模型"><a href="#Event-driven-concurrency模型" class="headerlink" title="Event-driven concurrency模型"></a>Event-driven concurrency模型</h3><p>​    在这种模型中，针对了Thread-based模型的缺点进行改进。服务器由一组线程/进程（一般是 one per CPU）循环处理各种来自队列的事件(Event)。OS，应用都可以产生这些事件，表示某些操作需要执行，如：network或 disk I/O 准备就绪，或者完成通知，定时器，或者应用层的自定义事件。</p>
+<p><img src="http://blog.chinaunix.net/attachment/201103/23/22939760_1300886551Ir5r.png" alt="img"></p>
+<p>​    通过使用一组过定数量的线程来处理请求的各个状态。一个线程可以处理每个请求的一种状态，或者是多个状态，或者是多个线程，这就依赖于具体实现了。</p>
+<p>​    Event-driven concurrency模型一般比Thread-per-request模型更据可扩展性，利用FSM来表示每一个请求，比Thread-per-request模型用Thread（Process）来表示一个请求更据可扩展性，也降低了系统中的Thread（Process）数，降低了系统消耗的资源。</p>
+<h3 id="SEDA异步框架"><a href="#SEDA异步框架" class="headerlink" title="SEDA异步框架"></a>SEDA异步框架</h3><p>​    SEDA将应用分通过事件队列链接的网状Stage，每个Stage由一个线程池，一个业务相关的事件处理器（Event Handler），一个事件输入队列和一个多个资源控制器组成。如图所示。</p>
+<p><img src="http://blog.chinaunix.net/attachment/201103/23/22939760_1300887035y4z4.png" alt="img"></p>
+<p><strong>Efficient, event-driven concurrency: </strong>SEDA并发模型依赖于Event-driven concurrency 模型来支持高并发。利用一组线程来处理每个请求，而不是每一个请求一个线程，利用 Nonblocking I/O来避免资源的阻塞。</p>
+<p><strong>Dynamic thread pooling: </strong>为了避免设计事件调度和达到非阻塞操作的要求，SEDA利用一系列线程组（Thread pool）, 每一个事件处理器利用一个动态的线程池。这样就可以利用OS的线程调度来调度事件的处理，并且可以允许事件处理代码阻塞一小段时间，因为有多个线程（一个动态线程池）可以处理一个事件。</p>
+<p><strong>Structured queues for code modularity and load management: </strong>通过事件队列将一个应用分割成一系列的Stage，可以让应用开发者只关注具体的业务逻辑（事件处理器）,然后通过队列将各个State组装成应用，也可以动态的添加何卸载Stage。这样可以独立开发每一个Stage。</p>
+<p>​       应用也可以在每个Stage中控制每一个请求的执行，如执行路径的改变，或终止请求等。每一个Stage可以更具自身的状态来控制请求的执行，如某一个Stage的负载太高，可能会拒绝处理这个请求。当然也可以让资源管理与控制在更细的粒度。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/分布式/" rel="tag"># 分布式</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/24/构建一个敏感词字典树/" rel="next" title="构建一个敏感词字典树">
+                <i class="fa fa-chevron-left"></i> 构建一个敏感词字典树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/03/Hadoop-Spark面试常见问题/" rel="prev" title="Hadoop/Spark面试常见问题">
+                Hadoop/Spark面试常见问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="彦鹏" />
+          <p class="site-author-name" itemprop="name">彦鹏</p>
+           
+              <p class="site-description motion-element" itemprop="description">每天进步一点点</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的并发编程框架——Thread-based模型"><span class="nav-number">2.</span> <span class="nav-text">常见的并发编程框架——Thread-based模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Event-driven-concurrency模型"><span class="nav-number">3.</span> <span class="nav-text">Event-driven concurrency模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEDA异步框架"><span class="nav-number">4.</span> <span class="nav-text">SEDA异步框架</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">彦鹏</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("haf2k8DGCn9V9IdwRUfFd1m2-gzGzoHsz", "eeRJlUBaMcwABRrULhYN4f3S");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
