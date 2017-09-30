@@ -93,18 +93,20 @@
  第二次握手：服务器收到syn包，必须确认客户的SYN（ack=x+1），同时自己也发送一个SYN包（syn=y），即SYN+ACK包，此时服务器进入SYN_RECV状态；
  第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP中的握手">
+<meta property="og:title" content="TCP中的三次握手和四次挥手">
 <meta property="og:url" content="https://scnuyp.github.io/2017/04/12/TCP中的握手/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
 <meta property="og:description" content="TCP三次握手和四次握手的全过程建立TCP链接——三次握手第一次握手：客户端发送syn包(syn=x)到服务器，并进入SYN_SEND状态，等待服务器确认；
  第二次握手：服务器收到syn包，必须确认客户的SYN（ack=x+1），同时自己也发送一个SYN包（syn=y），即SYN+ACK包，此时服务器进入SYN_RECV状态；
  第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包">
-<meta property="og:updated_time" content="2017-04-12T01:33:32.112Z">
+<meta property="og:image" content="http://ov2c4ir42.bkt.clouddn.com/0_131271823564Rx.gif">
+<meta property="og:updated_time" content="2017-09-30T03:05:03.500Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TCP中的握手">
+<meta name="twitter:title" content="TCP中的三次握手和四次挥手">
 <meta name="twitter:description" content="TCP三次握手和四次握手的全过程建立TCP链接——三次握手第一次握手：客户端发送syn包(syn=x)到服务器，并进入SYN_SEND状态，等待服务器确认；
  第二次握手：服务器收到syn包，必须确认客户的SYN（ack=x+1），同时自己也发送一个SYN包（syn=y），即SYN+ACK包，此时服务器进入SYN_RECV状态；
  第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包">
+<meta name="twitter:image" content="http://ov2c4ir42.bkt.clouddn.com/0_131271823564Rx.gif">
 
 
 
@@ -138,7 +140,7 @@
 
 
 
-  <title> TCP中的握手 | 彦鹏的个人博客 </title>
+  <title> TCP中的三次握手和四次挥手 | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -278,7 +280,7 @@
             
             
               
-                TCP中的握手
+                TCP中的三次握手和四次挥手
               
             
           </h1>
@@ -311,7 +313,7 @@
 
           
           
-             <span id="/2017/04/12/TCP中的握手/" class="leancloud_visitors" data-flag-title="TCP中的握手">
+             <span id="/2017/04/12/TCP中的握手/" class="leancloud_visitors" data-flag-title="TCP中的三次握手和四次挥手">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -349,8 +351,10 @@
 <p> 第二次挥手：被动关闭方收到FIN包后，发送一个ACK给对方，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号）。</p>
 <p> 第三次挥手：被动关闭方发送一个FIN，用来关闭被动关闭方到主动关闭方的数据传送，也就是告诉主动关闭方，我的数据也发送完了，不会再给你发数据了。</p>
 <p> 第四次挥手：主动关闭方收到FIN后，发送一个ACK给被动关闭方，确认序号为收到序号+1，至此，完成四次挥手。</p>
-<h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><p>TCP的三次握手过程？为什么会采用三次握手，若采用二次握手可以吗？</p>
+<p><img src="http://ov2c4ir42.bkt.clouddn.com/0_131271823564Rx.gif" alt="img"></p>
+<h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><p>1、TCP的三次握手过程？为什么会采用三次握手，若采用二次握手可以吗？</p>
 <p>A：建立连接的过程是利用客户服务器模式，假设主机A为客户端，主机B为服务器端。<br>（1）TCP的三次握手过程：主机A向B发送连接请求；主机B对收到的主机A的报文段进行确认；主机A再次对主机B的确认进行确认。<br>（2）采用三次握手是为了防止失效的连接请求报文段突然又传送到主机B，因而产生错误。失效的连接请求报文段是指：主机A发出的连接请求没有收到主机B的确认，于是经过一段时间后，主机A又重新向主机B发送连接请求，且建立成功，顺序完成数据传输。考虑这样一种特殊情况，主机A第一次发送的连接请求并没有丢失，而是因为网络节点导致延迟达到主机B，主机B以为是主机A又发起的新连接，于是主机B同意连接，并向主机A发回确认，但是此时主机A根本不会理会，主机B就一直在等待主机A发送数据，导致主机B的资源浪费。<br>（3）采用两次握手不行，原因就是上面说的实效的连接请求的特殊情况。</p>
+<p>2、</p>
 
       
     </div>
@@ -490,7 +494,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

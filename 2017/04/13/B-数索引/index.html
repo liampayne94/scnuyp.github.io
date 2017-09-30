@@ -89,30 +89,29 @@
 
 
 
-<meta name="description" content="索引我们知道，数据库中的索引是通过B树来储存的，经过一定操作之后，会产生大量碎片，降低数据库操作的效率， 这时我们应该进行碎片整理，最简单的方法就是把索引删除然后重建    
-B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这个并不陌生
- 1.所有非叶子结点至多拥有两个儿子（Left和Right）；
- 2.所有结点存储一个关键字；
- 3.非叶子结点的左指针指向小于其关">
+<meta name="description" content="本文转载自：http://www.cnblogs.com/yangecnu/p/Introduce-B-Tree-and-B-Plus-Tree.html
+维基百科对B树的定义为“在计算机科学中，B树（B-tree）是一种树状数据结构，它能够存储数据、对其进行排序并允许以O(log n)的时间复杂度运行进行查找、顺序读取、插入和删除的数据结构。B树，概括来说是一个节点可以拥有多于2个子节点的二叉查">
 <meta property="og:type" content="article">
-<meta property="og:title" content="B树，B+树，B-树，B*树">
+<meta property="og:title" content="B树，B+树的区别">
 <meta property="og:url" content="https://scnuyp.github.io/2017/04/13/B-数索引/index.html">
 <meta property="og:site_name" content="彦鹏的个人博客">
-<meta property="og:description" content="索引我们知道，数据库中的索引是通过B树来储存的，经过一定操作之后，会产生大量碎片，降低数据库操作的效率， 这时我们应该进行碎片整理，最简单的方法就是把索引删除然后重建    
-B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这个并不陌生
- 1.所有非叶子结点至多拥有两个儿子（Left和Right）；
- 2.所有结点存储一个关键字；
- 3.非叶子结点的左指针指向小于其关">
-<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/syxchina/201110/201110012318575052.png">
-<meta property="og:updated_time" content="2017-05-14T13:32:23.398Z">
+<meta property="og:description" content="本文转载自：http://www.cnblogs.com/yangecnu/p/Introduce-B-Tree-and-B-Plus-Tree.html
+维基百科对B树的定义为“在计算机科学中，B树（B-tree）是一种树状数据结构，它能够存储数据、对其进行排序并允许以O(log n)的时间复杂度运行进行查找、顺序读取、插入和删除的数据结构。B树，概括来说是一个节点可以拥有多于2个子节点的二叉查">
+<meta property="og:image" content="http://images.cnitblog.com/blog/94031/201403/290047064066682.png">
+<meta property="og:image" content="http://files.cnblogs.com/yangecnu/btreebuild.gif">
+<meta property="og:image" content="http://images.cnitblog.com/blog/94031/201403/290050048129679.png">
+<meta property="og:image" content="http://files.cnblogs.com/yangecnu/Bplustreebuild.gif">
+<meta property="og:image" content="http://images.cnitblog.com/blog/94031/201403/290050088914733.png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/94031/201403/290050133759728.png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/94031/201403/290050170319611.png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/94031/201403/290050215007080.png">
+<meta property="og:image" content="http://images.cnitblog.com/blog/94031/201403/290050263755491.png">
+<meta property="og:updated_time" content="2017-09-30T03:03:20.599Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="B树，B+树，B-树，B*树">
-<meta name="twitter:description" content="索引我们知道，数据库中的索引是通过B树来储存的，经过一定操作之后，会产生大量碎片，降低数据库操作的效率， 这时我们应该进行碎片整理，最简单的方法就是把索引删除然后重建    
-B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这个并不陌生
- 1.所有非叶子结点至多拥有两个儿子（Left和Right）；
- 2.所有结点存储一个关键字；
- 3.非叶子结点的左指针指向小于其关">
-<meta name="twitter:image" content="http://images.cnblogs.com/cnblogs_com/syxchina/201110/201110012318575052.png">
+<meta name="twitter:title" content="B树，B+树的区别">
+<meta name="twitter:description" content="本文转载自：http://www.cnblogs.com/yangecnu/p/Introduce-B-Tree-and-B-Plus-Tree.html
+维基百科对B树的定义为“在计算机科学中，B树（B-tree）是一种树状数据结构，它能够存储数据、对其进行排序并允许以O(log n)的时间复杂度运行进行查找、顺序读取、插入和删除的数据结构。B树，概括来说是一个节点可以拥有多于2个子节点的二叉查">
+<meta name="twitter:image" content="http://images.cnitblog.com/blog/94031/201403/290047064066682.png">
 
 
 
@@ -146,7 +145,7 @@ B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这
 
 
 
-  <title> B树，B+树，B-树，B*树 | 彦鹏的个人博客 </title>
+  <title> B树，B+树的区别 | 彦鹏的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -286,7 +285,7 @@ B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这
             
             
               
-                B树，B+树，B-树，B*树
+                B树，B+树的区别
               
             
           </h1>
@@ -319,7 +318,7 @@ B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这
 
           
           
-             <span id="/2017/04/13/B-数索引/" class="leancloud_visitors" data-flag-title="B树，B+树，B-树，B*树">
+             <span id="/2017/04/13/B-数索引/" class="leancloud_visitors" data-flag-title="B树，B+树的区别">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -348,29 +347,71 @@ B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这
       
 
       
-        <h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>我们知道，数据库中的索引是通过B树来储存的，经过一定操作之后，会产生大量碎片，降低数据库操作的效率， 这时我们应该进行碎片整理，最简单的方法就是把索引删除然后重建    </p>
-<h3 id="B树"><a href="#B树" class="headerlink" title="B树"></a>B树</h3><p>B树全称Binary Search Tree，也就是二叉查找树，相信大家对这个并不陌生</p>
-<p> 1.所有非叶子结点至多拥有两个儿子（Left和Right）；</p>
-<p> 2.所有结点存储一个关键字；</p>
-<p> 3.非叶子结点的左指针指向小于其关键字的子树，右指针指向大于其关键字的子树；</p>
-<p>如果B树的所有非叶子结点的左右子树的结点数目均保持差不多（平衡），那么B树的搜索性能逼近二分查找；但它比连续内存空间的二分查找的优点是，改变B树结构（插入与删除结点）不需要移动大段的内存数据，甚至通常是常数开销；</p>
-<p><img src="http://images.cnblogs.com/cnblogs_com/syxchina/201110/201110012318575052.png" alt="img"></p>
-<h3 id="B-树"><a href="#B-树" class="headerlink" title="B-树"></a>B-树</h3><p>是一种多路搜索树（并不是二叉树），具有以下特点：</p>
-<p>​    1.定义任意非叶子结点最多只有M个儿子；且M&gt;2；</p>
-<pre><code>2.根结点的儿子数为[2, M]；
+        <p><strong>本文转载自：<a href="http://www.cnblogs.com/yangecnu/p/Introduce-B-Tree-and-B-Plus-Tree.html" target="_blank" rel="external">http://www.cnblogs.com/yangecnu/p/Introduce-B-Tree-and-B-Plus-Tree.html</a></strong></p>
+<p>维基百科对B树的定义为“在计算机科学中，B树（B-tree）是一种树状数据结构，它能够存储数据、对其进行排序并允许以O(log n)的时间复杂度运行进行查找、顺序读取、插入和删除的数据结构。B树，概括来说是一个节点可以拥有多于2个子节点的二叉查找树。与自平衡二叉查找树不同，B-树为系统最优化<strong>大块数据的读和写操作</strong>。B-tree算法减少定位记录时所经历的中间过程，从而加快存取速度。普遍运用在<strong>数据库</strong>和<strong>文件系统</strong>。”</p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p><strong>B 树</strong>可以看作是对2-3查找树的一种扩展，即他允许每个节点有M-1个子节点。</p>
+<ul>
+<li>根节点至少有两个子节点</li>
+<li>每个节点有M-1个key，并且以升序排列</li>
+<li>位于M-1和M key的子节点的值位于M-1 和M key对应的Value之间</li>
+<li>其它节点至少有M/2个子节点</li>
+</ul>
+<p>下图是一个M=4 阶的B树:</p>
+<p><a href="http://images.cnitblog.com/blog/94031/201403/290047034539184.png" target="_blank" rel="external"><img src="http://images.cnitblog.com/blog/94031/201403/290047064066682.png" alt="B tree"></a></p>
+<p>可以看到B树是2-3树的一种扩展，他允许一个节点有多于2个的元素。</p>
+<p>B树的插入及平衡化操作和2-3树很相似，这里就不介绍了。下面是往B树中依次插入</p>
+<p><strong>6 10 4 14 5 11 15 3 2 12 1 7 8 8 6 3 6 21 5 15 15 6 32 23 45 65 7 8 6 5 4</strong></p>
+<p>的演示动画：</p>
+<p> <img src="http://files.cnblogs.com/yangecnu/btreebuild.gif" alt="img"></p>
+<p><strong>B+</strong>树是对B树的一种变形树，它与B树的差异在于：</p>
+<ul>
+<li>有k个子结点的结点必然有k个关键码；</li>
+<li>非叶结点仅具有索引作用，跟记录有关的信息均存放在叶结点中。</li>
+<li>树的所有叶结点构成一个有序链表，可以按照关键码排序的次序遍历全部记录。</li>
+</ul>
+<p>如下图，是一个B+树:</p>
+<p><a href="http://images.cnitblog.com/blog/94031/201403/290050025784094.png" target="_blank" rel="external"><img src="http://images.cnitblog.com/blog/94031/201403/290050048129679.png" alt="B Plus tree"></a></p>
+<p>下图是B+树的插入动画：</p>
+<p> <img src="http://files.cnblogs.com/yangecnu/Bplustreebuild.gif" alt="img"></p>
+<p>B和B+树的区别在于，B+树的非叶子结点只包含导航信息，不包含实际的值，所有的叶子结点和相连的节点使用链表相连，便于区间查找和遍历。</p>
+<p>B+ 树的优点在于：</p>
+<ul>
+<li>由于B+树在内部节点上不包含数据信息，因此在内存页中能够存放更多的key。 数据存放的更加紧密，具有更好的空间局部性。因此访问叶子节点上关联的数据也具有更好的缓存命中率。</li>
+<li>B+树的叶子结点都是相链的，因此对整棵树的便利只需要一次线性遍历叶子结点即可。而且由于数据顺序排列并且相连，所以便于区间查找和搜索。而B树则需要进行每一层的递归遍历。相邻的元素可能在内存中不相邻，所以缓存命中性没有B+树好。</li>
+</ul>
+<p>但是B树也有优点，其优点在于，由于B树的每一个节点都包含key和value，因此经常访问的元素可能离根节点更近，因此访问也更迅速。下面是B 树和B+树的区别图：</p>
+<p><a href="http://images.cnitblog.com/blog/94031/201403/290050064379149.png" target="_blank" rel="external"><img src="http://images.cnitblog.com/blog/94031/201403/290050088914733.png" alt="Different between B tree and B plus tree"></a></p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>对B树和B+树的分析和对前面讲解的2-3树的分析类似，</p>
+<p>对于一颗节点为N度为M的子树，查找和插入需要logM-1N ~ logM/2N次比较。这个很好证明，对于度为M的B树，每一个节点的子节点个数为M/2 到 M-1之间，所以树的高度在logM-1N至logM/2N之间。</p>
+<p>这种效率是很高的，对于N=62*1000000000个节点，如果度为1024，则logM/2N &lt;=4，即在620亿个元素中，如果这棵树的度为1024，则只需要小于4次即可定位到该节点，然后再采用二分查找即可找到要找的值。</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>B树和B+广泛应用于文件存储系统以及数据库系统中，在讲解应用之前，我们看一下常见的存储结构：</p>
+<p><a href="http://images.cnitblog.com/blog/94031/201403/290050109225145.png" target="_blank" rel="external"><img src="http://images.cnitblog.com/blog/94031/201403/290050133759728.png" alt="File System"></a></p>
+<p>我们计算机的主存基本都是随机访问存储器(Random-Access Memory，RAM)，他分为两类：静态随机访问存储器（SRAM）和动态随机访问存储器（DRAM）。SRAM比DRAM快，但是也贵的多，一般作为CPU的高速缓存，DRAM通常作为内存。这类存储器他们的结构和存储原理比较复杂，基本是使用电信号来保存信息的，不存在机器操作，所以访问速度非常快，具体的访问原理可以查看CSAPP，另外，他们是易失的，即如果断电，保存DRAM和SRAM保存的信息就会丢失。</p>
+<p>我们使用的更多的是使用磁盘，磁盘能够保存大量的数据，从GB一直到TB级，但是 他的读取速度比较慢，因为涉及到机器操作，读取速度为毫秒级，从DRAM读速度比从磁盘度快10万倍，从SRAM读速度比从磁盘读快100万倍。下面来看下磁盘的结构：</p>
+<p><a href="http://images.cnitblog.com/blog/94031/201403/290050156091613.png" target="_blank" rel="external"><img src="http://images.cnitblog.com/blog/94031/201403/290050170319611.png" alt="Disk geometry"></a></p>
+<p>如上图，磁盘由盘片构成,每个盘片有两面，又称为盘面(Surface)，这些盘面覆盖有磁性材料。盘片中央有一个可以旋转的主轴(spindle)，他使得盘片以固定的旋转速率旋转，通常是5400转每分钟(Revolution Per Minute,RPM)或者是7200RPM。磁盘包含一个多多个这样的盘片并封装在一个密封的容器内。上图左，展示了一个典型的磁盘表面结构。每个表面是由一组成为磁道(track)的同心圆组成的，每个磁道被划分为了一组扇区(sector).每个扇区包含相等数量的数据位，通常是（512）子节。扇区之间由一些间隔(gap)隔开,不存储数据。</p>
+<p>以上是磁盘的物理结构，现在来看下磁盘的读写操作：</p>
+<p><a href="http://images.cnitblog.com/blog/94031/201403/290050192666197.png" target="_blank" rel="external"><img src="http://images.cnitblog.com/blog/94031/201403/290050215007080.png" alt="Disk dynamic"></a></p>
+<p>如上图，磁盘用读/写头来读写存储在磁性表面的位，而读写头连接到一个传动臂的一端。通过沿着半径轴前后移动传动臂，驱动器可以将读写头定位到任何磁道上，这称之为寻道操作。一旦定位到磁道后，盘片转动，磁道上的每个位经过磁头时，读写磁头就可以感知到位的值，也可以修改值。对磁盘的访问时间分为 <strong>寻道时间</strong>，<strong>旋转时间</strong>，以及<strong>传送时间</strong>。</p>
+<p>由于存储介质的特性，磁盘本身存取就比主存慢很多，再加上机械运动耗费，因此为了提高效率，要尽量减少磁盘I/O，减少读写操作。为了达到这个目的，磁盘往往不是严格按需读取，而是每次都会预读，即使只需要一个字节，磁盘也会从这个位置开始，顺序向后读取一定长度的数据放入内存。这样做的理论依据是计算机科学中著名的局部性原理：</p>
+<p>当一个数据被用到时，其附近的数据也通常会马上被使用。</p>
+<p><strong>程序运行期间所需要的数据通常比较集中。</strong></p>
+<p>由于磁盘顺序读取的效率很高（不需要寻道时间，只需很少的旋转时间），因此对于具有局部性的程序来说，预读可以提高I/O效率。</p>
+<p>预读的长度一般为页（page）的整倍数。页是计算机管理存储器的逻辑块，硬件及操作系统往往将主存和磁盘存储区分割为连续的大小相等的块，每个存储块称为一页（在许多操作系统中，页得大小通常为4k），主存和磁盘以页为单位交换数据。当程序要读取的数据不在主存中时，会触发一个缺页异常，此时系统会向磁盘发出读盘信号，磁盘会找到数据的起始位置并向后连续读取一页或几页载入内存中，然后异常返回，程序继续运行。</p>
+<p>文件系统及数据库系统的设计者利用了磁盘预读原理，将一个节点的大小设为等于一个页，这样每个节点只需要一次I/O就可以完全载入。为了达到这个目的，在实际实现B-Tree还需要使用如下技巧：</p>
+<p>每次新建一个节点的同时，直接申请一个页的空间( 512或者1024)，这样就保证一个节点物理上也存储在一个页里，加之计算机存储分配都是按页对齐的，就实现了一个node只需一次I/O。如，将B树的度M设置为1024，这样在前面的例子中，600亿个元素中只需要小于4次查找即可定位到某一存储位置。</p>
+<p>同时在B+树中，内节点只存储导航用到的key，并不存储具体值，这样内节点个数较少，能够全部读取到主存中，外接点存储key及值，并且顺序排列，具有良好的空间局部性。所以B及B+树比较适合与文件系统的数据结构。下面是一颗B树，用来进行内容存储。</p>
+<p><a href="http://images.cnitblog.com/blog/94031/201403/290050241097149.png" target="_blank" rel="external"><img src="http://images.cnitblog.com/blog/94031/201403/290050263755491.png" alt="build a large B tree"></a></p>
+<p>另外B/B+树也经常用做数据库的索引，这方面推荐您直接看张洋的<a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="external">MySQL索引背后的数据结构及算法原理</a> 这篇文章，这篇文章对MySQL中的如何使用B+树进行索引有比较详细的介绍，推荐阅读。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在前面两篇文章介绍了平衡查找树中的<a href="http://www.cnblogs.com/yangecnu/p/Introduce-2-3-Search-Tree.html" target="_blank" rel="external">2-3树</a>，<a href="http://www.cnblogs.com/yangecnu/p/Introduce-Red-Black-Tree.html" target="_blank" rel="external">红黑树</a>之后，本文介绍了文件系统和数据库系统中常用的B/B+ 树，他通过对每个节点存储个数的扩展，使得对连续的数据能够进行较快的定位和访问，能够有效减少查找时间，提高存储的空间局部性从而减少IO操作。他广泛用于文件系统及数据库中，如：</p>
+<ul>
+<li>Windows：HPFS文件系统</li>
+<li>Mac：HFS，HFS+文件系统</li>
+<li>Linux：ResiserFS，XFS，Ext3FS，JFS文件系统</li>
+<li>数据库：ORACLE，MYSQL，SQLSERVER等中</li>
+</ul>
+<p>希望本文对您了解B/B+ 树有所帮助。</p>
 
-3.除根结点以外的非叶子结点的儿子数为[M/2, M]；
-
-4.每个结点存放至少M/2-1（取上整）和至多M-1个关键字；（至少2个关键字）
-
-5.非叶子结点的关键字个数=指向儿子的指针个数-1；
-
-6.非叶子结点的关键字：K[1], K[2], …, K[M-1]；且K[i] &lt; K[i+1]；
-
-7.非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；
-
-8.所有叶子结点位于同一层；
-</code></pre>
       
     </div>
 
@@ -509,7 +550,7 @@ B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -544,7 +585,7 @@ B树B树全称Binary Search Tree，也就是二叉查找树，相信大家对这
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">1.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B树"><span class="nav-number">2.</span> <span class="nav-text">B树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-树"><span class="nav-number">3.</span> <span class="nav-text">B-树</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="彦鹏的个人博客">
 <meta property="og:description" content="Lock接口Lock是一个接口，它的源码如下
 12345678public interface Lock &amp;#123;    void lock();    void lockInterruptibly() throws InterruptedException;    boolean tryLock();    boolean tryLock(long time, TimeUnit unit)">
-<meta property="og:updated_time" content="2017-09-28T07:37:33.865Z">
+<meta property="og:updated_time" content="2017-09-30T02:54:02.392Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程中Lock以及与synchronized的区别">
 <meta name="twitter:description" content="Lock接口Lock是一个接口，它的源码如下
@@ -365,7 +365,7 @@
 <p>上述代码中的两个方法method1和method2都用synchronized修饰了，假如某一时刻，线程A执行到了method1，此时线程A获取了这个对象的锁，而由于method2也是synchronized方法，假如synchronized不具备可重入性，此时线程A需要重新申请锁。但是这就会造成一个问题，因为线程A已经持有了该对象的锁，而又在申请获取该对象的锁，这样就会线程A一直等待永远不会获取到的锁。</p>
 <p>而由于synchronized和Lock都具备可重入性，所以不会发生上述现象。</p>
 <h3 id="可中断锁"><a href="#可中断锁" class="headerlink" title="可中断锁"></a>可中断锁</h3><p>通过lockInterruptibly()这个方法去获取锁时，体现了锁的可中断性</p>
-<h3 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h3><p>公平锁即尽量以请求锁的顺序来获取锁。比如同是有多个线程在等待一个锁，当这个锁被释放时，等待时间最久的线程（最先请求的线程）会获得该所，这种就是公平锁。</p>
+<h3 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h3><p>公平锁即尽量以请求锁的顺序来获取锁。比如同是有多个线程在等待一个锁，当这个锁被释放时，等待时间最久的线程（最先请求的线程）会获得该锁，这种就是公平锁。</p>
 <p>非公平锁即无法保证锁的获取是按照请求锁的顺序进行的。这样就可能导致某个或者一些线程永远获取不到锁。</p>
 <p>在Java中，<strong>synchronized就是非公平锁</strong>，它无法保证等待的线程获取锁的顺序。</p>
 <p>而对于<strong>ReentrantLock和ReentrantReadWriteLock，它默认情况下是非公平锁</strong>，但是可以设置为公平锁。</p>
@@ -508,7 +508,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
